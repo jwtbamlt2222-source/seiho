@@ -1,0 +1,17 @@
+{
+  "name": "生保２ 完全暗記教材",
+  "short_name": "生保２",
+  "description": "第2次試験 生保2科目 25年分過去問",
+  "start_url": "./seiho2_25years_study.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f1117",
+  "theme_color": "#20c0a0",
+  "icons": [
+    {
+      "src": "icon-s2.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生保２ 完全暗記教材 | 25年分過去問</title>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css"></noscript>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+:root{
+  --bg:#0f1117;--surface:#191c26;--surface2:#21263a;--border:#2e3450;
+  --accent:#20c0a0;--accent2:#4a9eff;--red:#e05050;--green:#3ec97a;
+  --text:#e8eaf0;--text2:#9aa0b8;--text3:#5c6380;
+  --gold:#d4a832;--purple:#a67fff;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+header{background:linear-gradient(135deg,#131620,#1a1f35);border-bottom:1px solid var(--border);padding:18px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.logo-main{font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;font-size:1.25rem;font-weight:900;color:var(--accent);letter-spacing:.06em;}
+.logo-sub{font-size:.72rem;color:var(--text3);letter-spacing:.12em;}
+.pill{font-size:.68rem;padding:3px 10px;border-radius:20px;letter-spacing:.08em;}
+.pill-teal{background:rgba(32,192,160,.15);color:var(--accent);border:1px solid rgba(32,192,160,.3);}
+.pill-blue{background:rgba(74,158,255,.12);color:var(--accent2);border:1px solid rgba(74,158,255,.3);}
+.header-meta{display:flex;gap:8px;}
+.tabs{display:flex;background:var(--surface);border-bottom:1px solid var(--border);padding:0 32px;}
+.tab-btn{padding:14px 26px;background:transparent;border:none;color:var(--text3);font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif;font-size:.83rem;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.05em;display:flex;align-items:center;gap:7px;}
+.tab-btn:hover{color:var(--text);}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+.content{padding:32px;max-width:1080px;margin:0 auto;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+.sec-hd{display:flex;align-items:center;gap:14px;margin-bottom:28px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.sec-hd h2{font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;font-size:1.15rem;font-weight:700;}
+.sec-hd .cnt{font-size:.72rem;background:var(--surface2);color:var(--text3);padding:3px 10px;border-radius:20px;border:1px solid var(--border);}
+/* flashcard */
+.fc-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;align-items:center;}
+.fc-cats{display:flex;gap:6px;flex-wrap:wrap;}
+.cat-btn{padding:5px 13px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text3);font-size:.74rem;cursor:pointer;transition:all .15s;font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif;}
+.cat-btn.on{background:var(--accent);border-color:var(--accent);color:#000;font-weight:700;}
+.prog-wrap{margin-bottom:24px;}
+.prog-label{font-size:.72rem;color:var(--text3);margin-bottom:6px;display:flex;justify-content:space-between;}
+.prog-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--accent));border-radius:2px;transition:width .4s;}
+.qcard{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:32px 36px;max-width:780px;margin:0 auto;box-shadow:0 8px 40px rgba(0,0,0,.4);}
+.qcard-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.qcat{font-size:.7rem;letter-spacing:.12em;color:var(--accent);font-weight:700;text-transform:uppercase;}
+.qnum{font-size:.7rem;color:var(--text3);}
+.question{font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;font-size:1.05rem;line-height:1.8;color:var(--text);margin-bottom:28px;min-height:60px;}
+.choices{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.choice-btn{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;text-align:left;transition:all .15s;font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif;color:var(--text);font-size:.88rem;line-height:1.6;}
+.choice-btn:not(.answered):hover{border-color:var(--accent2);background:rgba(74,158,255,.08);}
+.choice-label{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--text3);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;margin-top:1px;font-family:'JetBrains Mono','Menlo','Courier New',monospace;}
+.choice-btn.correct{background:rgba(62,201,122,.12);border-color:var(--green);}
+.choice-btn.correct .choice-label{background:var(--green);border-color:var(--green);color:#000;}
+.choice-btn.wrong{background:rgba(224,80,80,.1);border-color:var(--red);}
+.choice-btn.wrong .choice-label{background:var(--red);border-color:var(--red);color:#fff;}
+.choice-btn.neutral{opacity:.45;}
+.choice-btn.answered{cursor:default;}
+.explain{display:none;background:rgba(74,158,255,.07);border:1px solid rgba(74,158,255,.25);border-radius:8px;padding:18px 20px;margin-bottom:20px;}
+.explain.show{display:block;}
+.explain-title{font-size:.7rem;letter-spacing:.1em;color:var(--accent2);font-weight:700;margin-bottom:10px;text-transform:uppercase;}
+.explain-ans{font-size:.85rem;line-height:1.75;color:var(--text);}
+.explain-tips{margin-top:12px;padding-top:10px;border-top:1px solid rgba(74,158,255,.2);}
+.tips-label{font-size:.68rem;color:var(--purple);letter-spacing:.1em;font-weight:700;margin-bottom:6px;}
+.tips-body{font-size:.78rem;color:var(--text2);line-height:1.7;}
+.tips-year{display:inline-block;background:rgba(166,127,255,.15);color:var(--purple);font-size:.65rem;padding:2px 7px;border-radius:4px;margin-bottom:6px;font-family:'JetBrains Mono','Menlo','Courier New',monospace;}
+.fc-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:4px;}
+.nav-btn{padding:9px 24px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:.82rem;cursor:pointer;transition:all .15s;font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif;}
+.nav-btn:hover{background:var(--surface);border-color:var(--accent2);}
+.nav-cnt{font-size:.78rem;color:var(--text3);font-family:'JetBrains Mono','Menlo','Courier New',monospace;min-width:65px;text-align:center;}
+.score-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.sc{font-size:.72rem;padding:4px 12px;border-radius:20px;}
+.sc-ok{background:rgba(62,201,122,.15);color:var(--green);border:1px solid rgba(62,201,122,.3);}
+.sc-ng{background:rgba(224,80,80,.12);color:var(--red);border:1px solid rgba(224,80,80,.25);}
+.sc-rem{background:var(--surface2);color:var(--text3);border:1px solid var(--border);}
+/* key points */
+.kp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px;}
+.kp-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px 22px;position:relative;overflow:hidden;}
+.kp-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:8px 8px 0 0;}
+.kp-A::after{background:var(--accent);}
+.kp-B::after{background:var(--accent2);}
+.kp-C::after{background:var(--green);}
+.kp-D::after{background:var(--purple);}
+.kp-E::after{background:#ff7055;}
+.kp-F::after{background:#e8c020;}
+.kp-title{font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;font-size:.95rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.kp-freq{font-size:.65rem;padding:2px 7px;border-radius:10px;font-family:'JetBrains Mono','Menlo','Courier New',monospace;}
+.freq-s{background:rgba(32,192,160,.15);color:var(--accent);border:1px solid rgba(32,192,160,.3);}
+.freq-a{background:rgba(74,158,255,.12);color:var(--accent2);border:1px solid rgba(74,158,255,.25);}
+.freq-b{background:var(--surface2);color:var(--text3);border:1px solid var(--border);}
+.kp-ul{list-style:none;}
+.kp-ul li{font-size:.8rem;line-height:1.65;padding:5px 0 5px 16px;border-bottom:1px solid var(--border);color:var(--text2);position:relative;cursor:pointer;user-select:none;}
+.kp-ul li:last-child{border-bottom:none;}
+.kp-ul li::before{content:'›';position:absolute;left:0;color:var(--accent);font-weight:700;}
+.kp-kw{display:inline;background:rgba(32,192,160,.12);color:var(--accent);padding:0 4px;border-radius:3px;font-weight:600;}
+.kp-reveal-all{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.btn-reveal{font-size:.72rem;padding:5px 12px;border-radius:4px;border:1px solid var(--border);background:var(--surface2);color:var(--text3);cursor:pointer;font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif;transition:all .15s;}
+.btn-reveal:hover{border-color:var(--accent2);color:var(--accent2);}
+.kp-ul li .kp-hint{display:inline;color:var(--accent2);font-weight:600;font-size:.8rem;}
+.kp-ul li .kp-hint::after{content:' ▶';font-size:.6rem;color:var(--text3);}
+.kp-ul li .kp-full{display:none;}
+.kp-ul li.open .kp-hint{display:none;}
+.kp-ul li.open .kp-full{display:inline;}
+.kp-ul li.open{background:rgba(74,158,255,.05);border-radius:4px;padding:4px 6px;}
+/* templates */
+.tpl-grid{display:flex;flex-direction:column;gap:22px;}
+.tpl-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.tpl-head{padding:14px 22px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.tpl-head h3{font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;font-size:.95rem;font-weight:700;color:var(--text);}
+.tpl-tag{font-size:.65rem;padding:3px 9px;border-radius:4px;background:rgba(32,192,160,.15);color:var(--accent);border:1px solid rgba(32,192,160,.25);font-family:'JetBrains Mono','Menlo','Courier New',monospace;}
+.tpl-body{padding:20px 22px;}
+.tpl-sec-title{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid var(--border);}
+.tpl-block{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:6px;padding:14px 16px;font-size:.82rem;line-height:1.85;color:var(--text2);margin-bottom:10px;}
+.tpl-block .fill{background:rgba(32,192,160,.12);color:var(--accent);border-bottom:1.5px solid var(--accent);padding:1px 5px;border-radius:3px;font-weight:600;}
+.tpl-note{font-size:.74rem;color:var(--text3);font-style:italic;padding-left:10px;border-left:2px solid var(--border);margin-top:8px;}
+.kws{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.kw{font-size:.68rem;padding:3px 8px;border-radius:4px;background:var(--surface2);color:var(--text3);border:1px solid var(--border);}
+/* reveal template sections */
+.tpl-sec-wrap{margin-bottom:16px;}
+.tpl-sec-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;padding:8px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);transition:all .15s;margin-bottom:6px;}
+.tpl-sec-toggle:hover{border-color:var(--accent2);}
+.tpl-sec-toggle .tgl-icon{color:var(--accent2);font-size:.8rem;transition:transform .2s;}
+.tpl-sec-toggle.open .tgl-icon{transform:rotate(90deg);}
+.tpl-sec-toggle .tgl-title{font-size:.78rem;font-weight:600;color:var(--text2);}
+.tpl-sec-toggle .tgl-hint{font-size:.72rem;color:var(--text3);margin-left:auto;}
+.tpl-sec-body{display:none;}
+.tpl-sec-body.open{display:block;}
+/* math block */
+.math-block{background:rgba(74,158,255,.06);border:1px solid rgba(74,158,255,.2);border-radius:6px;padding:12px 16px;margin:10px 0;overflow-x:auto;font-size:.9rem;line-height:1.8;}
+.math-block .math-label{font-size:.65rem;letter-spacing:.1em;color:var(--accent2);font-weight:700;text-transform:uppercase;margin-bottom:6px;}
+.katex{font-size:1em;color:var(--text)!important;}
+.katex-display{overflow-x:auto;}
+
+/* ══════════════════════════════════════════════════
+   iPhone / iOS Safari 完全対応
+══════════════════════════════════════════════════ */
+
+/* タップハイライト除去 */
+* { -webkit-tap-highlight-color: transparent; }
+
+/* iOSボタンの独自スタイルをリセット、タップ遅延(300ms)除去 */
+button {
+  -webkit-appearance: none;
+  touch-action: manipulation;
+}
+
+/* セーフエリア対応（iPhone X以降のノッチ・ホームバー） */
+body {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+header {
+  -webkit-backdrop-filter: blur(12px);
+  padding-left: max(32px, calc(env(safe-area-inset-left, 0px) + 16px));
+  padding-right: max(32px, calc(env(safe-area-inset-right, 0px) + 16px));
+}
+
+/* user-select にベンダープレフィックス */
+.kp-ul li, .tpl-sec-toggle {
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+/* タブバーを横スクロール可能に（タブが画面外に消えない） */
+.tabs {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0 16px;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab-btn { white-space: nowrap; flex-shrink: 0; }
+
+/* 数式の横スクロール */
+.katex-display {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.math-block {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Apple HIG 推奨：タップ可能要素の最小サイズ 44pt */
+@media (pointer: coarse) {
+  .tab-btn    { min-height: 44px; }
+  .nav-btn    { min-height: 44px; }
+  .choice-btn { min-height: 48px; }
+  .cat-btn    { min-height: 36px; }
+  .btn-reveal { min-height: 36px; }
+}
+
+/* スマートフォン用レイアウト */
+@media (max-width: 640px) {
+  header {
+    padding: 10px 14px;
+    padding-left: max(14px, env(safe-area-inset-left, 0px));
+    padding-right: max(14px, env(safe-area-inset-right, 0px));
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .logo-sub { display: none; }
+  .content { padding: 14px; }
+  .qcard { padding: 16px 14px; }
+  .question { font-size: .95rem; margin-bottom: 16px; min-height: unset; }
+  .choice-btn { padding: 12px 12px; font-size: .84rem; gap: 10px; }
+  .choice-label { width: 24px; height: 24px; font-size: .7rem; }
+  .explain { padding: 12px; }
+  .explain-ans { font-size: .82rem; }
+  .tips-body { font-size: .75rem; }
+  .fc-nav { gap: 8px; }
+  .nav-btn { padding: 10px 16px; font-size: .8rem; }
+  .kp-grid { grid-template-columns: 1fr; gap: 12px; }
+  .kp-card { padding: 14px; }
+  .tpl-head { padding: 10px 14px; flex-wrap: wrap; gap: 6px; }
+  .tpl-body { padding: 12px; }
+  .tpl-block { font-size: .79rem; padding: 10px; }
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap"></noscript>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="生保２">
+<link rel="apple-touch-icon" href="icon-s2.png">
+<link rel="manifest" href="manifest-s2.json">
+<meta name="theme-color" content="#20c0a0">
+</head>
+<body>
+
+<!-- 数式テンプレート（隠し） -->
+<div id="formula-store" style="display:none">
+<div id="fml-sm-ratio">
+<div class="math-block"><div class="math-label">ソルベンシー・マージン比率の計算式</div>
+<div>\[\text{SMR} = \frac{\text{ソルベンシー・マージン総額}}{\frac{1}{2} \times \text{リスクの合計額}} \times 100\,(\%)\]</div>
+<div style="font-size:.82rem;line-height:1.8;margin-top:6px">
+リスクの合計額は各リスク相当額の二乗和の平方根で算出（相関を考慮）<br>
+200%以上で健全性確保の目安。規制上の早期是正措置は200%未満で発動。
+</div></div></div>
+
+<div id="fml-duration">
+<div class="math-block"><div class="math-label">デュレーション・マッチング条件</div>
+<div>\[D(L) = k \times D(A) \quad (0.8 \leq k \leq 1.25)\]</div>
+<div style="font-size:.82rem;line-height:1.8;margin-top:6px">
+\(D(L)\)：責任準備金のデュレーション<br>
+\(D(A)\)：責任準備金対応債券のデュレーション<br>
+\(k\)：0.8以上1.25以下の許容範囲（定期的に検証が必要）
+</div></div></div>
+
+<div id="fml-ibnr">
+<div class="math-block"><div class="math-label">IBNR備金の算出式（比例計算方式）</div>
+<div>\[\text{IBNR}_X = \text{IBNR所要額}_{X-1} \times \frac{\text{保有契約高}_X}{\text{保有契約高}_{X-1}}\]</div>
+<div style="font-size:.82rem;line-height:1.8;margin-top:6px">
+保有契約高は入院給付金日額の合計（事業年度末）を使用<br>
+X事業年度末のIBNR備金 ≈ 前年度所要額 × 保有契約高の比率
+</div></div></div>
+
+<div id="fml-ev">
+<div class="math-block"><div class="math-label">エンベディッド・バリュー（EV）の構成</div>
+<div>\[\text{EV} = \text{修正純資産} + \text{保有契約価値（VIF）}\]</div>
+<div style="font-size:.82rem;line-height:1.8;margin-top:6px">
+修正純資産＝自己資本＋含み損益±各種調整<br>
+VIF（Value In Force）＝将来利益の割引現在価値 − 資本コスト<br>
+新契約価値（VNB）＝当期新契約が将来にわたり生み出すEVの増分
+</div></div></div>
+</div>
+
+<header>
+  <div>
+    <div class="logo-main">生保２ 完全暗記教材</div>
+    <div class="logo-sub">第2次試験 · 25年分過去問（2000〜2024）</div>
+  </div>
+  <div class="header-meta">
+    <span class="pill pill-teal">準会員向け</span>
+    <span class="pill pill-blue">生保コース</span>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="sw('fc',this)">🃏 4択フラッシュカード</button>
+  <button class="tab-btn" onclick="sw('kp',this)">📌 重要ポイント</button>
+  <button class="tab-btn" onclick="sw('tpl',this)">📝 論述テンプレート</button>
+</div>
+
+<div class="content">
+
+<!-- ══ FLASH CARDS ══ -->
+<div class="tab-panel active" id="panel-fc">
+  <div class="sec-hd">
+    <h2>4択フラッシュカード</h2>
+    <span class="cnt" id="fc-cnt-label">60問</span>
+  </div>
+  <div class="fc-toolbar">
+    <div class="fc-cats" id="fc-cats">
+      <button class="cat-btn on" data-c="all" onclick="filt('all',this)">すべて</button>
+      <button class="cat-btn" data-c="責任準備金" onclick="filt('責任準備金',this)">責任準備金</button>
+      <button class="cat-btn" data-c="危険準備金" onclick="filt('危険準備金',this)">危険準備金</button>
+      <button class="cat-btn" data-c="ソルベンシー" onclick="filt('ソルベンシー',this)">ソルベンシー</button>
+      <button class="cat-btn" data-c="利源分析" onclick="filt('利源分析',this)">利源分析</button>
+      <button class="cat-btn" data-c="区分経理" onclick="filt('区分経理',this)">区分経理</button>
+      <button class="cat-btn" data-c="保険計理人" onclick="filt('保険計理人',this)">保険計理人</button>
+      <button class="cat-btn" data-c="配当" onclick="filt('配当',this)">配当</button>
+      <button class="cat-btn" data-c="ALM" onclick="filt('ALM',this)">ALM・EV</button>
+      <button class="cat-btn" data-c="会計・税制" onclick="filt('会計・税制',this)">会計・税制</button>
+    </div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-label"><span id="prog-txt">0 / 0 問 正解</span><span id="prog-pct">0%</span></div>
+    <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+  <div class="score-row">
+    <span class="sc sc-ok" id="sc-ok">✓ 正解 0</span>
+    <span class="sc sc-ng" id="sc-ng">✗ 不正解 0</span>
+    <span class="sc sc-rem" id="sc-rem">残り 0</span>
+  </div>
+  <div class="qcard" id="qcard">
+    <div class="qcard-meta">
+      <span class="qcat" id="qcat"></span>
+      <span class="qnum" id="qnum"></span>
+    </div>
+    <div class="question" id="question"></div>
+    <div class="choices" id="choices"></div>
+    <div class="explain" id="explain">
+      <div class="explain-title">解説</div>
+      <div class="explain-ans" id="explain-ans"></div>
+      <div class="explain-tips">
+        <div class="tips-label">Tips</div>
+        <div class="tips-body" id="tips-body"></div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button class="nav-btn" onclick="prevQ()">← 前へ</button>
+      <span class="nav-cnt" id="nav-cnt">1 / 60</span>
+      <button class="nav-btn" onclick="nextQ()">次へ →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ KEY POINTS ══ -->
+<div class="tab-panel" id="panel-kp">
+  <div class="sec-hd"><h2>重要ポイントまとめ</h2><span class="cnt">10テーマ · 頻出度付き</span></div>
+  <div class="kp-grid">
+
+    <div class="kp-card kp-A">
+      <div class="kp-title">責任準備金の種類と積立方式 <span class="kp-freq freq-s">S級頻出</span></div>
+      <ul class="kp-ul">
+        <li><span class="kp-kw">保険料積立金</span>：保険契約に基づく将来の債務履行に備えるため保険数理に基づき計算した額</li>
+        <li><span class="kp-kw">未経過保険料</span>：未経過期間に対応する責任に相当する額</li>
+        <li><span class="kp-kw">標準責任準備金</span>：H8年告示48号に定める計算基礎率による積立（原則）。予定利率・死亡率等を規定</li>
+        <li><span class="kp-kw">チルメル式</span>：初年度の新契約費を先取り回収する方式。通常の責任準備金より初期の積立が少ない</li>
+        <li>標準責任準備金の<span class="kp-kw">対象外</span>：特別勘定で変動（未保証）・払戻積立金なし・予定利率変更条項付・保険期間5年以下・外貨建て</li>
+        <li>1号収支分析：将来<span class="kp-kw">10年間</span>の将来収支分析により責任準備金の十分性を確認</li>
+        <li>責任準備金不足時の経営政策変更5つ：配当引下げ・事業費抑制・再保険見直し・新契約抑制・保険料引上げ</li>
+        <li>税務上の損金算入限度：保険料積立金および未経過保険料のみ。算出方法書の計算基礎を基とした額が上限</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-B">
+      <div class="kp-title">危険準備金・価格変動準備金 <span class="kp-freq freq-s">S級頻出</span></div>
+      <ul class="kp-ul">
+        <li><span class="kp-kw">危険準備金Ⅰ</span>：保険リスク備え。取崩は死差損のてん補時のみ</li>
+        <li><span class="kp-kw">危険準備金Ⅱ</span>：予定利率リスク備え。取崩は逆ざやのてん補時のみ</li>
+        <li><span class="kp-kw">危険準備金Ⅲ</span>：最低保証リスク備え。取崩は最低保証の収支残が負の場合のみ。上限は保険料積立金の6%</li>
+        <li><span class="kp-kw">危険準備金Ⅳ</span>：第三分野リスク備え（ストレステスト対象）。取崩は第三分野の損失てん補時</li>
+        <li>積立限度超過時は超過額を強制取崩</li>
+        <li><span class="kp-kw">価格変動準備金</span>：対象資産（株式・外国債等）の時価下落に備え。係数は国内株式10/1000〜125/1000</li>
+        <li>価格変動準備金の対象外：責任準備金対応債券・不動産（不動産は対象）・外貨建（為替リスクなし）</li>
+        <li>第三分野ストレステスト：97.7%（2σ）をカバーする発生率で判定。対象は危険準備金Ⅳ積立限度額</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-C">
+      <div class="kp-title">ソルベンシー・マージン比率 <span class="kp-freq freq-s">S級頻出</span></div>
+      <ul class="kp-ul">
+        <li>SMR＝ソルベンシー・マージン総額÷（リスクの合計額÷2）×100（%）</li>
+        <li>SMR200%未満→早期是正措置。100%未満→業務停止命令</li>
+        <li>マージン総額の主要算入項目：資本金・基金等・価格変動準備金・危険準備金・一般貸倒引当金・その他有価証券評価差額（90%または100%）・土地含み損益（85%または100%）・負債性資本調達手段等</li>
+        <li><span class="kp-kw">保険料積立金等余剰部分</span>：（保険料積立金＋未経過保険料）－（全期チルメル式または解約返戻金相当額の大きい方）－追加責任準備金</li>
+        <li>リスクの合計額＝√(保険リスク² + 予定利率リスク² + 資産運用リスク² + …) + 経営管理リスク</li>
+        <li><span class="kp-kw">H22年改正</span>：信頼水準の引上げ（従来の水準→99%）・繰延税金資産のマージン算入制限・将来利益を全額マージン不算入</li>
+        <li>実質資産負債差額：時価評価ベースの自己資本。監督規制上の健全性指標とは異なる</li>
+        <li>3号の２収支分析：将来10年間のソルベンシー・マージン基準の充足性確認</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-D">
+      <div class="kp-title">利源分析（費差・死差・利差） <span class="kp-freq freq-s">S級頻出</span></div>
+      <ul class="kp-ul">
+        <li><span class="kp-kw">費差損益</span>：予定事業費（利源枠）－実際事業費。費差益は予定事業費枠内に実際費用が収まった分</li>
+        <li><span class="kp-kw">死差損益</span>：危険保険料（予定死亡率ベース）－実際保険金。死差益は実際死亡率が予定を下回った分</li>
+        <li><span class="kp-kw">利差損益</span>：（実際運用収益＋有価証券償還益±為替損益）－予定利息。逆ざや発生時は利差損</li>
+        <li><span class="kp-kw">解約・失効益</span>：解約契約の消滅時保険料積立金×解約控除率（解約控除で生じる益）</li>
+        <li><span class="kp-kw">価格変動損益</span>：有価証券売却益－価格変動準備金繰入額（キャピタル損益の一部）</li>
+        <li><span class="kp-kw">責任準備金関係損益</span>：利源枠・純保枠の差額調整。諸積増の増減等を含む</li>
+        <li>基礎利益＝費差損益＋死差損益＋利差損益＋解約失効益＋その他の損益（臨時損益・キャピタル損益を除く）</li>
+        <li>変額年金の最低保証積立：金融庁提出用では<span class="kp-kw">利差損益</span>で認識（内部管理では資産運用損益として認識も可）</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-E">
+      <div class="kp-title">区分経理・全社区分 <span class="kp-freq freq-s">S級頻出</span></div>
+      <ul class="kp-ul">
+        <li>区分経理の目的：①商品・商品群ごとの損益把握 ②配当財源の計算 ③各種報告・開示</li>
+        <li><span class="kp-kw">商品区分</span>（プロフィットセンター）：損益把握の単位。保険の性質の相違等により合理的に区分</li>
+        <li><span class="kp-kw">全社区分</span>の4機能：①保険リスク引受機能 ②新商品開発等の事業運営資金提供機能 ③共有資産・共通経費の管理機能 ④現預金等の管理機能</li>
+        <li>運用資産の管理方式3種：<span class="kp-kw">資産分別管理方式</span>（銘柄ごと直接帰属）・<span class="kp-kw">資産共有管理方式</span>（取引単位ごとに持分）・<span class="kp-kw">資産持分管理方式</span>（マザーファンド）</li>
+        <li>資産区分間の取引：市場価格等の適正な価格で管理。商品区分から全社区分への貸付はやむを得ない場合のみ</li>
+        <li>全社区分の資産：基金・子会社関連会社株式・本社不動産等</li>
+        <li>区分経理の対象は内部管理会計（財務諸表とは別）</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-A">
+      <div class="kp-title">保険計理人の職務と収支分析 <span class="kp-freq freq-s">S級頻出</span></div>
+      <ul class="kp-ul">
+        <li>保険計理人の関与事項（9項目）：①保険料 ②責任準備金 ③配当 ④契約者価額 ⑤未収保険料 ⑥支払備金 ⑦将来収支計画 ⑧募集人給与等規程 ⑨その他</li>
+        <li>毎決算期に<span class="kp-kw">意見書</span>を取締役会に提出→写しを金融庁に提出</li>
+        <li><span class="kp-kw">1号収支分析</span>：責任準備金の充足性確認。将来10年間のシナリオ分析</li>
+        <li><span class="kp-kw">3号収支分析</span>（負債十分性テスト）：実質資産負債差額の正の確認（事業継続基準）</li>
+        <li><span class="kp-kw">3号の2収支分析</span>：SMR基準の充足確認。分析期間は将来10年間</li>
+        <li>3号の2基本シナリオ：金利横ばい・株式不動産価格変動なし・危険準備金等繰入なし・劣後債等は約定通り利息支払</li>
+        <li>1号収支分析で不足の場合：経営政策変更（配当引下げ等5つ）が実行可能であれば積立省略を意見書に示せる</li>
+        <li>公正・衡平な配当の要件：①適正な責任準備金・必要額準備 ②収支状況（アセットシェア）に応じた分配 ③適正な保険数理・法令・契約条項に則る ④市場金利・運用実績の動向考慮</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-F">
+      <div class="kp-title">配当方式・ALM・デュレーション <span class="kp-freq freq-a">A級頻出</span></div>
+      <ul class="kp-ul">
+        <li><span class="kp-kw">利源別配当方式</span>：剰余金の発生原因（費差・死差・利差等）ごとに把握し配当。原因に応じた公平性</li>
+        <li><span class="kp-kw">アセットシェア方式</span>：保険契約の実績に基づく持分評価で配当。収支の貢献度に応じた配当</li>
+        <li>相互会社の社員配当：「衡平な分配」が法律上の要件。最高意思決定機関は<span class="kp-kw">社員総会</span></li>
+        <li>株式会社の契約者配当：費用処理。最高意思決定機関は<span class="kp-kw">取締役会</span></li>
+        <li>デュレーション・マッチング：D(L)＝k×D(A)（0.8≦k≦1.25）。定期的検証が必要</li>
+        <li><span class="kp-kw">責任準備金対応債券</span>の要件：①デュレーション条件充足 ②金利要因のみで時価変動 ③同一通貨建て ④信用悪化なし ⑤持合目的の劣後債でない ⑥デリバティブ組合せでない</li>
+        <li>ALMの市場リスク4種（IAIS）：金利リスク・<span class="kp-kw">為替リスク</span>・<span class="kp-kw">株式リスク</span>・<span class="kp-kw">流動性リスク</span></li>
+        <li>ヘッジ会計の事後テスト：最低3ヵ月に1回。有効性比率80%〜125%の範囲内で高い相関と認定</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-B">
+      <div class="kp-title">エンベディッド・バリュー（EV） <span class="kp-freq freq-a">A級頻出</span></div>
+      <ul class="kp-ul">
+        <li>EV＝修正純資産＋保有契約価値（VIF）</li>
+        <li><span class="kp-kw">伝統的EV</span>：決定論的手法。将来利益の割引現在価値から資本コストを控除。TVOGは考慮しない</li>
+        <li><span class="kp-kw">市場整合的EV（MCEV）</span>：確率的手法。TVOG（保証とオプションの時間価値）・非ヘッジアブルリスクのリスク・マージンを考慮。割引率にリスクフリーレートを使用</li>
+        <li>MCEVとの主な相違点：①TVOGの評価 ②割引率（伝統的：期待運用収益率、MCEV：RFR） ③フリクショナルコスト ④NHR（非ヘッジアブルリスクコスト）</li>
+        <li>新契約価値（VNB）：当期新契約が将来にわたって生み出すEVの増分。プロフィット・マージンに対応</li>
+        <li>経済価値ベースのリスク・マージン（RM）：資本コスト法またはパーセンタイル法で算出</li>
+        <li>資本コスト法：残存期間の各年SCRの割引現在価値×資本コスト率（例：6%）</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-C">
+      <div class="kp-title">生命保険会計の特殊性・税制 <span class="kp-freq freq-a">A級頻出</span></div>
+      <ul class="kp-ul">
+        <li>保険料計上：<span class="kp-kw">現金主義</span>（未収保険料は計上しない）</li>
+        <li>保険金：<span class="kp-kw">発生主義</span>（支払備金として計上）</li>
+        <li>価格変動準備金の積立基準：対象資産の<span class="kp-kw">期末簿価</span>（帳簿価額）×係数（時価ではない）</li>
+        <li>その他有価証券の評価：<span class="kp-kw">時価評価</span>。評価差額は純資産直入または損益計上</li>
+        <li>満期保有目的債券：<span class="kp-kw">償却原価法</span>（時価評価しない）</li>
+        <li>有価証券の減損：時価が帳簿価額の約50%以上下落→原則として減損処理（強制評価減）</li>
+        <li><span class="kp-kw">法人事業税</span>：収入保険料中の付加保険料相当額をベースに算出（純保険料部分は除外）</li>
+        <li><span class="kp-kw">7%最低課税方式</span>：課税所得が剰余金の7%未満の場合、剰余金の7%を課税標準</li>
+        <li>IBNR備金の税務上の損金：団体定期保険・消費者信用団体生命保険のみ。算式あり（8.3/100等）</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-D">
+      <div class="kp-title">IBNR備金・支払備金・予定事業費枠 <span class="kp-freq freq-a">A級頻出</span></div>
+      <ul class="kp-ul">
+        <li><span class="kp-kw">IBNR備金</span>：保険事故が発生しているが会社にまだ報告が届いていない案件に対する支払備金</li>
+        <li>IBNR備金の算出：前年度所要額×（当年度末保有契約高÷前年度末保有契約高）で比例計算が一般的</li>
+        <li>いわゆる<span class="kp-kw">入院責任準備金</span>：評価日時点で入院継続中の契約の将来給付に備える責任準備金（IBNRとは別）</li>
+        <li><span class="kp-kw">蔵銀枠</span>：一定の定額事業費回収のための予定事業費枠。保険期間を通じて安定的</li>
+        <li><span class="kp-kw">利源枠</span>（チルメル式）：初年度に新契約費を大きく計上し、以後逓減。収益認識との整合性あり</li>
+        <li><span class="kp-kw">純保枠</span>（純保険料式）：保険料に含まれる付加保険料部分を均等に配分。期間中一定額</li>
+        <li>利源枠＞蔵銀枠＞純保枠（保険料払込期間中の初年度の一般的な大小関係）</li>
+        <li>限度超過修正：チルメル歩合が保険料で賄いきれない場合の調整（翌年度以降に繰越）</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ TEMPLATES ══ -->
+<div class="tab-panel" id="panel-tpl">
+  <div class="sec-hd"><h2>論述答案テンプレート</h2><span class="cnt">10パターン</span></div>
+  <div class="tpl-grid">
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>① 利源分析の各利源の説明</h3><span class="tpl-tag">2018・H26・H24頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">費差損益の型</div>
+        <div class="tpl-block"><span class="fill">費差損益</span>＝予定事業費（利源枠）－実際事業費<br>予定事業費枠（利源枠）は、チルメル式に基づき初年度に新契約費を大きく計上し、以後逓減する方式。費差益は予定事業費枠の範囲内に実際事業費が収まった場合に生じる。</div>
+        <div class="tpl-sec-title">死差損益の型</div>
+        <div class="tpl-block"><span class="fill">死差損益</span>＝危険保険料（予定死亡率×危険保険金額）－実際保険金（＋実際発生備金変動）<br>死差益は実際の死亡実績が予定より少ない場合に生じる。危険差損益ともいう。</div>
+        <div class="tpl-sec-title">利差損益の型</div>
+        <div class="tpl-block"><span class="fill">利差損益</span>＝（利息および配当金等収入＋有価証券償還益±為替損益等）－予定利息<br>予定利率を超えた運用実績が利差益の源泉。予定利率が運用利回りを上回ると逆ざや（利差損）が生じる。</div>
+        <div class="tpl-sec-title">基礎利益の計算構造</div>
+        <div class="tpl-block">基礎利益＝費差損益＋死差損益＋利差損益＋解約・失効益＋その他の損益<br>キャピタル損益（有価証券売却損益・価格変動損益）・臨時損益は基礎利益に含まない。</div>
+        <div class="kws"><span class="kw">予定事業費枠</span><span class="kw">チルメル式</span><span class="kw">危険保険料</span><span class="kw">予定利率</span><span class="kw">逆ざや</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>② 契約者配当の公正・衡平の要件と確認</h3><span class="tpl-tag">2023・2019・H24頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">公正・衡平な配当の4要件</div>
+        <div class="tpl-block">
+          ①<span class="fill">財務健全性の確保</span>：責任準備金が適正に積み立てられ、かつ会社の継続的運営のための必要額が準備されている状況において配当が決定されていること<br><br>
+          ②<span class="fill">収支状況に応じた分配</span>：配当の割当・分配が収支状況（アセットシェア）に応じて行われていること<br><br>
+          ③<span class="fill">適正な計算・法令遵守</span>：適正な保険数理・企業会計基準等に基づき、法令・通達・保険約款の契約条項に則っていること<br><br>
+          ④<span class="fill">市場動向・契約者期待への配慮</span>：運用実績の動向・市場金利の趨勢等から保険契約者が期待するところを考慮していること
+        </div>
+        <div class="tpl-sec-title">配当方式の比較</div>
+        <div class="tpl-block">
+          <span class="fill">利源別配当方式</span>：費差益・死差益・利差益の発生原因ごとに把握し各保険契約に分配。計算が複雑だが原因に応じた公平性が高い<br><br>
+          <span class="fill">アセットシェア方式</span>：保険契約の実績キャッシュフローに基づく持分評価で配当。長期契約での公平性確保に有効
+        </div>
+        <div class="kws"><span class="kw">財務健全性</span><span class="kw">収支状況</span><span class="kw">法令遵守</span><span class="kw">市場金利</span><span class="kw">利源別</span><span class="kw">アセットシェア</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>③ 標準責任準備金制度の目的と概要</h3><span class="tpl-tag">2019・2018頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">目的</div>
+        <div class="tpl-block">
+          ①<span class="fill">契約者保護</span>：保険会社が将来の保険金支払義務を確実に履行できるよう、最低限の責任準備金積立を強制する<br>
+          ②<span class="fill">健全性の確保</span>：予定利率等の計算基礎率を統一することで、業界全体の財務健全性を確保する<br>
+          ③<span class="fill">公平な競争環境</span>：保険料引き下げ競争による財務悪化を防止する
+        </div>
+        <div class="tpl-sec-title">概要（新規契約に適用）</div>
+        <div class="tpl-block">
+          H8年大蔵省告示第48号に基づき、計算基礎率（予定利率・予定死亡率等）の水準を定めた。生命保険会社は算出方法書に定める方法で計算した責任準備金（≦標準責任準備金）を積み立てなければならない。<br><br>
+          なお、以下は<span class="fill">対象外</span>：特別勘定の保険金未保証契約・払戻積立金なし・予定利率変更条項付・保険期間5年以下・外貨建て
+        </div>
+        <div class="kws"><span class="kw">告示48号</span><span class="kw">計算基礎率</span><span class="kw">最低積立</span><span class="kw">対象外5種</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>④ 区分経理の意義と商品区分の設定</h3><span class="tpl-tag">2024・2023・H23頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">意義</div>
+        <div class="tpl-block">
+          保険会社が取り扱う多様な商品群ごとに収益・費用・資産・負債を区分して把握することで、<br>
+          ①<span class="fill">商品ごとの損益把握</span>（経営管理・PDCAの基盤）<br>
+          ②<span class="fill">配当財源の計算</span>（公正・衡平な配当のベース）<br>
+          ③<span class="fill">規制当局への報告</span>（監督指針に基づく開示・報告）<br>
+          を適切に行うことができる。
+        </div>
+        <div class="tpl-sec-title">商品区分の設定</div>
+        <div class="tpl-block">
+          商品区分は損益を把握する単位として「保険の性質の相違等により理論的・合理的な区分」とすることが求められる。<br>
+          留意点：①区分が細かすぎると管理コスト増大、粗すぎると損益把握精度が低下 ②単一区分にマザーファンドを設けないよう留意（資産持分管理方式）
+        </div>
+        <div class="kws"><span class="kw">損益把握</span><span class="kw">配当財源</span><span class="kw">監督報告</span><span class="kw">商品区分</span><span class="kw">全社区分</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>⑤ 金利急上昇が財務・健全性・経済価値に与える影響</h3><span class="tpl-tag">2019・H23頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">財務諸表への影響</div>
+        <div class="tpl-block">
+          ・その他有価証券（債券）：時価下落→<span class="fill">評価差額金が減少</span>（純資産マイナス）<br>
+          ・責任準備金対応債券：時価評価なし→財務諸表上は影響なし<br>
+          ・満期保有目的債券：時価評価なし→影響なし<br>
+          ・解約返戻金の支払増加→流動性問題（ディスインターミディエーション）のリスク
+        </div>
+        <div class="tpl-sec-title">監督規制上の健全性指標（SMR）への影響</div>
+        <div class="tpl-block">
+          ・その他有価証券の評価差額減少→<span class="fill">ソルベンシー・マージン総額が減少</span><br>
+          ・責任準備金対応債券が有効に機能している場合、金利リスクの影響を一定程度緩和<br>
+          ・予定利率リスク相当額（分母）：標準利率との差に対応するリスク係数が変化しうる
+        </div>
+        <div class="tpl-sec-title">経済価値ベースの自己資本への影響</div>
+        <div class="tpl-block">
+          ・資産（債券）の時価：金利上昇で<span class="fill">減少</span><br>
+          ・負債（責任準備金）の経済価値：将来キャッシュフローを市場金利で割引→<span class="fill">減少</span>（通常、資産の減少より大きい場合、経済価値ベースの自己資本は増加する）<br>
+          ・ALMが有効に機能している場合は資産・負債のデュレーション差が小さく影響が限定的
+        </div>
+        <div class="kws"><span class="kw">評価差額金</span><span class="kw">SMR</span><span class="kw">デュレーション差</span><span class="kw">流動性</span><span class="kw">経済価値</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>⑥ 保険計理人の収支分析（1号・3号・3号の2）</h3><span class="tpl-tag">2022・H25頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">1号収支分析</div>
+        <div class="tpl-block">
+          将来<span class="fill">10年間</span>の複数シナリオによる将来収支分析で責任準備金の充足性を確認。結果として責任準備金不足相当額が生じた場合、保険計理人は積立を求めるか、またはただちに実行可能な経営政策の変更（配当引下げ等5つ）を意見書に示すことで積立省略を認めることができる。
+        </div>
+        <div class="tpl-sec-title">3号収支分析（負債十分性テスト）</div>
+        <div class="tpl-block">
+          実質資産負債差額が正（資産超過）であることを確認（<span class="fill">事業継続基準</span>）。時価評価ベースで計算。
+        </div>
+        <div class="tpl-sec-title">3号の2収支分析</div>
+        <div class="tpl-block">
+          将来<span class="fill">10年間</span>のSMR基準の充足性確認。基本シナリオ（金利横ばい・株価不変等）で計算。分析期間中の最大不足額の現在価値を保険料積立金等余剰部分控除額の下限とする。
+        </div>
+        <div class="kws"><span class="kw">10年間</span><span class="kw">経営政策変更5つ</span><span class="kw">実質資産負債差額</span><span class="kw">SMR充足</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>⑦ 事業費管理のあり方（費差損益・モニタリング）</h3><span class="tpl-tag">2023・H28頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">事業費効率の把握（一般論）</div>
+        <div class="tpl-block">
+          ・<span class="fill">事業費率</span>（事業費÷保険料等収入）と<span class="fill">基礎利益費差損益</span>の両面から分析<br>
+          ・イニシャルコスト（新契約費）とランニングコスト（維持費）を区分して管理<br>
+          ・予定事業費枠（利源枠・純保枠・蔵銀枠）との比較による費差損益の把握<br>
+          ・金融庁モニタリング資料（5-7：新契約費の充足状況・5-9：維持費の充足状況）の定期報告
+        </div>
+        <div class="tpl-sec-title">インフレ率上昇を踏まえた留意点</div>
+        <div class="tpl-block">
+          ・<span class="fill">人件費・物価の上昇</span>→実際事業費が増加→費差損の拡大リスク<br>
+          ・予定事業費率は保険料設定時に固定されているため、インフレが継続すると費差損が恒常化<br>
+          ・新規商品の予定事業費率設定時にインフレ率を見込んだ十分性の確認が必要
+        </div>
+        <div class="tpl-sec-title">経営政策上の留意点</div>
+        <div class="tpl-block">
+          ・IT投資等の大型支出は<span class="fill">費用対効果</span>を中長期的に評価（短期の費差損を許容できるか）<br>
+          ・チャネルごとの事業費効率の差異把握と最適な販売戦略の立案<br>
+          ・費差損が恒常化する場合は保険料率の改定・商品見直しを検討
+        </div>
+        <div class="kws"><span class="kw">事業費率</span><span class="kw">費差損益</span><span class="kw">インフレ対応</span><span class="kw">IT投資</span><span class="kw">金融庁モニタリング</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>⑧ ALM（資産負債管理）の意義と実務</h3><span class="tpl-tag">2023・2019頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">ALMの意義</div>
+        <div class="tpl-block">
+          資産および負債・資産の運用方針と負債の管理方針が、会社の経営目標・リスク特性に適合していることを確保するため、資産負債全体を統合的に管理する態勢。特に生命保険会社は<span class="fill">超長期の負債</span>を抱えるため金利リスク管理が重要。
+        </div>
+        <div class="tpl-sec-title">デュレーション・マッチングの要件と実務</div>
+        <div class="tpl-block">
+          D(L)＝k×D(A)（0.8≦k≦1.25）の範囲で管理。<span class="fill">責任準備金対応債券</span>として指定することで保有目的区分を維持したまま時価変動による損益への影響を一定程度緩和できる。ただし要件：①金利要因のみで時価変動 ②同一通貨建て ③信用悪化なし ④デリバティブ組合せなし等
+        </div>
+        <div class="tpl-sec-title">ショート・フォール・アプローチ</div>
+        <div class="tpl-block">
+          利率保証がある一般勘定において、<span class="fill">効率的フロンティア</span>上に利率保証の制約線を重ねることで、利率保証を満たしながら期待リターンを最大化するポートフォリオを選択する手法。
+        </div>
+        <div class="kws"><span class="kw">デュレーション</span><span class="kw">責任準備金対応債券</span><span class="kw">金利リスク</span><span class="kw">効率的フロンティア</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>⑨ ソルベンシー・マージン比率の構造と改正（H22）</h3><span class="tpl-tag">2024・H22頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">SMRの計算構造</div>
+        <div class="tpl-block">
+          SMR（%）＝マージン総額÷（リスクの合計額÷2）×100<br><br>
+          リスクの合計額＝√（保険リスク²＋予定利率リスク²＋最低保証リスク²＋資産運用リスク²）＋経営管理リスク（他は合算後に加算）
+        </div>
+        <div class="tpl-sec-title">H22年改正の主な内容</div>
+        <div class="tpl-block">
+          【分子の厳格化】<br>
+          ・負債性資本調達手段等の<span class="fill">算入制限</span>導入<br>
+          ・繰延税金資産（欠損金に係るもの）の算入制限<br>
+          ・将来利益を<span class="fill">全額マージン不算入</span>に変更<br><br>
+          【分母の精緻化】<br>
+          ・各リスク係数の信頼水準引上げ（従来水準→<span class="fill">99%</span>）<br>
+          ・価格変動等リスクを各社の資産構成割合に基づき算出（従来：生保30%一律）<br>
+          ・ヘッジ効果：有効と確認されたものに限定
+        </div>
+        <div class="kws"><span class="kw">マージン総額</span><span class="kw">リスクの合計額</span><span class="kw">99%信頼水準</span><span class="kw">将来利益不算入</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>⑩ 経済価値ベースのソルベンシー規制とリスク・マージン</h3><span class="tpl-tag">2024・2022頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">経済価値ソルベンシー規制の目的</div>
+        <div class="tpl-block">
+          従来のソルベンシー規制（清算価値の保全）とは異なり、保険契約の<span class="fill">保険会社間の移転可能価値の保全</span>を目的とする。技術的準備金＝現在推計（BE）＋リスク・マージン（RM）
+        </div>
+        <div class="tpl-sec-title">リスク・マージンの計算方法</div>
+        <div class="tpl-block">
+          ①<span class="fill">資本コスト法</span>（COC法）：残存期間の各年のSCR（ソルベンシー資本要件）の割引現在価値×資本コスト率（例：6%）。ICS・ソルベンシーⅡで採用<br><br>
+          ②<span class="fill">パーセンタイル法</span>（クォンタイル法）：所要資本より小さい信頼水準における保険負債の1年変動と期待値（現在推計）との差額
+        </div>
+        <div class="tpl-sec-title">自己資本の機能（4つ）</div>
+        <div class="tpl-block">
+          ①<span class="fill">損失吸収機能</span>：予期せぬ損失の吸収<br>
+          ②<span class="fill">資金調達機能</span>：事業拡大・新商品開発等への資金供給<br>
+          ③<span class="fill">信用補完機能</span>：契約者・取引先・市場への信頼性付与<br>
+          ④<span class="fill">規制対応機能</span>：SMR等の規制上の要件充足
+        </div>
+        <div class="kws"><span class="kw">移転可能価値</span><span class="kw">現在推計</span><span class="kw">資本コスト法</span><span class="kw">パーセンタイル法</span><span class="kw">自己資本の4機能</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<script>
+// ═══════════════════════════════
+// 問題データ（60問）
+// ═══════════════════════════════
+const ALL_Q = [
+// 責任準備金
+{cat:'責任準備金',q:'標準責任準備金の「対象外」となる保険契約として正しいものはどれか？',
+ opts:['A. 保険期間5年以下の保険契約','B. 予定死亡率が業界標準を上回る保険契約','C. 払込期間が10年を超える保険契約','D. 保険金額が1億円を超える保険契約'],ans:0,
+ expl:'標準責任準備金の対象外：①特別勘定の保険金未保証契約 ②払戻積立金なし ③予定利率変更条項付 ④保険期間5年以下（積立勘定設置の場合は10年以下） ⑤外貨建て。',
+ tips:'<span class="tips-year">2018・H21</span>対象外5種類をセットで暗記。「特別勘定・払戻なし・利率変更・5年以下・外貨建て」'},
+
+{cat:'責任準備金',q:'チルメル式責任準備金の説明として正しいのはどれか？',
+ opts:['A. 初年度の新契約費を先取り計上し、通常より初期の積立が少ない方式','B. 全期間で均等に新契約費を配分する方式','C. 高齢者契約を対象に設計された特別積立方式','D. 変額保険にのみ適用できる積立方式'],ans:0,
+ expl:'チルメル式：契約初年度に新契約費（チルメル歩合）を先取りして費消する方式。通常の平準純保険料式より初期の積立が少ない（または負値）。限度超過修正が必要になる場合もある。',
+ tips:'<span class="tips-year">2022・H26</span>チルメル式は「初年度に大きく費消、以後逓減」が特徴。利源枠の計算基礎となる。'},
+
+{cat:'責任準備金',q:'1号収支分析で責任準備金不足相当額が発生した場合に、積立省略が認められるための経営政策変更に含まれないものはどれか？',
+ opts:['A. 資本金の増資','B. 配当の引下げ','C. 事業費の抑制','D. 保険料の引上げ'],ans:0,
+ expl:'1号収支分析の経営政策変更5つ：①配当引下げ ②事業費抑制 ③再保険見直し ④新契約抑制 ⑤今後締結する保険契約の保険料引上げ。「増資」は含まれない。',
+ tips:'<span class="tips-year">H20</span>「イ配当↓ ロ事業費↓ ハ再保険 ニ新契約↓ ホ保険料↑」の5つ。増資・社債発行等の財務的手段は含まれない。'},
+
+{cat:'責任準備金',q:'責任準備金の積立（保険業法施行規則第69条）における保険料積立金の説明として正しいのはどれか？',
+ opts:['A. 将来の債務履行に備え保険数理に基づき計算した金額','B. 未経過期間に対応する責任に相当する額','C. 保険リスクに備えて積み立てる準備金','D. 最低保証に係る収支残の不足に備える準備金'],ans:0,
+ expl:'施行規則69条：第1号「保険料積立金」→将来の債務履行に備え保険数理に基づき計算した額。第2号「未経過保険料」→未経過期間に対応する額。危険準備金はⅠ〜Ⅳに区分。',
+ tips:'<span class="tips-year">H18</span>施行規則69条の条文穴埋めが頻出。保険料積立金（第1号）・未経過保険料（第2号）・危険準備金（第3号）の対応を整理。'},
+
+{cat:'責任準備金',q:'税務上、責任準備金繰入額の損金算入が認められているのはどのような部分か？',
+ opts:['A. 保険料積立金および未経過保険料の部分のみ','B. 危険準備金を含むすべての責任準備金','C. 価格変動準備金を含む全準備金','D. 社員配当準備金も含む全準備金'],ans:0,
+ expl:'税務上の損金算入：保険料積立金および未経過保険料の部分のみ（危険準備金・価格変動準備金は含まない）。算出方法書の計算基礎を基とした額が上限（標準責任準備金対象は告示48号ベースを選択可）。',
+ tips:'<span class="tips-year">H26・H24・H23</span>「危険準備金は損金不算入」が頻出の誤答肢。保険料積立金+未経過保険料のみが損金算入の対象。'},
+
+// 危険準備金
+{cat:'危険準備金',q:'危険準備金Ⅱの取崩しが認められるのはどの場合か？',
+ opts:['A. 逆ざや（予定利率>実際運用利回り）がある場合のてん補','B. 死差損がある場合のてん補','C. 最低保証の収支残が負の場合のてん補','D. 第三分野保険の損失のてん補'],ans:0,
+ expl:'危険準備金Ⅱは予定利率リスクに備えるもの。取崩しは「逆ざやがある場合において当該逆ざやのてん補に充てるとき」のみ。危険準備金Ⅰは死差損、ⅢはMG損、Ⅳは第三分野損のてん補に各々充当。',
+ tips:'<span class="tips-year">H29・H27・2024</span>Ⅰ→死差損・Ⅱ→逆ざや・Ⅲ→MG損・Ⅳ→第三分野損の対応を完全に暗記する。'},
+
+{cat:'危険準備金',q:'危険準備金Ⅲ（最低保証リスク備え）の積立上限として正しいのはどれか？',
+ opts:['A. 保険料積立金の6%','B. 保険料積立金の5%','C. 危険準備金Ⅰの50%','D. 特別勘定残高の3%'],ans:0,
+ expl:'危険準備金Ⅲの積立上限：一般勘定の最低保証に係る保険料積立金と特別勘定に係る保険料積立金の合計の6%。旧規定は5%だった（H29問題で「5%→誤」）。',
+ tips:'<span class="tips-year">H27（問題で5%→×）</span>現在は6%。危険準備金ⅢはMG（最低保証）リスクに備えるもので、取崩しはMG収支残が負の場合のみ。'},
+
+{cat:'危険準備金',q:'価格変動準備金の積立基準の説明として正しいのはどれか？',
+ opts:['A. 対象資産の期末帳簿価額（簿価）に所定の係数を乗じた額が積立限度額','B. 対象資産の時価に所定の係数を乗じた額が積立限度額','C. 対象資産の含み損益に係数を乗じた額が積立限度額','D. 対象資産の取得原価に係数を乗じた額が積立限度額'],ans:0,
+ expl:'価格変動準備金の積立限度：対象資産の期末帳簿価額（貸借対照表計上額）×係数（国内株式10/1000〜125/1000等）。「時価→誤」（H19・H21問題で誤答選択肢として出題）。',
+ tips:'<span class="tips-year">H19（②価格変動準備金の積立基準は時価→×）</span>「帳簿価額（簿価）×係数」が正しい。国内株式は125/1000（最高）、外貨建で為替リスクあり債券は100/1000等。'},
+
+{cat:'危険準備金',q:'第三分野保険のストレステストの説明として正しいのはどれか？',
+ opts:['A. 発生率のリスクの97.7%をカバーする発生率（A）と99%をカバーする発生率（B）を予測し、予定発生率ベースの保険金額（P）と比較する','B. 発生率のリスクの99%をカバーする発生率のみで判定する','C. 実績発生率と予定発生率の比率が1.2倍以上で危険準備金積立を要する','D. 資産運用利回りが標準利率を下回った場合に実施する'],ans:0,
+ expl:'ストレステスト：A（97.7%カバー）・B（99%カバー）を予測し予定発生率ベースの保険金額Pと比較。Z≧B→十分、B>Z≧A→危険準備金Ⅳ積立、B>A>Z→危険準備金Ⅳ積立＋負債十分性テスト実施。',
+ tips:'<span class="tips-year">H27・H23</span>「99%のみで判定→誤」が頻出。A（97.7%）とB（99%）の2段階判定が正しい。ZはPベース＝予定発生率に基づく保険金額。'},
+
+// ソルベンシー
+{cat:'ソルベンシー',q:'ソルベンシー・マージン比率の計算式として正しいのはどれか？',
+ opts:['A. ソルベンシー・マージン総額÷（リスクの合計額÷2）×100','B. ソルベンシー・マージン総額÷リスクの合計額×100','C. リスクの合計額÷ソルベンシー・マージン総額×100','D. （ソルベンシー・マージン総額－リスクの合計額）×100'],ans:0,
+ expl:'SMR＝ソルベンシー・マージン総額÷（リスクの合計額÷2）×100（%）。200%以上で健全性確保の目安。規制上は200%未満で早期是正措置、100%未満で業務停止命令が発動しうる。',
+ tips:'<span class="tips-year">H19・H24</span>「÷2」を忘れやすい。SMRの計算式は毎年数値計算問題として出題される。分母はリスク合計の半分。'},
+
+{cat:'ソルベンシー',q:'ソルベンシー・マージン総額に含まれないものはどれか？',
+ opts:['A. 将来の新契約から生じる将来利益','B. 危険準備金','C. 価格変動準備金','D. その他有価証券の評価差額（90%または100%）'],ans:0,
+ expl:'H22年改正で将来利益は全額マージン不算入。含まれるもの：資本金等・価格変動準備金・危険準備金・一般貸倒引当金・有価証券評価差額（90%または100%）・土地含み損益（85%または100%）・保険料積立金等余剰部分等。',
+ tips:'<span class="tips-year">H22改正・H28（自己資本の機能）</span>「将来利益は不算入」はH22改正の重要ポイント。改正前は将来利益の一部を算入できた。'},
+
+{cat:'ソルベンシー',q:'保険料積立金等余剰部分の計算式として正しいのはどれか？',
+ opts:['A.（保険料積立金＋未経過保険料）－max（全期チルメル式責任準備金, 解約返戻金相当額）－追加責任準備金','B.（保険料積立金＋未経過保険料）－標準責任準備金','C.（保険料積立金＋未経過保険料）×30%','D. 保険料積立金の余剰部分をそのまま計上'],ans:0,
+ expl:'保険料積立金等余剰部分＝（保険料積立金＋未経過保険料）－max（全期チルメル式責任準備金, 解約返戻金相当額）－追加責任準備金。',
+ tips:'<span class="tips-year">2023</span>「保険料積立金等余剰部分」はSMR分子の一要素。「全期チルメルと解約返戻金相当額の大きい方を控除」がポイント。'},
+
+{cat:'ソルベンシー',q:'実質資産負債差額の特徴として正しいのはどれか？',
+ opts:['A. 時価評価ベースの自己資本。SMRとは異なる健全性指標','B. 帳簿価額ベースで計算する自己資本','C. SMR（ソルベンシー・マージン比率）と同義の指標','D. 保険金の支払能力を示す規制上の指標'],ans:0,
+ expl:'実質資産負債差額：時価評価資産－時価評価負債（≒経済価値ベースの自己資本）。SMRは簿価中心で計算するのに対し、実質資産負債差額は時価評価ベースであり別の健全性指標。',
+ tips:'<span class="tips-year">H19・2019</span>実質資産負債差額は「時価ベース」。SMRは「帳簿価額ベースが主体」。金利上昇時に両者が乖離することが多い。'},
+
+// 利源分析
+{cat:'利源分析',q:'生命保険会社の「基礎利益」に含まれるものはどれか？',
+ opts:['A. 費差損益・死差損益・利差損益・解約失効益','B. 有価証券売却益・価格変動損益','C. 臨時損益・キャピタル損益','D. 特別利益・特別損失'],ans:0,
+ expl:'基礎利益＝費差損益＋死差損益＋利差損益＋解約・失効益＋その他の損益（臨時・キャピタルを除く）。有価証券売却損益はキャピタル損益として基礎利益に含まない。',
+ tips:'<span class="tips-year">2018・H26・H23</span>「有価証券売却益は基礎利益に含まない」が頻出の誤答肢。キャピタル損益（価格変動損益含む）は基礎利益の外。'},
+
+{cat:'利源分析',q:'費差損益の計算式として正しいのはどれか？',
+ opts:['A. 予定事業費（利源枠）－実際事業費','B. 実際事業費－予定事業費（純保枠）','C. 予定事業費（蔵銀枠）－実際事業費','D. 予定事業費（利源枠）÷実際事業費'],ans:0,
+ expl:'費差損益＝予定事業費（利源枠）－実際事業費。費差益は予定事業費枠を実際事業費が下回ったとき。金融庁提出用の利源分析では「5年チルメル式（利源枠）」を用いるのが標準。',
+ tips:'<span class="tips-year">2020・H26</span>「利源枠を使う」のが金融庁提出用標準。純保枠（平準純保険料式）との差が責任準備金関係損益に計上される。'},
+
+{cat:'利源分析',q:'変額年金保険の最低保証に係る保険料積立金の積立・取崩を、金融庁提出用の利源分析ではどの利源として認識するか？',
+ opts:['A. 利差損益','B. 死差損益','C. 費差損益','D. 解約・失効益'],ans:0,
+ expl:'金融庁提出用の利源分析では、最低保証に係る保険料積立金の積立・取崩は「利差損益」で認識する。内部管理としては資産運用損益（別管理）として認識することも考えられる。',
+ tips:'<span class="tips-year">2021</span>「発生要因が対象資産の価値変動」であることに鑑みると内部管理では利差損益以外で認識する考え方もあるが、金融庁提出用では利差損益として計上する。'},
+
+{cat:'利源分析',q:'利源分析における「責任準備金関係損益」に主に含まれるものはどれか？',
+ opts:['A. 利源枠と純保枠の差額（諸積増の増減等）','B. 有価証券の評価損益','C. 解約返戻金の支払による損益','D. 死亡保険金と危険保険料の差額'],ans:0,
+ expl:'責任準備金関係損益：主に利源枠（チルメル式）と純保枠（平準純保険料式）の差額調整。諸積増（追加責任準備金等）の増減も含まれる。金融庁提出用の利源分析で6利源の一つ。',
+ tips:'<span class="tips-year">2021・H22</span>「利源枠と純保枠の差」が責任準備金関係損益。純保枠が標準責任準備金の積立方式なので、チルメル方式との差が生じる。'},
+
+// 区分経理
+{cat:'区分経理',q:'区分経理における全社区分の機能として含まれないものはどれか？',
+ opts:['A. 新商品の販売収益を積立て顧客に還元する機能','B. 保険リスク等の引受機能','C. 新商品開発等の事業運営資金提供機能','D. 会社全体で共有する資産・共通経費の管理機能'],ans:0,
+ expl:'全社区分の4機能：①保険リスク等の引受機能 ②新商品開発等の事業運営資金提供機能 ③共有資産・共通経費の管理機能 ④現預金等の管理機能。「販売収益の積立て→顧客還元」は全社区分の機能ではない。',
+ tips:'<span class="tips-year">H27・H19・2019</span>全社区分の4機能は毎年のように問われる重要暗記事項。「引受・資金・管理・現預金」の4点セット。'},
+
+{cat:'区分経理',q:'運用資産の管理方式のうち「資産分別管理方式」の説明として正しいのはどれか？',
+ opts:['A. 個々の資産を銘柄ごとに資産区分に直接帰属させる方式','B. 取引単位ごとに各資産区分の持分で管理する方式','C. マザーファンドを設定し持分を管理する方式','D. 全資産を一つの共有プールで管理する方式'],ans:0,
+ expl:'資産分別管理方式：個々の資産を銘柄ごとに資産区分に直接帰属させる方式。資産共有管理方式（取引単位ごとの持分）・資産持分管理方式（マザーファンドへの持分）の3種類がある。',
+ tips:'<span class="tips-year">2018・H20</span>3つの管理方式の名称と内容の対応が頻出。なお、資産持分管理方式では「一般勘定資産全体を一個のマザーファンドとして扱わない」という留意点がある。'},
+
+{cat:'区分経理',q:'区分経理における商品区分の設定について正しいのはどれか？',
+ opts:['A. 保険の性質の相違等により理論的・合理的な区分とする','B. 保険料収入の規模順に均等分割する','C. 生命保険・損害保険の免許区分に従って設定する','D. 規制当局が一律に定める区分に従う'],ans:0,
+ expl:'商品区分（プロフィットセンター）は損益を把握する単位として「保険の性質の相違等により理論的・合理的な区分」とすることが求められる。各社が監督指針に基づき自社の実態に合わせて設定。',
+ tips:'<span class="tips-year">2024・H23</span>「理論的・合理的な区分」がキーワード。区分が細すぎると管理コスト↑、粗すぎると損益把握精度↓のトレードオフを意識する。'},
+
+// 保険計理人
+{cat:'保険計理人',q:'保険計理人の関与事項（保険業法施行規則第77条）に含まれないものはどれか？',
+ opts:['A. 保険商品の販売チャネルの選択','B. 保険料の算出方法','C. 将来収支に関する計画','D. 生命保険募集人の給与等に関する規程の作成'],ans:0,
+ expl:'関与事項9項目：①保険料 ②責任準備金 ③配当 ④契約者価額 ⑤未収保険料 ⑥支払備金 ⑦将来収支計画 ⑧生命保険募集人給与等規程作成 ⑨その他。「販売チャネルの選択」は含まれない。',
+ tips:'<span class="tips-year">H28・H22・2023</span>関与事項の9項目は毎年穴埋め問題として出題。⑦「将来収支に関する計画」と⑧「募集人給与等に関する規程」は間違えやすい。'},
+
+{cat:'保険計理人',q:'保険計理人が毎決算期に作成・提出する書類として正しいのはどれか？',
+ opts:['A. 意見書を取締役会に提出し、写しを金融庁（当局）に提出する','B. 事業報告書を株主総会に提出する','C. リスク管理報告書を社外取締役に提出する','D. 保険数理報告書を保険契約者に直接送付する'],ans:0,
+ expl:'保険業法121条：保険計理人は毎決算期に意見書を取締役会に提出→遅滞なく写しを金融庁（当局）に提出。当局は保険計理人に意見書の説明・意見を求めることができる。',
+ tips:'<span class="tips-year">2022</span>「意見書→取締役会→写しを金融庁」の2段階提出が正確な手続き。直接金融庁に提出するのではないことに注意。'},
+
+{cat:'保険計理人',q:'3号の2収支分析（ソルベンシー・マージン基準の確認）の分析期間として正しいのはどれか？',
+ opts:['A. 将来10年間','B. 将来5年間','C. 将来3年間','D. 将来20年間'],ans:0,
+ expl:'3号の2収支分析は将来10年間。（1号収支分析も将来10年間）。なお、H25の問題では「3号の2収支分析の分析期間は将来5年間→誤」として出題された。',
+ tips:'<span class="tips-year">H29・H25（5年間→誤）</span>1号も3号の2もどちらも「将来10年間」。「5年間」が誤答選択肢として頻出。'},
+
+// 配当
+{cat:'配当',q:'保険相互会社の社員配当（剰余金分配）の最高意思決定機関として正しいのはどれか？',
+ opts:['A. 社員総会','B. 取締役会','C. 保険計理人','D. 金融庁'],ans:0,
+ expl:'相互会社の社員配当は「社員自治」が企業理念。最高意思決定機関は社員総会。一方、株式会社の契約者配当の最高意思決定機関は取締役会であり費用処理される。',
+ tips:'<span class="tips-year">H27</span>相互会社＝社員総会が最高意思決定機関（社員の衡平・自治）。株式会社＝取締役会。この対比が試験頻出。'},
+
+{cat:'配当',q:'公正・衡平な配当の要件として保険計理人が確認すべき事項に含まれないものはどれか？',
+ opts:['A. 配当の割当に株主への利益還元との連動性があること','B. 財務健全性のための必要額が準備されている状況で配当が決定されていること','C. 配当の割当・分配が収支状況に応じて行われていること','D. 市場金利の趨勢等から保険契約者が期待するところを考慮していること'],ans:0,
+ expl:'公正・衡平な配当の4要件：①財務健全性の確保 ②収支状況に応じた分配 ③適正な保険数理・法令遵守 ④市場金利等の考慮。「株主への利益還元との連動性」は含まれない。',
+ tips:'<span class="tips-year">2023</span>実務基準第19条〜22条が根拠。4要件を「健全性・収支・法令・動向」と整理して暗記。'},
+
+{cat:'配当',q:'「利源別配当方式」の説明として正しいのはどれか？',
+ opts:['A. 剰余金の発生原因（費差・死差・利差等）ごとに把握し各契約に分配する方式','B. 各契約のアセットシェアを基に持分に応じて分配する方式','C. 保険金額に比例して均等分配する方式','D. 各契約者の保険期間に応じて配当を逓増させる方式'],ans:0,
+ expl:'利源別配当方式（第4号方式）：剰余金の発生原因ごとに把握し、各保険契約の責任準備金・保険料等を基準に計算・分配。アセットシェア方式（第3号方式）は保険契約の実績キャッシュフローに基づく持分評価で分配。',
+ tips:'<span class="tips-year">H24・2019</span>施行規則30条の2の4つの方式の違いを押さえる。1号：アセットシェア方式、2号：利源別方式、3号：アセットシェア類似方式、4号：その他。'},
+
+// ALM・EV
+{cat:'ALM',q:'責任準備金対応債券として認められるための要件に含まれないものはどれか？',
+ opts:['A. 保険契約と同一国の発行体の債券であること','B. デュレーション・マッチングの条件を満たしていること','C. 金利要因のみで時価が変動する債券であること','D. 責任準備金と同一通貨建てであること'],ans:0,
+ expl:'責任準備金対応債券の要件：①デュレーション条件（D(L)＝k×D(A)、0.8≦k≦1.25） ②金利要因のみで時価変動 ③同一通貨建て ④信用悪化なし ⑤持合目的の劣後債でない ⑥デリバティブ組合せなし。「同一国の発行体」という要件はない。',
+ tips:'<span class="tips-year">2024・2018</span>「同一通貨建て」は要件だが「同一国の発行体」は要件でない。デュレーション条件（0.8≦k≦1.25）も必ず暗記。'},
+
+{cat:'ALM',q:'デュレーション・マッチングの許容範囲として正しいのはどれか？',
+ opts:['A. D(L)＝k×D(A)、kは0.8以上1.25以下','B. D(L)＝k×D(A)、kは0.9以上1.1以下','C. D(L)－D(A)の差が±1年以内','D. D(L)＝D(A)（完全一致）'],ans:0,
+ expl:'デュレーション・マッチング：D(L)＝k×D(A)（ただし0.8≦k≦1.25）。責任準備金のデュレーションD(L)が、責任準備金対応債券のデュレーションD(A)の0.8倍以上1.25倍以下の範囲内であることが要件。',
+ tips:'<span class="tips-year">2024</span>k＝0.8〜1.25（±20%の許容幅）が正確な数値。定期的検証が必要であることもセットで暗記。<span data-formula="duration"></span>'},
+
+{cat:'ALM',q:'IAISのALM論点書（ALMイシューペーパー）において市場リスクに含まれる「金利リスク以外の3つ」として正しいのはどれか？',
+ opts:['A. 為替リスク・株式リスク・流動性リスク','B. 信用リスク・オペレーショナルリスク・流動性リスク','C. 為替リスク・信用リスク・オペレーショナルリスク','D. 株式リスク・信用リスク・不動産リスク'],ans:0,
+ expl:'IAISのALM論点書における市場リスク4種：①金利リスク ②為替リスク ③株式リスク ④流動性リスク。信用リスク・オペレーショナルリスクは別カテゴリ。',
+ tips:'<span class="tips-year">H25・2023</span>「金利・為替・株式・流動性」の4種。保険引受リスクは市場リスクとは別に明示される（ALM論点書では保険引受リスクも含む）。'},
+
+{cat:'ALM',q:'エンベディッド・バリュー（EV）の構成要素として正しいのはどれか？',
+ opts:['A. 修正純資産＋保有契約価値（VIF）','B. 保険料収入の現在価値＋資産の時価','C. 将来利益の合計額＋繰延税金資産','D. 責任準備金＋危険準備金＋価格変動準備金'],ans:0,
+ expl:'EV＝修正純資産＋VIF（保有契約価値）。修正純資産＝自己資本＋含み損益等の調整額。VIF＝将来利益の割引現在価値－資本コスト。新契約価値（VNB）は当期新契約が生み出すEV増分。',
+ tips:'<span class="tips-year">2021</span>EV＝修正純資産＋VIFが定義。市場整合的EV（MCEV）はさらにTVOG（保証とオプションの時間価値）を控除し、リスクフリーレートで割引。<span data-formula="ev"></span>'},
+
+{cat:'ALM',q:'市場整合的EV（MCEV）と伝統的EVの主な相違点として正しいのはどれか？',
+ opts:['A. MCEVはTVOG（保証とオプションの時間価値）を評価し割引率にリスクフリーレートを使用する','B. MCEVは帳簿価額ベースの純資産を使用する','C. 伝統的EVはリスク中立確率を使用した確率論的手法を採用する','D. MCEVは将来の新契約価値を含まない'],ans:0,
+ expl:'MCEV（2008年CFOフォーラム）の主な特徴：①TVOG（保証とオプションの時間価値）を確率論的手法で評価 ②割引率にリスクフリーレート使用 ③非ヘッジアブルリスクコスト（NHR）を控除 ④フリクショナルコストを考慮。伝統的EVは決定論的手法・期待運用収益率で割引。',
+ tips:'<span class="tips-year">2021</span>「TVOGを評価する→MCEV、しない→伝統的EV」が最重要ポイント。割引率の違い（RFR vs 期待収益率）も重要。'},
+
+// 会計・税制
+{cat:'会計・税制',q:'生命保険会社における保険料の計上基準として正しいのはどれか？',
+ opts:['A. 現金主義（収納ベース）による計上','B. 発生主義（契約ベース）による計上','C. 実現主義（支払ベース）による計上','D. 割賦主義（均等配分）による計上'],ans:0,
+ expl:'保険業法施行規則は保険料の計上を「現金主義」（収納ベース）と規定。未収保険料は原則として計上しない（発生主義ではない点に注意）。保険金は発生主義で支払備金として計上。',
+ tips:'<span class="tips-year">H19（①発生主義→誤）、H25（②ヘッジ会計）</span>保険料＝現金主義、保険金＝発生主義の対比が頻出。「保険料も発生主義→誤」がよく出る誤答肢。'},
+
+{cat:'会計・税制',q:'価格変動準備金の積立基準として正しいのはどれか？',
+ opts:['A. 対象資産の期末帳簿価額×係数','B. 対象資産の時価×係数','C. 対象資産の取得原価×係数','D. 対象資産の含み損益×係数'],ans:0,
+ expl:'価格変動準備金：対象資産の期末帳簿価額（貸借対照表計上額）×係数。「時価×係数→誤」（H19問題で正誤問題として出題）。係数は国内株式10/1000〜125/1000等、対象資産の種類により異なる。',
+ tips:'<span class="tips-year">H19（②時価→誤）</span>「簿価×係数」が正しい。時価が大きく変動しても積立限度計算は簿価ベース。これは重要な誤りやすいポイント。'},
+
+{cat:'会計・税制',q:'法人事業税の課税標準の計算として生命保険会社に適用されるものはどれか？',
+ opts:['A. 収入保険料に一定割合を乗じた金額（付加保険料相当額がベース）','B. 経常利益に法定税率を乗じた金額','C. 収入保険料の全額','D. 責任準備金の繰入額'],ans:0,
+ expl:'生命保険会社の法人事業税：収入保険料のうち付加保険料相当額（純保険料部分を除く）をベースとする考え方から、収入保険料に一定割合を乗じた金額が課税標準。個人保険は24/100等。',
+ tips:'<span class="tips-year">H23・H19・2021</span>「収入保険料×一定割合（付加保険料相当額に基づく割合）」が課税標準。純保険料部分は課税対象外とする考え方。'},
+
+{cat:'会計・税制',q:'生命保険会社における「7%最低課税方式」の説明として正しいのはどれか？',
+ opts:['A. 課税所得が剰余金の7%未満の場合、剰余金の7%を課税標準とする制度','B. 課税所得が常に収入保険料の7%以上となることを保証する制度','C. 法人税率が一律7%に軽減される特例制度','D. 社員配当準備金繰入額の7%が損金算入限度となる制度'],ans:0,
+ expl:'7%最低課税方式：課税所得が当該事業年度の剰余金の7%相当額に満たない場合は、剰余金の7%相当額をもって課税標準とする（契約者配当準備金繰入額の損金算入を制限する形で機能）。ただし団体定期保険等の剰余金は1/2に減額。',
+ tips:'<span class="tips-year">H26・H24・H23</span>「剰余金の7%を下限とする」制度。団体定期保険・心身障害者扶養・再保険に係る剰余金は1/2に減額して計算する特例あり。'},
+
+{cat:'会計・税制',q:'その他有価証券に係るヘッジ会計で認められる方法として正しいのはどれか？',
+ opts:['A. 繰延ヘッジおよび公正価値ヘッジの両方が認められる','B. 繰延ヘッジのみが認められる','C. 公正価値ヘッジのみが認められる','D. ヘッジ会計は適用できない'],ans:0,
+ expl:'H25年問題③「その他有価証券のヘッジ対象については繰延ヘッジのみ→誤」。正しくは繰延ヘッジおよび公正価値ヘッジの両方が認められる。ヘッジ有効性の事後テストは最低3ヵ月に1回（月1回ではない）。',
+ tips:'<span class="tips-year">H25（③繰延ヘッジのみ→誤）</span>「繰延ヘッジのみ→誤、両方認められる→正」。事後テストの頻度も「3ヵ月に1回」を正確に覚える。'},
+
+{cat:'会計・税制',q:'IBNR備金（既発生未報告支払備金）の算出方法として一般的なものはどれか？',
+ opts:['A. 前年度のIBNR所要額×（当年度保有契約高÷前年度保有契約高）','B. 当年度の保険金支払額の5%','C. 前年度末責任準備金の1%','D. 入院給付金日額の合計×平均入院日数'],ans:0,
+ expl:'IBNR備金（入院給付金）の算出：前年度IBNR所要額×（当年度末保有契約高÷前年度末保有契約高）の比例計算が一般的。保有契約高は入院給付金日額の合計（事業年度末）を使用。',
+ tips:'<span class="tips-year">H27・2022</span>IBNR備金の比例計算式は数値計算問題として出題される。保有契約高（入院給付金日額の合計）を分子・分母に使う点がポイント。<span data-formula="ibnr"></span>'},
+
+{cat:'会計・税制',q:'相互会社の準備金のうち「損益計算書の特別損失に計上される」ものはどれか？',
+ opts:['A. 危険準備金の繰入額','B. 価格変動準備金の繰入額','C. 社員配当準備金の繰入額','D. 損失てん補準備金の繰入額'],ans:0,
+ expl:'危険準備金の繰入額は特別損失に計上される（P/Lベースで税前利益を減少させる）。価格変動準備金の繰入額も特別損失。社員配当準備金の繰入額は剰余金処分。損失てん補準備金も剰余金処分。',
+ tips:'<span class="tips-year">2023</span>危険準備金・価格変動準備金の繰入→特別損失。社員配当準備金・損失てん補準備金の繰入→剰余金処分（損益計算書外）。'},
+
+{cat:'会計・税制',q:'生命保険株式会社の契約者配当準備金繰入額の経理処理として正しいのはどれか？',
+ opts:['A. 費用処理（損益計算書の費用）','B. 剰余金処分（貸借対照表の純資産の増減）','C. 特別損失への計上','D. 負債の部に直接計上'],ans:0,
+ expl:'株式会社の契約者配当準備金繰入額は費用処理（損益計算書に計上）。一方、相互会社の社員配当準備金繰入額は剰余金処分として処理される点が相違。',
+ tips:'<span class="tips-year">H26（⑤株式会社の契約者配当準備金繰入額は費用処理→正）、2020</span>株式会社＝費用処理、相互会社＝剰余金処分の対比が頻出。'},
+
+// 追加問題
+{cat:'責任準備金',q:'保険業法施行規則により定められる社員配当準備金の上限（積立限度）に含まれないものはどれか？',
+ opts:['A. 危険準備金の残高','B. 積立配当の額','C. 未払配当の額','D. 翌期配当所要額'],ans:0,
+ expl:'社員配当準備金の上限＝①積立配当の額 ②未払配当の額（決算期において未割当を含む） ③翌期配当所要額 ④その他算出方法書で定める額。「危険準備金の残高」は含まれない。',
+ tips:'<span class="tips-year">H21</span>社員配当準備金の限度＝積立配当＋未払配当＋翌期配当所要額＋その他。税法上の損金算入限度は「翌期配当所要額のうちの一定額」。'},
+
+{cat:'ソルベンシー',q:'ソルベンシー・マージン比率の計算において「価格変動等リスク」の対象となる資産はどれか？',
+ opts:['A. その他有価証券に分類された国内株式','B. 責任準備金対応債券に指定された邦貨建債券','C. 満期保有目的に分類された邦貨建債券','D. 外貨建債券（為替リスクなし、先物予約付き）'],ans:0,
+ expl:'価格変動等リスクの対象：①その他有価証券の株式・外貨建債券等 ②時価変動リスクのある資産。責任準備金対応債券と満期保有目的の債券は価格変動リスク計算の対象外。',
+ tips:'<span class="tips-year">H29・H28</span>「責任準備金対応債券→価格変動等リスク対象外」「その他有価証券→対象」の対比が重要。'},
+
+{cat:'ALM',q:'ヘッジ会計の事後テストにおける有効性の判定として正しいのはどれか？',
+ opts:['A. 最低3ヵ月に1回評価。ヘッジ対象とヘッジ手段の変動比率が80%〜125%の範囲内','B. 最低毎月1回評価。変動比率が95%〜105%の範囲内','C. 最低半年に1回評価。変動比率が70%〜130%の範囲内','D. 毎決算期に評価。変動比率が50%〜150%の範囲内'],ans:0,
+ expl:'ヘッジ会計の事後テスト：最低3ヵ月に1回評価。ヘッジ開始時から有効性判定時点までの、ヘッジ対象の変動とヘッジ手段の変動の比率が80%〜125%の範囲内で高い相関と認定。',
+ tips:'<span class="tips-year">2020・H25</span>「3ヵ月に1回」「80%〜125%」の両方を正確に覚える。H25問題では「年に1回→誤」として出題された。'},
+
+{cat:'区分経理',q:'区分経理における商品区分から全社区分への貸付が認められる条件として正しいのはどれか？',
+ opts:['A. 異常な保険金の支払い・新商品販売に伴う事業運営資金・その他やむを得ない事情がある場合に限る','B. 会社の収益改善のためなら常時可能','C. 取締役会の決議があれば無条件で可能','D. 全社区分の資産が不足している場合は自由に貸付できる'],ans:0,
+ expl:'商品区分→全社区分への貸付は限定的。「①異常な保険金支払い ②新商品販売に伴う事業運営資金 ③その他やむを得ない事情がある場合」に限る。逆（全社→商品）は商品区分の規模が小さく機能を果たせない場合に限る。',
+ tips:'<span class="tips-year">2022</span>区分間の資金移動には厳格な制限がある。「やむを得ない事情」要件を満たさない資金移動は区分経理の趣旨に反する。'},
+
+{cat:'保険計理人',q:'3号の2基本シナリオの前提として正しいものはどれか？',
+ opts:['A. 金利横ばい・株価不変・価格変動準備金繰入なし・劣後債等は約定通り利息支払い','B. 金利が毎年1%上昇・株価は10%下落シナリオ','C. 金利の急激な上昇（ストレスシナリオ）を前提','D. 最悪シナリオを複数用意して最大損失を計算'],ans:0,
+ expl:'3号の2基本シナリオ：①金利は直近長期国債利回りが横ばい ②株式・不動産価格・為替は変動しない ③危険準備金等への繰入なし ④劣後性債務等は約定通り利息支払い ⑤価格変動準備金・危険準備金の取崩しおよび含み益実現による充当を行わない。',
+ tips:'<span class="tips-year">H29</span>「横ばいシナリオ」が基本。ストレスシナリオとは異なる。含み益の実現を行わない点も重要。'},
+
+{cat:'配当',q:'契約者配当の分配方式のうち「アセットシェア方式」の説明として正しいのはどれか？',
+ opts:['A. 保険契約の実績キャッシュフローに基づく持分評価で分配する方式','B. 費差・死差・利差の各利源ごとに把握し分配する方式','C. 保険金額に比例して均等分配する方式','D. 保険期間に応じて逓増する配当を設定する方式'],ans:0,
+ expl:'アセットシェア方式：保険契約の実績ベースの保険数理的持分（アセットシェア）を評価し、各契約の貢献度に応じて分配する方式。長期契約の公平性確保に適している。',
+ tips:'<span class="tips-year">H24・2019</span>アセットシェア方式の定義は生保1のアセットシェアと共通。「実績キャッシュフローに基づく持分評価→配当」の流れ。'},
+
+{cat:'会計・税制',q:'生命保険相互会社において「貸借対照表の資産の部に計上される」準備金等はどれか？',
+ opts:['A. 基金（未償却の調達済み基金）','B. 危険準備金','C. 価格変動準備金','D. 社員配当準備金'],ans:0,
+ expl:'基金は相互会社の資本調達手段（株式会社の株式に相当）で資産の部の純資産に計上（正確には純資産の部）。危険準備金・価格変動準備金・社員配当準備金はすべて負債の部。',
+ tips:'<span class="tips-year">2023</span>2023年問題（3）の選択問題として出題。基金は「資産の部」ではなく純資産の部（負債の部ではない）。問題の出し方に注意して選択肢を正確に読む。'},
+
+{cat:'ALM',q:'経済価値ソルベンシー規制の目的として正しいのはどれか？',
+ opts:['A. 保険契約の保険会社間の移転可能価値の保全','B. 保険契約の清算価値の保全','C. 保険料収入の適切な配分の確保','D. 保険会社の株主価値の最大化'],ans:0,
+ expl:'経済価値ソルベンシー規制（ICS等）の目的は、従来の清算価値保全ではなく「保険契約の保険会社間の移転可能価値の保全」。保険会社が保険負債を移転させる際に必要な経済価値を確保することを目的とする。',
+ tips:'<span class="tips-year">2024</span>「移転可能価値の保全」vs「清算価値の保全」の対比が重要。リスク・マージンはサードパーティが負債を引き継ぐ際に必要とする資本コストを反映するもの。'},
+
+// ── H12〜H16 追加問題 ──────────────────────────────────────
+
+{cat:'会計・税制',q:'生命保険会計における費用の計上基準として正しいのはどれか？',
+ opts:['A. 発生主義（保険事故の発生時点で費用認識）','B. 現金主義（支払時点で費用認識）','C. 実現主義（収益に対応した費用のみ計上）','D. 均等配分主義（保険期間に均等計上）'],ans:0,
+ expl:'生命保険会計における費用（保険金・給付金等）の計上基準は発生主義。実務上、期中は支払時に現金主義で処理するが、事業年度末に支払備金勘定を用いて発生主義による処理に修正する。',
+ tips:'<span class="tips-year">H14・H13（①保険料は発生主義→誤）</span>「保険料＝現金主義、費用（保険金）＝発生主義」の対比が最重要。H13で「保険料の計上基準は発生主義→×」として出題。'},
+
+{cat:'会計・税制',q:'生命保険株式会社と保険相互会社の会計処理の相違として正しいのはどれか？',
+ opts:['A. 株式会社の契約者配当準備金繰入額は費用処理、相互会社の社員配当準備金繰入額は剰余金処分','B. 株式会社も相互会社も配当準備金繰入額は剰余金処分','C. 株式会社の配当準備金繰入額は剰余金処分、相互会社は費用処理','D. どちらも費用処理で同一の処理を行う'],ans:0,
+ expl:'株式会社：契約者配当準備金繰入額→費用処理（損益計算書の費用）。相互会社：社員配当準備金繰入額→剰余金処分（損益計算書外）。資本の部の対応：株式会社の資本金・資本準備金・利益準備金→相互会社の基金・基金償却積立金・損失てん補準備金。',
+ tips:'<span class="tips-year">H14・H13・2020</span>「株式会社は費用処理、相互会社は剰余金処分」の対比は最頻出事項。毎年何らかの形で出題される。'},
+
+{cat:'会計・税制',q:'有価証券の保有目的区分のうち「損益計算書に時価変動額が当期純利益に影響する」ものはどれか？',
+ opts:['A. 売買目的有価証券','B. 満期保有目的の債券','C. 責任準備金対応債券','D. その他有価証券（全部純資産直入法）'],ans:0,
+ expl:'売買目的有価証券：時価評価し評価差額を当期の損益（P/L）に計上。満期保有目的・責任準備金対応債券：償却原価法（時価評価しない）。その他有価証券：時価評価するが評価差額は純資産直入（P/Lに影響しない）。',
+ tips:'<span class="tips-year">H16・H29</span>有価証券4区分の評価基準と評価差額の取り扱いは毎年出題。「売買目的のみP/Lに直接影響」が正解パターン。'},
+
+{cat:'会計・税制',q:'米国のSAP（法定会計）の目的として正しいのはどれか？',
+ opts:['A. 保険契約者保護を主目的とし、保守的な評価基準を採用','B. 投資家への情報提供を主目的とし、期間損益の正確な把握を重視','C. 課税所得の正確な計算を主目的とする','D. 国際的な会計基準との整合性確保を主目的とする'],ans:0,
+ expl:'米国SAP（Statutory Accounting Principles/法定会計）：保険契約者保護が主目的、保守的評価。米国GAAP（Generally Accepted Accounting Principles）：投資家への情報提供が主目的、期間損益・経済価値の適正把握を重視。',
+ tips:'<span class="tips-year">H13・H12・H15</span>SAP vs GAAP の対比は頻出。「SAP＝契約者保護・保守的、GAAP＝投資家・期間損益」。'},
+
+{cat:'ALM',q:'レディントン条件（免疫化条件）の一つとして正しいのはどれか？',
+ opts:['A. 資産と負債の現在価値が等しく（A＝L）、デュレーションが等しい（Da＝DL）かつ資産の凸性が負債の凸性より大きい（Ca>CL）','B. 資産の時価が負債の時価より常に大きいこと','C. 資産のデュレーションが負債のデュレーションより必ず長いこと','D. 金利が下落した場合のみ資産の価値が増加すること'],ans:0,
+ expl:'レディントンの免疫化条件：①A＝L（現在価値が等しい） ②Da＝DL（デュレーションが等しい） ③Ca＞CL（資産の凸性が負債の凸性より大きい）の3つを満たすとき、金利変動に対して免疫化される。',
+ tips:'<span class="tips-year">H16</span>レディントン条件の3つ：「現在価値一致・デュレーション一致・資産の凸性>負債の凸性」。金利が上下どちらに動いても資産>負債となる性質。'},
+
+{cat:'保険計理人',q:'1号収支分析について正しいのはどれか？',
+ opts:['A. 分析期間は将来10年間。標準責任準備金対象外契約も確認対象となる','B. 分析期間は将来5年間','C. 新契約の募集を行わない前提（クローズド型）で行わなければならない','D. 区分経理の商品区分ごとに行うことはできず、会社全体でのみ実施する'],ans:0,
+ expl:'1号収支分析：①分析期間は将来10年間 ②標準責任準備金対象外契約も確認対象 ③オープン型（新契約継続前提）でもクローズド型でも可 ④商品区分ごとに行い、保険計理人が合理的と判断する場合は複数区分まとめて可。',
+ tips:'<span class="tips-year">H14（②5年間→誤、④クローズド型のみ→誤）</span>「10年間」と「オープン型も可」が正確な知識。H14・H25で「5年間→誤」として出題。'},
+
+{cat:'会計・税制',q:'米国GAAP会計における有価証券「売却可能証券（Available for Sale）」の評価と処理として正しいのはどれか？',
+ opts:['A. 時価評価し、評価損益は株主持分勘定（その他包括利益）に計上（P/Lには計上しない）','B. 時価評価し、評価損益は当期純利益に計上','C. 取得原価で評価し、処分時のみ損益認識','D. 償却原価法で評価する'],ans:0,
+ expl:'米国GAAP（FAS115等）での分類：①売買目的（Trading）：時価評価、評価損益をP/Lに計上 ②売却可能（AFS）：時価評価、評価損益はOCI（その他包括利益）に計上 ③満期保有（HTM）：償却原価法。',
+ tips:'<span class="tips-year">H12</span>「売却可能証券の評価差額は株主持分（OCI）へ計上」→P/Lに直接影響しない。日本の「その他有価証券」の処理と類似。'},
+
+{cat:'ソルベンシー',q:'保険計理人の実務基準における「配当可能財源の確認」で使用する「その他有価証券」の含み損益の取り扱いとして正しいのはどれか？',
+ opts:['A. 配当可能財源に算入する','B. 配当可能財源に算入しない','C. 含み益のみ50%算入する','D. 含み損のみ控除する'],ans:0,
+ expl:'配当可能財源の確認：「その他有価証券」の含み損益は配当可能財源に算入する。一方、「満期保有目的の債券」と「責任準備金対応債券」の含み損益は算入しない（H13問題④で正解として出題）。',
+ tips:'<span class="tips-year">H13</span>その他有価証券：含み損益を算入。満期保有・責任準備金対応債券：含み損益を不算入。これは配当財源と市場価格変動リスクの観点から整理する。'},
+
+{cat:'会計・税制',q:'法人事業税における個人保険（貯蓄保険以外）の収入金額の計算として正しいのはどれか？',
+ opts:['A. 各事業年度の収入保険料に100分の24を乗じて得た金額','B. 各事業年度の収入保険料に100分の50を乗じて得た金額','C. 各事業年度の経常利益に所定の税率を乗じた金額','D. 収入保険料から保険金支払額を控除した金額'],ans:0,
+ expl:'個人保険（貯蓄保険以外）の法人事業税課税標準：収入保険料×24/100。個人保険（貯蓄保険）は4/100。団体保険は保険料の収入に応じた別の割合。これは付加保険料部分（純保険料を除く）に相当する考え方。',
+ tips:'<span class="tips-year">H15（②個人保険（貯蓄保険以外）は100分の24→正）</span>「24/100（24%）」の数値を正確に暗記。貯蓄保険は「4/100（4%）」と大きく異なる。'},
+
+{cat:'責任準備金',q:'責任準備金の「限度積立」において保険料積立金の計算基準として正しいのはどれか？',
+ opts:['A. 年度末有効契約に対して払込期日の到来した保険料についてすべて収入があったものとして計算し、猶予期間中の保険料相当額を加算する','B. 実際に収入した保険料の金額のみで計算する','C. 翌年度の保険料も見込んで計算する','D. 解約控除後の金額で計算する'],ans:0,
+ expl:'責任準備金の「限度積立」：年度末有効契約に対して払込期日の到来した保険料について全て収入があったものとして計算→そこから猶予期間中の保険料積立金・未経過保険料を差し引く→決算時から猶予期間末までの期間内に収入見込みのない契約については猶予期間に対する未経過保険料相当額を加算。',
+ tips:'<span class="tips-year">H12・H19</span>「限度積立」とは収入保険料を限度として責任準備金を積む考え方。未収保険料を計上しない現金主義と連動。'},
+
+{cat:'ソルベンシー',q:'ソルベンシー・マージン基準において「満期保有目的の債券」の価格変動等リスク相当額のリスク係数として正しいのはどれか？',
+ opts:['A. ゼロ（対象外）','B. 10/1000','C. 50/1000','D. 100/1000'],ans:0,
+ expl:'満期保有目的の債券（邦貨建て）の価格変動等リスク係数はゼロ。満期保有目的は償却原価法で評価するため、価格変動リスクを計上しない。その他有価証券の邦貨建て債券は10/1000等の係数が適用される。',
+ tips:'<span class="tips-year">H13</span>「満期保有目的の債券のリスク係数＝0」が正解。SMRの価格変動等リスクは時価評価する資産のみが対象であることを理解する。'},
+
+{cat:'ALM',q:'ハードル・レート（Hurdle Rate）と内部収益率（IRR）の関係として正しいのはどれか？',
+ opts:['A. ハードル・レートは商品の必要サープラス（資本）とIRRとの比較を通じて商品のプライシングと関係する','B. ハードル・レートは保険料率の下限を直接規定する指標','C. ハードル・レートは将来利益の総額を示す指標','D. ハードル・レートと内部収益率は全く別の概念で関係しない'],ans:0,
+ expl:'ハードル・レート：商品の必要サープラス（資本）との比較を通じてプライシングと関係。IRR（内部収益率）は商品から得られる将来利益の現在価値と、販売のために使った必要サープラスが等しくなる割引率。IRRがハードル・レートを上回れば採算が取れると判断する。',
+ tips:'<span class="tips-year">H12</span>「ハードル・レート≒資本コスト」「IRR≒その商品の投資収益率」。IRR＞ハードル・レートが商品採算の目安。プロフィット・マージンと合わせて収益検証の指標として使用。'},
+
+{cat:'会計・税制',q:'前納契約が消滅した場合の前納残高の返還金の会計処理として正しいのはどれか？',
+ opts:['A. 保険料勘定に計上する（保険料の取消しとして処理）','B. 解約返戻金勘定に計上する','C. 特別損失に計上する','D. 資産の部から直接控除する'],ans:0,
+ expl:'前納契約が消滅した場合の前納残高の返還金：「保険料」勘定に計上する（H28問題⑤では「その他経常費用→誤」として出題。H13問題②でも「保険料の勘定科目に計上する→正」として出題）。',
+ tips:'<span class="tips-year">H28（⑤保険料勘定→正）・H13（②保険料勘定→正）</span>「前納残高の返還金は保険料勘定」。解約返戻金ではなく保険料として処理する点がポイント。'},
+
+{cat:'保険計理人',q:'3号収支分析（事業継続基準の確認）で使用する「全期チルメル式責任準備金」について正しいのはどれか？',
+ opts:['A. 事業継続基準に係る額の計算において、全期チルメル式責任準備金と解約返戻金相当額のいずれか大きい方を使用する','B. 全期チルメル式責任準備金のみを使用し、解約返戻金相当額は考慮しない','C. 平準純保険料式責任準備金と全期チルメル式責任準備金の小さい方を使用する','D. 全期チルメル式責任準備金は3号収支分析では使用しない'],ans:0,
+ expl:'事業継続基準に係る額：各保険契約について「全期チルメル式責任準備金」と「解約返戻金相当額」のいずれか大きい方の額を計算したものの合計額。これは最低限確保すべき資産水準を示す。',
+ tips:'<span class="tips-year">H16・H13</span>「全期チルメルと解約返戻金相当額の大きい方」がポイント。保険料積立金等余剰部分の計算式とも関連する重要な概念。'},
+
+{cat:'会計・税制',q:'損益計算書において「その他経常費用」に含まれる「税金」として含まれないものはどれか？',
+ opts:['A. 法人税・住民税（法人税等合計）','B. 固定資産税','C. 法人事業税','D. 印紙税'],ans:0,
+ expl:'損益計算書の「その他経常費用」内の「税金」：固定資産税・法人事業税・印紙税・都市計画税・事業所税等。「法人税・住民税」は損益計算書の税引前利益の後に計上される「法人税等合計」であり、経常費用には含まれない。',
+ tips:'<span class="tips-year">H16</span>「法人税・住民税→経常費用の外（法人税等合計として計上）」。固定資産税・法人事業税・印紙税は経常費用内の税金に含まれる。'},
+
+];
+
+// ═══════════════════════════════
+// State & Logic
+// ═══════════════════════════════
+function fisherYates(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function shuffleOpts(q){
+  const correct=q.opts[q.ans];
+  const shuffled=fisherYates(q.opts);
+  return{shuffledOpts:shuffled,newAns:shuffled.indexOf(correct)};
+}
+
+let curQ=[],idx=0,answered=false,choiceData=[],results=[];
+
+function countResults(){
+  return{ok:results.filter(r=>r==='ok').length,ng:results.filter(r=>r==='ng').length};
+}
+function initQuiz(pool){
+  curQ=fisherYates(pool);
+  idx=0;answered=false;
+  choiceData=curQ.map(q=>shuffleOpts(q));
+  results=new Array(curQ.length).fill(null);
+}
+function filt(cat,btn){
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  initQuiz(cat==='all'?ALL_Q:ALL_Q.filter(q=>q.cat===cat));
+  renderQ();
+}
+function renderQ(){
+  if(!curQ.length)return;
+  const q=curQ[idx];
+  const{shuffledOpts,newAns}=choiceData[idx];
+  const prev=results[idx];
+  document.getElementById('qcat').textContent=q.cat;
+  document.getElementById('qnum').textContent=(idx+1)+' / '+curQ.length;
+  document.getElementById('nav-cnt').textContent=(idx+1)+' / '+curQ.length;
+  document.getElementById('fc-cnt-label').textContent=curQ.length+'問';
+  document.getElementById('question').textContent=q.q;
+  const ch=document.getElementById('choices');
+  ch.innerHTML='';
+  const lbls=['A','B','C','D'];
+  shuffledOpts.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='choice-btn';
+    btn.innerHTML=`<span class="choice-label">${lbls[i]}</span><span>${opt.replace(/^[A-D]\. /,'')}</span>`;
+    if(prev!==null){
+      btn.classList.add('answered');
+      if(i===newAns)btn.classList.add('correct');
+      else btn.classList.add('neutral');
+    }else{
+      btn.onclick=()=>!answered&&answer(i,newAns);
+    }
+    ch.appendChild(btn);
+  });
+  const ex=document.getElementById('explain');
+  if(prev!==null){
+    document.getElementById('explain-ans').innerHTML=q.expl;
+    document.getElementById('tips-body').innerHTML=q.tips;
+    ex.classList.add('show');
+    answered=true;
+    injectFormulas(ex);
+  }else{
+    document.getElementById('explain-ans').textContent='';
+    document.getElementById('tips-body').innerHTML='';
+    ex.classList.remove('show');
+    answered=false;
+  }
+  updateScore();
+}
+function answer(sel,newAns){
+  answered=true;
+  const q=curQ[idx];
+  const isOk=(sel===newAns);
+  results[idx]=isOk?'ok':'ng';
+  document.querySelectorAll('.choice-btn').forEach((b,i)=>{
+    b.classList.add('answered');
+    if(i===newAns)b.classList.add('correct');
+    else if(i===sel&&!isOk)b.classList.add('wrong');
+    else b.classList.add('neutral');
+  });
+  document.getElementById('explain-ans').innerHTML=q.expl;
+  document.getElementById('tips-body').innerHTML=q.tips;
+  document.getElementById('explain').classList.add('show');
+  injectFormulas(document.getElementById('explain'));
+  updateScore();
+}
+function updateScore(){
+  const{ok,ng}=countResults();
+  const done=ok+ng,pct=done>0?Math.round(ok/done*100):0;
+  document.getElementById('sc-ok').textContent='✓ 正解 '+ok;
+  document.getElementById('sc-ng').textContent='✗ 不正解 '+ng;
+  document.getElementById('sc-rem').textContent='残り '+(curQ.length-done);
+  document.getElementById('prog-fill').style.width=(done/curQ.length*100)+'%';
+  document.getElementById('prog-txt').textContent=ok+' / '+done+' 問 正解';
+  document.getElementById('prog-pct').textContent=pct+'%';
+}
+function nextQ(){idx=(idx+1)%curQ.length;renderQ();}
+function prevQ(){idx=(idx-1+curQ.length)%curQ.length;renderQ();}
+function sw(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')nextQ();
+  if(e.key==='ArrowLeft')prevQ();
+});
+
+// KaTeX
+function renderKaTeX(el){
+  if(!el||!window.renderMathInElement)return;
+  renderMathInElement(el,{
+    delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],
+    throwOnError:false
+  });
+}
+const FORMULA_MAP={
+  'duration':'fml-duration','ibnr':'fml-ibnr','ev':'fml-ev','sm-ratio':'fml-sm-ratio'
+};
+function injectFormulas(container){
+  if(!container)return;
+  container.querySelectorAll('[data-formula]').forEach(span=>{
+    const key=span.getAttribute('data-formula');
+    const src=document.getElementById(FORMULA_MAP[key]);
+    if(src)span.outerHTML=src.innerHTML;
+  });
+  renderKaTeX(container);
+}
+window.addEventListener('load',()=>{
+  renderKaTeX(document.getElementById('formula-store'));
+});
+
+// KP reveal
+function initKPReveal(){
+  document.querySelectorAll('.kp-ul li').forEach(li=>{
+    const raw=li.innerHTML.replace(/<br>/gi,' ').replace(/<[^>]+>/g,'').trim();
+    const sep=raw.search(/[：:。、・]/);
+    let hint=sep>0&&sep<30?raw.substring(0,sep+1):raw.substring(0,22)+(raw.length>22?'…':'');
+    const full=li.innerHTML;
+    li.innerHTML=`<span class="kp-hint">${hint}</span><span class="kp-full">${full}</span>`;
+    li.addEventListener('click',()=>li.classList.toggle('open'));
+  });
+  document.querySelectorAll('.kp-card').forEach(card=>{
+    const btn=document.createElement('div');
+    btn.className='kp-reveal-all';
+    btn.innerHTML='<button class="btn-reveal" onclick="toggleCard(this,true)">▶ すべて展開</button><button class="btn-reveal" onclick="toggleCard(this,false)">▲ すべて折りたたむ</button>';
+    card.insertBefore(btn,card.querySelector('.kp-ul'));
+  });
+}
+function toggleCard(btn,open){
+  btn.closest('.kp-card').querySelectorAll('.kp-ul li').forEach(li=>{
+    if(open)li.classList.add('open');else li.classList.remove('open');
+  });
+}
+
+// Template reveal
+function initTplReveal(){
+  document.querySelectorAll('.tpl-body').forEach(body=>{
+    const children=Array.from(body.children);
+    if(!children.some(c=>c.classList.contains('tpl-sec-title')))return;
+    const groups=[];let current=null;
+    children.forEach(child=>{
+      if(child.classList.contains('tpl-sec-title')){current={title:child,blocks:[]};groups.push(current);}
+      else if(current)current.blocks.push(child);
+    });
+    body.innerHTML='';
+    groups.forEach(({title,blocks})=>{
+      let hintText='';
+      if(blocks.length>0){
+        const t=blocks[0].textContent.replace(/\s+/g,' ').trim();
+        hintText=t.substring(0,20)+(t.length>20?'…':'');
+      }
+      const wrap=document.createElement('div');wrap.className='tpl-sec-wrap';
+      const toggle=document.createElement('div');toggle.className='tpl-sec-toggle';
+      toggle.innerHTML=`<span class="tgl-icon">▶</span><span class="tgl-title">${title.textContent}</span><span class="tgl-hint">${hintText}</span>`;
+      const content=document.createElement('div');content.className='tpl-sec-body';
+      blocks.forEach(b=>content.appendChild(b));
+      toggle.addEventListener('click',()=>{
+        const isOpen=toggle.classList.toggle('open');
+        content.classList.toggle('open',isOpen);
+      });
+      wrap.appendChild(toggle);wrap.appendChild(content);body.appendChild(wrap);
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  initKPReveal();
+  initTplReveal();
+  initQuiz(ALL_Q);
+  renderQ();
+});
+</script>
+
+<script>
+// Service Worker 登録 (PWA・オフライン対応)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .catch(err => console.warn('SW:', err));
+  });
+}
+</script>
+</body>
+</html>

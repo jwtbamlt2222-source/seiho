@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生保１ 完全暗記教材 | 25年分過去問</title>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css"></noscript>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+:root{
+  --bg:#0f1117;
+  --surface:#191c26;
+  --surface2:#21263a;
+  --border:#2e3450;
+  --accent:#e8a020;
+  --accent2:#4a9eff;
+  --red:#e05050;
+  --green:#3ec97a;
+  --text:#e8eaf0;
+  --text2:#9aa0b8;
+  --text3:#5c6380;
+  --gold:#d4a832;
+  --purple:#a67fff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#131620 0%,#1a1f35 100%);
+  border-bottom:1px solid var(--border);
+  padding:18px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+  backdrop-filter:blur(12px);
+}
+.logo{display:flex;align-items:baseline;gap:12px;}
+.logo-main{font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;font-size:1.25rem;font-weight:900;color:var(--accent);letter-spacing:.06em;}
+.logo-sub{font-size:.72rem;color:var(--text3);letter-spacing:.12em;}
+.header-meta{display:flex;gap:8px;}
+.pill{font-size:.68rem;padding:3px 10px;border-radius:20px;letter-spacing:.08em;}
+.pill-gold{background:rgba(212,168,50,.15);color:var(--gold);border:1px solid rgba(212,168,50,.3);}
+.pill-blue{background:rgba(74,158,255,.12);color:var(--accent2);border:1px solid rgba(74,158,255,.3);}
+
+/* TABS */
+.tabs{display:flex;background:var(--surface);border-bottom:1px solid var(--border);padding:0 32px;gap:0;}
+.tab-btn{
+  padding:14px 26px;background:transparent;border:none;color:var(--text3);
+  font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif;font-size:.83rem;font-weight:500;
+  cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.05em;
+  display:flex;align-items:center;gap:7px;
+}
+.tab-btn:hover{color:var(--text);}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+/* CONTENT */
+.content{padding:32px;max-width:1080px;margin:0 auto;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* SECTION HEADER */
+.sec-hd{display:flex;align-items:center;gap:14px;margin-bottom:28px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.sec-hd h2{font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;font-size:1.15rem;font-weight:700;}
+.sec-hd .cnt{font-size:.72rem;background:var(--surface2);color:var(--text3);padding:3px 10px;border-radius:20px;border:1px solid var(--border);}
+
+/* ════════════════════════
+   FLASH CARD (4択)
+════════════════════════ */
+.fc-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;align-items:center;}
+.fc-cats{display:flex;gap:6px;flex-wrap:wrap;}
+.cat-btn{
+  padding:5px 13px;border-radius:20px;border:1px solid var(--border);
+  background:transparent;color:var(--text3);font-size:.74rem;cursor:pointer;
+  transition:all .15s;font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif;
+}
+.cat-btn.on{background:var(--accent);border-color:var(--accent);color:#000;font-weight:700;}
+
+.prog-wrap{margin-bottom:24px;}
+.prog-label{font-size:.72rem;color:var(--text3);margin-bottom:6px;display:flex;justify-content:space-between;}
+.prog-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--accent));border-radius:2px;transition:width .4s;}
+
+/* Question card */
+.qcard{
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:32px 36px;max-width:780px;margin:0 auto;
+  box-shadow:0 8px 40px rgba(0,0,0,.4);
+}
+.qcard-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.qcat{font-size:.7rem;letter-spacing:.12em;color:var(--accent);font-weight:700;text-transform:uppercase;}
+.qnum{font-size:.7rem;color:var(--text3);}
+.question{
+  font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;font-size:1.05rem;line-height:1.8;
+  color:var(--text);margin-bottom:28px;min-height:60px;
+}
+
+/* 4択ボタン */
+.choices{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.choice-btn{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 18px;border-radius:8px;border:1px solid var(--border);
+  background:var(--surface2);cursor:pointer;text-align:left;
+  transition:all .15s;font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif;
+  color:var(--text);font-size:.88rem;line-height:1.6;
+}
+.choice-btn:not(.answered):hover{border-color:var(--accent2);background:rgba(74,158,255,.08);}
+.choice-label{
+  width:26px;height:26px;border-radius:50%;border:1.5px solid var(--text3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:700;flex-shrink:0;margin-top:1px;
+  font-family:'JetBrains Mono','Menlo','Courier New',monospace;
+}
+.choice-btn.correct{background:rgba(62,201,122,.12);border-color:var(--green);}
+.choice-btn.correct .choice-label{background:var(--green);border-color:var(--green);color:#000;}
+.choice-btn.wrong{background:rgba(224,80,80,.1);border-color:var(--red);}
+.choice-btn.wrong .choice-label{background:var(--red);border-color:var(--red);color:#fff;}
+.choice-btn.neutral{opacity:.45;}
+.choice-btn.answered{cursor:default;}
+
+/* 解説パネル */
+.explain{
+  display:none;background:rgba(74,158,255,.07);border:1px solid rgba(74,158,255,.25);
+  border-radius:8px;padding:18px 20px;margin-bottom:20px;
+}
+.explain.show{display:block;}
+.explain-title{font-size:.7rem;letter-spacing:.1em;color:var(--accent2);font-weight:700;margin-bottom:10px;text-transform:uppercase;}
+.explain-ans{font-size:.85rem;line-height:1.75;color:var(--text);}
+.explain-tips{margin-top:12px;padding-top:10px;border-top:1px solid rgba(74,158,255,.2);}
+.tips-label{font-size:.68rem;color:var(--purple);letter-spacing:.1em;font-weight:700;margin-bottom:6px;}
+.tips-body{font-size:.78rem;color:var(--text2);line-height:1.7;}
+.tips-year{display:inline-block;background:rgba(166,127,255,.15);color:var(--purple);font-size:.65rem;padding:2px 7px;border-radius:4px;margin-bottom:6px;font-family:'JetBrains Mono','Menlo','Courier New',monospace;}
+
+/* nav */
+.fc-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:4px;}
+.nav-btn{
+  padding:9px 24px;border-radius:6px;border:1px solid var(--border);
+  background:var(--surface2);color:var(--text);font-size:.82rem;cursor:pointer;
+  transition:all .15s;font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif;
+}
+.nav-btn:hover{background:var(--surface);border-color:var(--accent2);}
+.nav-cnt{font-size:.78rem;color:var(--text3);font-family:'JetBrains Mono','Menlo','Courier New',monospace;min-width:65px;text-align:center;}
+
+/* score badges */
+.score-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.sc{font-size:.72rem;padding:4px 12px;border-radius:20px;}
+.sc-ok{background:rgba(62,201,122,.15);color:var(--green);border:1px solid rgba(62,201,122,.3);}
+.sc-ng{background:rgba(224,80,80,.12);color:var(--red);border:1px solid rgba(224,80,80,.25);}
+.sc-rem{background:var(--surface2);color:var(--text3);border:1px solid var(--border);}
+
+/* ════════════════════════
+   KEY POINTS
+════════════════════════ */
+.kp-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.kp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px;}
+.kp-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  padding:20px 22px;position:relative;overflow:hidden;
+}
+.kp-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  border-radius:8px 8px 0 0;
+}
+.kp-A::after{background:var(--accent);}
+.kp-B::after{background:var(--accent2);}
+.kp-C::after{background:var(--green);}
+.kp-D::after{background:var(--purple);}
+.kp-E::after{background:#ff7055;}
+.kp-F::after{background:#55cccc;}
+.kp-title{font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;font-size:.95rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.kp-freq{font-size:.65rem;padding:2px 7px;border-radius:10px;font-family:'JetBrains Mono','Menlo','Courier New',monospace;}
+.freq-s{background:rgba(232,160,32,.15);color:var(--accent);border:1px solid rgba(232,160,32,.3);}
+.freq-a{background:rgba(74,158,255,.12);color:var(--accent2);border:1px solid rgba(74,158,255,.25);}
+.freq-b{background:var(--surface2);color:var(--text3);border:1px solid var(--border);}
+.kp-ul{list-style:none;}
+.kp-ul li{
+  font-size:.8rem;line-height:1.65;padding:5px 0 5px 16px;
+  border-bottom:1px solid var(--border);color:var(--text2);position:relative;
+}
+.kp-ul li:last-child{border-bottom:none;}
+.kp-ul li::before{content:'›';position:absolute;left:0;color:var(--accent);font-weight:700;}
+.kp-kw{display:inline;background:rgba(232,160,32,.12);color:var(--accent);padding:0 4px;border-radius:3px;font-weight:600;}
+
+/* ════════════════════════
+   TEMPLATES
+════════════════════════ */
+.tpl-grid{display:flex;flex-direction:column;gap:22px;}
+.tpl-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.tpl-head{
+  padding:14px 22px;background:var(--surface2);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.tpl-head h3{font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;font-size:.95rem;font-weight:700;color:var(--text);}
+.tpl-tag{font-size:.65rem;padding:3px 9px;border-radius:4px;background:rgba(74,158,255,.15);color:var(--accent2);border:1px solid rgba(74,158,255,.25);font-family:'JetBrains Mono','Menlo','Courier New',monospace;}
+.tpl-body{padding:20px 22px;}
+.tpl-sec-title{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid var(--border);}
+.tpl-block{
+  background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:6px;
+  padding:14px 16px;font-size:.82rem;line-height:1.85;color:var(--text2);margin-bottom:10px;
+}
+.tpl-block .fill{
+  background:rgba(232,160,32,.12);color:var(--accent);border-bottom:1.5px solid var(--accent);
+  padding:1px 5px;border-radius:3px;font-weight:600;
+}
+.tpl-note{font-size:.74rem;color:var(--text3);font-style:italic;padding-left:10px;border-left:2px solid var(--border);margin-top:8px;}
+.kws{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.kw{font-size:.68rem;padding:3px 8px;border-radius:4px;background:var(--surface2);color:var(--text3);border:1px solid var(--border);}
+
+/* 数式ブロック */
+.math-block{
+  background:rgba(74,158,255,.06);
+  border:1px solid rgba(74,158,255,.2);
+  border-radius:6px;
+  padding:12px 16px;
+  margin:10px 0;
+  overflow-x:auto;
+  font-size:.9rem;
+  line-height:1.8;
+}
+.math-block .math-label{
+  font-size:.65rem;
+  letter-spacing:.1em;
+  color:var(--accent2);
+  font-weight:700;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.mjx-chtml { color: var(--text) !important; }
+
+/* ── KaTeX overrides ── */
+.katex { font-size: 1em; color: var(--text); }
+.katex-display { overflow-x: auto; }
+
+/* ── reveal: KP items ── */
+.kp-ul li { cursor: pointer; user-select: none; }
+.kp-ul li .kp-hint {
+  display: inline;
+  color: var(--accent2);
+  font-weight: 600;
+  font-size: .8rem;
+}
+.kp-ul li .kp-hint::after { content: ' ▶'; font-size: .6rem; color: var(--text3); }
+.kp-ul li .kp-full { display: none; }
+.kp-ul li.open .kp-hint { display: none; }
+.kp-ul li.open .kp-full { display: inline; }
+.kp-ul li.open { background: rgba(74,158,255,.05); border-radius: 4px; padding: 4px 6px; }
+.kp-reveal-all {
+  display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.btn-reveal {
+  font-size: .72rem; padding: 5px 12px; border-radius: 4px;
+  border: 1px solid var(--border); background: var(--surface2);
+  color: var(--text3); cursor: pointer; font-family: 'Noto Sans JP','Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif;
+  transition: all .15s;
+}
+.btn-reveal:hover { border-color: var(--accent2); color: var(--accent2); }
+
+/* ── reveal: Template blocks ── */
+.tpl-sec-wrap { margin-bottom: 16px; }
+.tpl-sec-toggle {
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer; user-select: none; padding: 8px 10px;
+  border-radius: 6px; border: 1px solid var(--border);
+  background: var(--surface2); transition: all .15s;
+  margin-bottom: 6px;
+}
+.tpl-sec-toggle:hover { border-color: var(--accent2); }
+.tpl-sec-toggle .tgl-icon { color: var(--accent2); font-size: .8rem; transition: transform .2s; }
+.tpl-sec-toggle.open .tgl-icon { transform: rotate(90deg); }
+.tpl-sec-toggle .tgl-title { font-size: .78rem; font-weight: 600; color: var(--text2); }
+.tpl-sec-toggle .tgl-hint { font-size: .72rem; color: var(--text3); margin-left: auto; }
+.tpl-sec-body { display: none; }
+.tpl-sec-body.open { display: block; }
+
+
+/* ══════════════════════════════════════════════════
+   iPhone / iOS Safari 完全対応
+══════════════════════════════════════════════════ */
+
+/* タップハイライト除去 */
+* { -webkit-tap-highlight-color: transparent; }
+
+/* iOSボタンの独自スタイルをリセット、タップ遅延(300ms)除去 */
+button {
+  -webkit-appearance: none;
+  touch-action: manipulation;
+}
+
+/* セーフエリア対応（iPhone X以降のノッチ・ホームバー） */
+body {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+header {
+  -webkit-backdrop-filter: blur(12px);
+  padding-left: max(32px, calc(env(safe-area-inset-left, 0px) + 16px));
+  padding-right: max(32px, calc(env(safe-area-inset-right, 0px) + 16px));
+}
+
+/* user-select にベンダープレフィックス */
+.kp-ul li, .tpl-sec-toggle {
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+/* タブバーを横スクロール可能に（タブが画面外に消えない） */
+.tabs {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0 16px;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab-btn { white-space: nowrap; flex-shrink: 0; }
+
+/* 数式の横スクロール */
+.katex-display {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.math-block {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Apple HIG 推奨：タップ可能要素の最小サイズ 44pt */
+@media (pointer: coarse) {
+  .tab-btn    { min-height: 44px; }
+  .nav-btn    { min-height: 44px; }
+  .choice-btn { min-height: 48px; }
+  .cat-btn    { min-height: 36px; }
+  .btn-reveal { min-height: 36px; }
+}
+
+/* スマートフォン用レイアウト */
+@media (max-width: 640px) {
+  header {
+    padding: 10px 14px;
+    padding-left: max(14px, env(safe-area-inset-left, 0px));
+    padding-right: max(14px, env(safe-area-inset-right, 0px));
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .logo-sub { display: none; }
+  .content { padding: 14px; }
+  .qcard { padding: 16px 14px; }
+  .question { font-size: .95rem; margin-bottom: 16px; min-height: unset; }
+  .choice-btn { padding: 12px 12px; font-size: .84rem; gap: 10px; }
+  .choice-label { width: 24px; height: 24px; font-size: .7rem; }
+  .explain { padding: 12px; }
+  .explain-ans { font-size: .82rem; }
+  .tips-body { font-size: .75rem; }
+  .fc-nav { gap: 8px; }
+  .nav-btn { padding: 10px 16px; font-size: .8rem; }
+  .kp-grid { grid-template-columns: 1fr; gap: 12px; }
+  .kp-card { padding: 14px; }
+  .tpl-head { padding: 10px 14px; flex-wrap: wrap; gap: 6px; }
+  .tpl-body { padding: 12px; }
+  .tpl-block { font-size: .79rem; padding: 10px; }
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap"></noscript>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="生保１">
+<link rel="apple-touch-icon" href="icon-s1.png">
+<link rel="manifest" href="manifest-s1.json">
+<meta name="theme-color" content="#e8a020">
+</head>
+<body>
+
+
+<!-- ═══ 数式テンプレート（KaTeX用・隠し要素）═══ -->
+<div id="formula-store" style="display:none">
+
+<div id="fml-putcall">
+<div class="math-block">
+<div class="math-label">Put-Call Parity（ヨーロピアンオプション）</div>
+<div>\[C + Ke^{-rt} = P + S\]</div>
+<div style="font-size:.82rem;line-height:1.8;margin-top:6px">
+\(C\)：コールオプション価格　\(P\)：プットオプション価格<br>
+\(K\)：行使価格（満期保証額）　\(r\)：無リスク金利　\(t\)：満期まで期間<br>
+\(S\)：原資産価格（特別勘定残高）<br>
+変額年金の最低保証 ＝ 投資信託（\(S\)）＋ プットオプション（\(P\)）
+</div>
+</div>
+</div>
+
+<div id="fml-pm">
+<div class="math-block">
+<div class="math-label">プロフィット・マージンの定義</div>
+<div>\[\text{PM} = \frac{\displaystyle\sum_{t=1}^{n} \frac{\text{利益}_t}{(1+d)^t}}{\displaystyle\sum_{t=1}^{n} \frac{\pi_t \cdot l_{t-1}}{(1+d)^{t-1}}}\]</div>
+<div style="font-size:.82rem;line-height:1.8;margin-top:6px">
+\(d\)：割引率　\(\pi_t\)：第\(t\)保険年度の保険料　\(l_{t-1}\)：第\(t\)保険年度始残存率<br>
+IRR（内部収益率）：分子をゼロにする割引率 \(d^*\) を求める
+</div>
+</div>
+</div>
+
+<div id="fml-kaizen">
+<div class="math-block">
+<div class="math-label">年平均改善率の合成式</div>
+<div>\[(1-R_1)^5 \times (1-R_2)^{13} = (1-R)^{18}\]</div>
+<div style="font-size:.82rem;line-height:1.8;margin-top:6px">
+\(R_1\)：1995〜2000年の5年間の幾何平均改善率<br>
+\(R_2\)：1980〜1993年の13年間の幾何平均改善率<br>
+\(R\)：18年間の年平均改善率（上記から算出）<br>
+将来死亡率：\(q^*_x = q^{(15)}_x \times (1-R_x)^{T_x}\)　（\(T_x\)：改善年数）
+</div>
+</div>
+</div>
+
+<div id="fml-var">
+<div class="math-block">
+<div class="math-label">VaR と CTE の定義</div>
+<div>\[\text{VaR}_\alpha(X) = \inf\{x \in \mathbb{R} : F_X(x) \geq 1 - \alpha\}\]</div>
+<div>\[\text{CTE}_\alpha(X) = E\bigl[X \mid X \geq \text{VaR}_\alpha(X)\bigr]\]</div>
+<div style="font-size:.82rem;line-height:1.8;margin-top:6px">
+\(\alpha\)：信頼水準（例：0.99）<br>
+VaR：損失が上位 \((1-\alpha)\times 100\)% に収まる最大値<br>
+CTE：VaRを超えた損失の条件付き期待値（テイルリスクを捕捉）
+</div>
+</div>
+</div>
+
+<div id="fml-coherent">
+<div class="math-block">
+<div class="math-label">コヒーレントリスク尺度の4条件</div>
+<div style="font-size:.82rem;line-height:2">
+劣加法性：\(\rho(X+Y) \leq \rho(X) + \rho(Y)\)<br>
+単調性：\(X \leq Y \Rightarrow \rho(X) \leq \rho(Y)\)<br>
+平行移動不変性：\(\rho(X + c) = \rho(X) + c\)<br>
+<strong>正同次性</strong>：\(\rho(\lambda X) = \lambda\,\rho(X) \quad (\lambda > 0)\)<br>
+CTE はこの4条件をすべて満たす。VaR は劣加法性を満たさない場合がある。
+</div>
+</div>
+</div>
+
+<div id="fml-mva">
+<div class="math-block">
+<div class="math-label">MVA（市場価格調整）算式</div>
+<div>\[\text{解約返戻金} = \text{契約者価額} \times \left(\frac{1+i_1}{1+i_2+\alpha}\right)^{n - \frac{12t+\theta}{12}}\]</div>
+<div style="font-size:.82rem;line-height:1.8;margin-top:6px">
+\(i_1\)：契約時の利率　\(i_2\)：解約時の利率　\(\alpha\)：タイムラグ対応マージン<br>
+\(n\)：保険期間（年）　\(t\)：経過年数　\(\theta\)：経過月数<br>
+金利上昇時（\(i_2\uparrow\)）→ 指数部の分数が1を下回る → 解約返戻金が減少
+</div>
+</div>
+</div>
+
+<div id="fml-discount">
+<div class="math-block">
+<div class="math-label">優良団体割引率の算式</div>
+<div>\[\bar{\gamma}(1-\alpha) = \gamma + u(0.20)\sqrt{\frac{\gamma}{N}}\]</div>
+<div>\[\therefore\quad \alpha = 1 - \frac{\gamma + u(0.20)\sqrt{\gamma/N}}{\bar{\gamma}}\]</div>
+<div style="font-size:.82rem;line-height:1.8;margin-top:6px">
+\(\gamma\)：団体の実績死亡率　\(\bar{\gamma}\)：経験から割り出された死亡率<br>
+\(N\)：被保険者数　\(u(0.20) \approx 0.84\)（標準正規分布の片側20%点）<br>
+\(N\uparrow\) → \(\sqrt{\gamma/N}\downarrow\) → 右辺が小さくなる → \(\alpha\uparrow\)
+</div>
+</div>
+</div>
+
+<div id="fml-cte">
+<div class="math-block">
+<div class="math-label">通時一貫性の問題（2期間二項モデルの例）</div>
+<div style="font-size:.82rem;line-height:1.8">
+時点0でCTE水準を積み立てても、悪いノード（\(d\)）に至ったとき<br>
+時点1での必要額が時点0の積立額を上回るケースが存在する：<br>
+\[\text{CTE}_{(d)} > \text{CTE}_{(0)}\]
+これにより「破綻確率5%未満の保証」と矛盾が生じる。<br>
+→ これを<strong>「通時一貫性の欠如」</strong>と呼ぶ（2020年問題）
+</div>
+</div>
+</div>
+
+</div><!-- /formula-store -->
+
+<header>
+  <div class="logo">
+    <span class="logo-main">生保１ 完全暗記教材</span>
+    <span class="logo-sub">第2次試験 · 25年分過去問（2000〜2024）</span>
+  </div>
+  <div class="header-meta">
+    <span class="pill pill-gold">準会員向け</span>
+    <span class="pill pill-blue">生保コース</span>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="sw('fc',this)">🃏 4択フラッシュカード</button>
+  <button class="tab-btn" onclick="sw('kp',this)">📌 重要ポイント</button>
+  <button class="tab-btn" onclick="sw('tpl',this)">📝 論述テンプレート</button>
+</div>
+
+<div class="content">
+
+<!-- ══════════════════════════════════
+     FLASH CARDS
+══════════════════════════════════ -->
+<div class="tab-panel active" id="panel-fc">
+  <div class="sec-hd">
+    <h2>4択フラッシュカード</h2>
+    <span class="cnt" id="fc-cnt-label">72問</span>
+  </div>
+
+  <div class="fc-toolbar">
+    <div class="fc-cats" id="fc-cats">
+      <button class="cat-btn on" data-c="all" onclick="filt('all',this)">すべて</button>
+      <button class="cat-btn" data-c="再保険" onclick="filt('再保険',this)">再保険</button>
+      <button class="cat-btn" data-c="変額年金" onclick="filt('変額年金',this)">変額年金</button>
+      <button class="cat-btn" data-c="アセット・シェア" onclick="filt('アセット・シェア',this)">アセット・シェア</button>
+      <button class="cat-btn" data-c="団体保険" onclick="filt('団体保険',this)">団体保険</button>
+      <button class="cat-btn" data-c="医療保険" onclick="filt('医療保険',this)">医療保険</button>
+      <button class="cat-btn" data-c="商品開発" onclick="filt('商品開発',this)">商品開発</button>
+      <button class="cat-btn" data-c="標準生命表" onclick="filt('標準生命表',this)">標準生命表</button>
+      <button class="cat-btn" data-c="法令・監督" onclick="filt('法令・監督',this)">法令・監督</button>
+      <button class="cat-btn" data-c="数理" onclick="filt('数理',this)">数理・計算</button>
+    </div>
+  </div>
+
+  <div class="prog-wrap">
+    <div class="prog-label"><span id="prog-txt">0 / 0 問 正解</span><span id="prog-pct">0%</span></div>
+    <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="score-row">
+    <span class="sc sc-ok" id="sc-ok">✓ 正解 0</span>
+    <span class="sc sc-ng" id="sc-ng">✗ 不正解 0</span>
+    <span class="sc sc-rem" id="sc-rem">残り 0</span>
+  </div>
+
+  <div class="qcard" id="qcard">
+    <div class="qcard-meta">
+      <span class="qcat" id="qcat"></span>
+      <span class="qnum" id="qnum"></span>
+    </div>
+    <div class="question" id="question"></div>
+    <div class="choices" id="choices"></div>
+    <div class="explain" id="explain">
+      <div class="explain-title">解説</div>
+      <div class="explain-ans" id="explain-ans"></div>
+      <div class="explain-tips">
+        <div class="tips-label">Tips</div>
+        <div class="tips-body" id="tips-body"></div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button class="nav-btn" onclick="prevQ()">← 前へ</button>
+      <span class="nav-cnt" id="nav-cnt">1 / 60</span>
+      <button class="nav-btn" onclick="nextQ()">次へ →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     KEY POINTS
+══════════════════════════════════ -->
+<div class="tab-panel" id="panel-kp">
+  <div class="sec-hd">
+    <h2>重要ポイントまとめ</h2>
+    <span class="cnt">10テーマ · 頻出度付き</span>
+  </div>
+  <div class="kp-grid">
+
+    <div class="kp-card kp-A">
+      <div class="kp-title">再保険の分類と目的 <span class="kp-freq freq-s">S級頻出</span></div>
+      <ul class="kp-ul">
+        <li><span class="kp-kw">比例式</span>：危険保険料式・共同保険式・修正共同保険式・資産留保型修共</li>
+        <li><span class="kp-kw">非比例式</span>：ELC（Cat Cover / Working Cover）・ストップロス</li>
+        <li>自動再保険（協約で義務的出再）vs 任意再保険（1件ごと判断・条件体査定に活用）</li>
+        <li>伝統的目的①保険金支払変動の軽減 ②新規リスク対応 ③競争的料率の提供</li>
+        <li>共同保険式：解約失効リスクも再保険会社に移転される（H23・H24頻出）</li>
+        <li>修正共同保険式：mod-co利率＝実際運用利回り→損益は再保険会社に帰属（2023問）</li>
+        <li>財務再保険（H10告示）：全リスク移転・手数料は現金・一方的解約不可</li>
+        <li><span class="kp-kw">ART</span>（代替的リスク移転）：自家保険・キャプティブ・証券化・CAT債券</li>
+        <li>危険保険料式：元受保険種類に関わらず再保険は1年定期。危険保険金額＝保険金額−責任準備金</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-B">
+      <div class="kp-title">変額年金・最低保証リスク <span class="kp-freq freq-s">S級頻出</span></div>
+      <ul class="kp-ul">
+        <li><span class="kp-kw">ラチェット型</span>：好調時に最低保証が切上がり下がらない。保険会社の負担増</li>
+        <li><span class="kp-kw">ノックアウト型</span>：残高が基準超で最低保証消滅→保険会社負担軽減</li>
+        <li>ヘッジパラメータ：<span class="kp-kw">Delta</span>（原資産）・<span class="kp-kw">Gamma</span>・<span class="kp-kw">Vega</span>（ボラティリティ）・<span class="kp-kw">Rho</span>（金利）</li>
+        <li>経済価値ヘッジ：動態的（先物ロール）＋静態的（OTMプット買い）</li>
+        <li>会計価値ヘッジ：責任準備金が負値を取らず固定されるため困難</li>
+        <li>Put-Call Parity：C＋Ke^{−rt}＝P＋S（ヨーロピアン）</li>
+        <li>ポジティブ・フィードバック構造：残高↓→ITM増→費用収入減→損失拡大</li>
+        <li>危険準備金Ⅲ：収支残以上を積立、上限6%（旧5%→H29問題で誤答選択肢）</li>
+        <li>動的解約モデル：ITM時に解約増加・OTM時に解約減少（合理的契約者行動）</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-C">
+      <div class="kp-title">アセット・シェア <span class="kp-freq freq-s">S級頻出</span></div>
+      <ul class="kp-ul">
+        <li>定義：実績ベース（運用利回り・死亡率・事業費・解約失効率）のCFから得た<span class="kp-kw">正味資産</span>を各契約に割当てた持分・貢献度</li>
+        <li><span class="kp-kw">ネット・アセット・シェア</span>＝AS－対応責任準備金</li>
+        <li>選定単位最低区分：<span class="kp-kw">①区分経理の商品区分 ②保険事故の種類 ③契約経過年度</span></li>
+        <li>追加区分：保険種類・販売経路・危険選択手法・性別・年齢・払込方法・保険金額・保険期間</li>
+        <li>当年度末AS＝前年度末AS＋保険料＋運用収益±評価差額金増減－保険金等－事業費－税金－配当±調整</li>
+        <li>初期値が負値となることも認められる（実務基準24条）</li>
+        <li>消滅時配当を支払う契約は配当確認が必要（実務基準23条）</li>
+        <li>料率設定への活用：イクエーション方式（収支相等方程式の拡張）・アキュムレーション方式（保険料率を実際に算出）</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-D">
+      <div class="kp-title">団体生命保険 <span class="kp-freq freq-a">A級頻出</span></div>
+      <ul class="kp-ul">
+        <li><span class="kp-kw">グレッグの5原則</span>：①保険目的でない団体 ②加入脱退がある ③保険金額が客観的 ④一定割合以上加入 ⑤管理が簡単（画一性）</li>
+        <li>配当清算法：剰余金＝収入保険料－保険金費用－事業費＋発生利息－剰余金費用</li>
+        <li>プール方式：<span class="kp-kw">信頼度方式</span>（加重平均）と<span class="kp-kw">損失限度方式</span>（発生保険金と一定額の小さい方＋プーリング保険料）</li>
+        <li>剰余金費用：異常危険準備金・マージン・調節財源・<span class="kp-kw">危険賦課金</span>（赤字充当）</li>
+        <li>優良団体割引：正規分布仮定・片側20%点基準。N大きいほど割引適用されやすい</li>
+        <li>総合福祉団体定期：H8年11月発売。企業負担保険料は原則全額損金算入</li>
+        <li>ヒューマン・ヴァリュー特約：代替雇用者の採用・育成費用を目的</li>
+        <li>団体信用生命：貸し手が契約者・保険金で債務消滅→相続財産は増加しない</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-B">
+      <div class="kp-title">医療保険・第三分野 <span class="kp-freq freq-s">S級頻出</span></div>
+      <ul class="kp-ul">
+        <li>第三分野標準生命表<span class="kp-kw">2018</span>：基礎データは第21回生命表（2010年）・高度障害を含まない</li>
+        <li>2007との違い：①死亡率改善の反映 ②想定件数400万→100万件 ③補整上限85%追加 ④若齢截断を廃止</li>
+        <li>死亡率改善：2015年まで男2.5%・女2.0%、2015〜2018年は男女1.0%</li>
+        <li>数学的危険論：補整前死亡率から2σを減じる（下限70%・上限85%）</li>
+        <li><span class="kp-kw">基礎率変更権</span>：①指標設定 ②適切な水準 ③手続き明確化＋態勢整備の3要件</li>
+        <li>ストレステスト：97.7%（2σ）カバーの発生率でテスト（99%ではない）</li>
+        <li>IBNR備金：入院継続中ではなくまだ請求が到達していない案件が対象</li>
+        <li>女性受療率の特徴：20〜30代に山（妊娠・分娩）→逆選択・収益変動・不公平のリスク</li>
+        <li>重大疾病保障保険の疾病要件：①高頻度・多発性 ②重篤性 ③治療費が高額 ④診断が明確</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-E">
+      <div class="kp-title">商品開発・収益検証 <span class="kp-freq freq-s">S級頻出</span></div>
+      <ul class="kp-ul">
+        <li><span class="kp-kw">プロフィット・マージン</span>＝将来利益の現価÷収入保険料の現価</li>
+        <li><span class="kp-kw">IRR</span>（内部収益率）＝将来利益の現価をゼロにする割引率</li>
+        <li>モデル・ポイント：群団を代表する代表契約。<span class="kp-kw">ヴァリデーション</span>で精度確認（件数・保険金額・責任準備金など）</li>
+        <li>確率論的手法のデメリット：計算負荷大・再現困難。メリット：分布把握・変額有用</li>
+        <li>事後モニタリング：PDCA。給付発生指数（実績÷予定）を監視</li>
+        <li>収益変動の制御：①商品設計 ②契約群団コントロール ③ポートフォリオ ④事後モニタリング</li>
+        <li>負値責任準備金：①発生率年齢逓減 ②保障額逓減型 ③後払い保険料設計</li>
+        <li>解約リスク：<span class="kp-kw">解約益リスク</span>（新契約費未回収）vs <span class="kp-kw">継続リスク</span>（将来利益逸失）</li>
+        <li>高額割引：メリット＝競争力・大口確保。デメリット＝逆選択・モラルリスク</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-A">
+      <div class="kp-title">標準利率・MVA・予定利率 <span class="kp-freq freq-a">A級頻出</span></div>
+      <ul class="kp-ul">
+        <li>円建て一時払終身：国内優良社債（A格）の参照金利×安全率係数（0%以下→1.0、5〜6%→0.8など）</li>
+        <li>米ドル建て：A格社債（10年＋20年）÷2を参照金利として使用（2022年4月〜）</li>
+        <li><span class="kp-kw">MVA算式</span>：解約返戻金＝契約者価額×{(1+i1)/(1+i2+α)}^{n−(12t+θ)/12}</li>
+        <li>i1：契約時利率、i2：解約時利率、α：タイムラグ対応マージン</li>
+        <li>MVA意義：金利変動リスクを契約者に移転・ディスインターミディエーション防止</li>
+        <li><span class="kp-kw">ディスインターミディエーション</span>：1970年代米国で発生した金利上昇時の大量解約現象</li>
+        <li>予定利率設定：十分性・競争力・資産運用計画・金利変動リスク・標準利率との関係</li>
+        <li>積立負担：保険料基礎率≠標準基礎率のとき途中で積立負担が生じる（収益合計に影響なし）</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-F">
+      <div class="kp-title">法令・監督・付加保険料 <span class="kp-freq freq-a">A級頻出</span></div>
+      <ul class="kp-ul">
+        <li>算出方法書（施行規則10条）：保険料・責任準備金・契約者価額・未収保険料・保険期間変更等を記載</li>
+        <li>保険料認可：標準処理期間<span class="kp-kw">90日</span>（認可・届出とも）</li>
+        <li>付加保険料：2006年以降事後モニタリング型（純保険料は事前認可型）</li>
+        <li>α−β−γ方式の問題点：費用主義乖離・効用主義欠如・貯蓄初期利回り低下・矛盾</li>
+        <li><span class="kp-kw">医的査定</span>（身体的危険）vs <span class="kp-kw">環境査定</span>（環境的危険）</li>
+        <li>自己責任原則：リスク・財務・募集・法制の4面から内部管理態勢整備</li>
+        <li>保険法：生命保険契約＝人の生死に関し一定の保険給付を行うもの（傷害疾病定額除く）</li>
+        <li>低・無解約返戻金型：払済変更不可（原資なし・継続者との公平性問題）</li>
+        <li>特定保険契約：変額保険・変額年金等。金融商品取引法の行為規制が準用される</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-C">
+      <div class="kp-title">リスク尺度（VaR・CTE） <span class="kp-freq freq-b">B級</span></div>
+      <ul class="kp-ul">
+        <li><span class="kp-kw">VaR</span>：一定信頼区間内での最大損失。直観的で扱いやすい</li>
+        <li>VaRの弱点：テイル外リスクを把握できない・凸性を満たさない（分散効果に潜在的弱点）</li>
+        <li><span class="kp-kw">CTE</span>（TVaR）：信頼区間を超える部分の期待損失。コヒーレントリスク尺度</li>
+        <li>CTEの弱点：通時一貫性がなく多期間適用に問題（2020年問題：通時一貫性の欠如）</li>
+        <li>正同次性：ρ(λX)＝λρ(X)（コヒーレント条件の一つ。「定数不変性」は誤り→H29問題）</li>
+        <li>CTE多期間問題：t=0でCTE積立をしても翌期に必要額を満たせない場合がある</li>
+      </ul>
+    </div>
+
+    <div class="kp-card kp-D">
+      <div class="kp-title">保険料率の公平性・細分化 <span class="kp-freq freq-a">A級頻出</span></div>
+      <ul class="kp-ul">
+        <li><span class="kp-kw">保険技術的公平性</span>：リスクに応じた保険料設定。逆選択防止・収支相等</li>
+        <li><span class="kp-kw">社会的公平性</span>：差別的取扱いの禁止・相互扶助・加入機会の平等</li>
+        <li>料率区分要素の満たすべき要件：①統計的根拠 ②実務的実行可能性 ③法的・社会的受容性 ④継続的モニタリング可能性</li>
+        <li>男女別料率：統計的根拠あり（保険技術的公平性）。一方、社会的公平性の観点から議論あり</li>
+        <li>優良体保険の留意点：①基礎データの信頼性 ②逆選択リスク ③判定基準の明確化 ④標準体との整合性</li>
+        <li>ライフスタイル（運動習慣等）による細分化：客観的測定方法・継続的モニタリングが課題</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     TEMPLATES
+══════════════════════════════════ -->
+<div class="tab-panel" id="panel-tpl">
+  <div class="sec-hd">
+    <h2>論述答案テンプレート</h2>
+    <span class="cnt">12パターン</span>
+  </div>
+  <div class="tpl-grid">
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>① 再保険の伝統的目的（3点論述）</h3><span class="tpl-tag">2024・2022・H26頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">250字×3点の型</div>
+        <div class="tpl-block">
+          ①<span class="fill">保険金支払の変動</span>が収益・資本に与える影響を軽減すること<br>
+          　→元受会社の自己保有限度額を超えた分を出再。Cat Coverで集積リスクも移転。<br><br>
+          ②<span class="fill">新規リスク（経験のないリスク）</span>の収益・資本への影響を軽減すること<br>
+          　→国民統計等を基にした予定率のミスプライシングリスクを出再により受容可能な範囲に収める。<br><br>
+          ③<span class="fill">再保険料率をもとに競争的な元受料率</span>を提供すること<br>
+          　→再保険会社の低廉な料率・競争力ある査定を活用し、低廉な保険料を提供できる。
+        </div>
+        <div class="tpl-note">各項目：「なぜ必要か」→「どう機能するか」の順で記述。「収益・資本」という言葉を必ず使う。</div>
+        <div class="kws"><span class="kw">収益・資本の変動</span><span class="kw">集積リスク</span><span class="kw">ミスプライシング</span><span class="kw">自己保有限度額</span><span class="kw">低廉な料率</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>② 予定発生率設定の留意点（3観点）</h3><span class="tpl-tag">2024・H27頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">（ア）基礎データ</div>
+        <div class="tpl-block">
+          ・<span class="fill">信頼性</span>：データ量（母数）の十分性・統計的正確さ。区分ごとの母数確保。<br>
+          ・<span class="fill">給付内容との整合性</span>：データ定義と給付事由が整合しているか。整合しない場合は複数データを合理的に組合せる。
+        </div>
+        <div class="tpl-sec-title">（イ）補整（理由＋代表的な2例）</div>
+        <div class="tpl-block">
+          理由：統計制約から取得粒度・年齢範囲が限定されるため。<br>
+          ①<span class="fill">スムージング</span>（5歳移動平均等）：不合理な凹凸を除去。<br>
+          ②<span class="fill">高齢・若齢の補外</span>：薄い年齢域を公的データ等のモデルにより補外。<br>
+          ＋コーホート効果除去・選択効果の考慮・年齢群団の細分化 も可。
+        </div>
+        <div class="tpl-sec-title">（ウ）将来トレンド・安全割増</div>
+        <div class="tpl-block">
+          ・<span class="fill">将来トレンド</span>：医療技術の進歩・社会保険制度変更・疾病構造変化等を反映。<br>
+          ・<span class="fill">安全割増</span>：将来変動余地・データ不確実性を加味し保守的方向（生存リスク側）に加算。数学的危険論等により合理的に設定。
+        </div>
+        <div class="kws"><span class="kw">信頼性</span><span class="kw">整合性</span><span class="kw">スムージング</span><span class="kw">補外</span><span class="kw">将来トレンド</span><span class="kw">安全割増</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>③ 保険技術的公平性 vs 社会的公平性</h3><span class="tpl-tag">2024・H25・H22頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">500字程度の型</div>
+        <div class="tpl-block">
+          <span class="fill">保険技術的公平性</span>：各被保険者のリスクの大小に応じて保険料を設定し、リスクが高い者はより高い保険料を負担するという考え方。大数の法則に基づき同質リスク群団内で収支相等が成立することを目標とし、逆選択防止・収益安定化の観点から重要である。<br><br>
+          <span class="fill">社会的公平性</span>：社会全体の観点から保険加入機会の平等・相互扶助の精神を重視する考え方。特定属性（遺伝情報・人種等）による差別的取扱いを排除することが求められる。<br><br>
+          両者はトレードオフになる場合があり（例：がん罹患リスクを遺伝子情報で細分化すると保険技術的公平性は高まるが社会的公平性の観点から問題となりうる）、法令・監督指針の範囲内でバランスをとることが重要である。
+        </div>
+        <div class="kws"><span class="kw">大数の法則</span><span class="kw">逆選択防止</span><span class="kw">差別的取扱い禁止</span><span class="kw">相互扶助</span><span class="kw">トレードオフ</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>④ 解約リスクの2側面（解約益リスク・継続リスク）</h3><span class="tpl-tag">H26・2022頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">400字程度の型</div>
+        <div class="tpl-block">
+          <span class="fill">解約益リスク</span>（過去起因）：過去に支出した新契約費が回収できなくなるリスク。または低・無解約返戻金型において解約収入が得られなくなるリスク。解約率が予定を下回ると顕在化。<br><br>
+          <span class="fill">継続リスク</span>（将来向き）：解約増加により将来の死差益等の収益が逸失するリスク。保険期間が長い商品ほど大きく、リスク濃縮が起こった場合は将来死差益が悪化。<br><br>
+          【伝統的終身保険】：解約増→新契約費未回収分があれば収益悪化、回収済みなら解約控除分が収益増。<br>
+          【低解約返戻金型終身保険】：払込期間中の解約率上昇→解約返戻金が少ないため保険会社は比較的有利だが、継続リスクの観点から将来利益が逸失する。
+        </div>
+        <div class="kws"><span class="kw">新契約費回収</span><span class="kw">解約控除</span><span class="kw">死差益</span><span class="kw">リスク濃縮</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>⑤ 事後モニタリングと改善アクション</h3><span class="tpl-tag">2022・2018・H27頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">構成</div>
+        <div class="tpl-block">
+          <span class="fill">目的</span>：PDCAサイクルにより機動的に販売施策・価格を調整し、長期にわたる商品事業の健全性を維持すること。<br><br>
+          <span class="fill">収益性低下要因（例）</span>：逆選択・モラルリスクの混入、感染症等の一時的発生率上昇、競争環境激化による件数減少、事業費の増加。<br><br>
+          <span class="fill">改善アクション（1件あたり）</span>：引受査定基準見直し・料率改定・基礎率変更権行使・再保険活用。<br>
+          <span class="fill">改善アクション（販売件数）</span>：商品設計変更・チャネル見直し・競合分析。<br><br>
+          <span class="fill">留意点</span>：各アクションには副作用（査定強化→販売量低下、料率改定→既契約者への影響）があるため総合的に判断。
+        </div>
+        <div class="kws"><span class="kw">給付発生指数</span><span class="kw">PDCAサイクル</span><span class="kw">逆選択</span><span class="kw">副作用</span><span class="kw">基礎率変更権</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>⑥ 新商品開発の所見論述（汎用テンプレート）</h3><span class="tpl-tag">第Ⅱ部 大問必須</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">3500字問題の構成パターン</div>
+        <div class="tpl-block">
+          【1. 開発の目的・背景】環境変化・顧客ニーズ・戦略的意義<br>
+          【2. 商品設計】給付事由・保険期間・払込方法・特約・販売制限等<br>
+          【3. 基礎率設定】<br>
+          　　<span class="fill">予定発生率</span>：自社/公共データ・補整・将来トレンド・安全割増<br>
+          　　<span class="fill">予定利率</span>：標準利率との関係・金利変動対応・十分性<br>
+          　　<span class="fill">予定事業費</span>：費用主義・効用主義・チャネル別差異<br>
+          【4. 危険選択・逆選択対策】告知項目・診査 vs 告知書扱い・加入限度額<br>
+          【5. リスクと管理手法】発生率リスク・金利リスク・解約リスク・集積リスク→ヘッジ・再保険・基礎率変更権<br>
+          【6. 収益性】プロフィット・マージン・IRR・楽観/中立/ストレスの複数シナリオ<br>
+          【7. 販売政策・チャネル】適切なチャネル・募集管理・お客様説明<br>
+          【8. 事後モニタリング計画】KPI・改善アクション発動基準
+        </div>
+        <div class="tpl-note">問題文で指定された観点を特に厚く書くこと。すべての項目に触れつつバランスよく。</div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>⑦ 標準責任準備金制度と営業保険料の関係</h3><span class="tpl-tag">2020・H27頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">600字程度の型</div>
+        <div class="tpl-block">
+          ・標準基礎率（告示）と<span class="fill">営業保険料の計算基礎率は各社の判断</span>で独立。標準基礎率に合わせる必要はない。<br>
+          ・保険料基礎率が標準基礎率より有利な場合、保険期間途中で<span class="fill">標準責任準備金の積立負担</span>が発生する。<br>
+          ・一時払：予定利率>標準利率の場合、契約初期に大きな積立負担が生じうる。<br>
+          ・平準払（貯蓄性）：標準基礎率の純保険料が営業保険料を上回る場合、積立負担が大きくなる。<br>
+          ・積立負担は当該群団でセルフサポートすることが望ましく、恒常的な他群団からの立替えは好ましくない。<br>
+          ・収益の現在価値合計には影響しないが、<span class="fill">タイミングのずれ</span>が経営上のリスクになる。
+        </div>
+        <div class="kws"><span class="kw">標準基礎率</span><span class="kw">積立負担</span><span class="kw">セルフサポート</span><span class="kw">タイミングずれ</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>⑧ 外貨建一時払終身保険の開発所見</h3><span class="tpl-tag">H29・2022頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">主要論点</div>
+        <div class="tpl-block">
+          【標準利率・予定利率】A格社債（10年+20年）÷2×安全率係数。米金利は急激変動する特性。<br>
+          【為替リスク】円高時に解約集中の可能性。為替水準と契約者行動の連動性を分析。<br>
+          【信用リスク】BBB格事業債運用時はデフォルト・格下げリスクのストレステストが必要。<br>
+          【流動性リスク（ディスインターミディエーション）】金利急上昇時の大量解約に対し<span class="fill">MVA</span>で緩和。<br>
+          【競合対応】利回りだけでなく商品設計（リビングベネフィット等）でも差別化を図る。<br>
+          【後発商品への対応】他社の低利回りでの参入に対し、信用リスクへの対応や商品性で差別化。
+        </div>
+        <div class="kws"><span class="kw">参照金利</span><span class="kw">安全率係数</span><span class="kw">為替リスク</span><span class="kw">信用リスク</span><span class="kw">MVA</span><span class="kw">ディスインターミディエーション</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>⑨ 低・無解約返戻金型商品の開発</h3><span class="tpl-tag">H25・2021頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">構成</div>
+        <div class="tpl-block">
+          【背景】低金利による保険料上昇→消費者の低価格ニーズ。解約率削減・ディスインターミディエーション耐性が強みとなった。<br><br>
+          【商品設計上の留意点】<br>
+          ・<span class="fill">保険契約者の理解</span>：長期後に解約する場合を想定した十分な説明。解約返戻金の水準を極端に低く設定しない等の工夫。<br>
+          ・<span class="fill">払済保険への変更不可</span>：原資がなく、公平性上の問題あり。<br>
+          ・予定解約率を保険料計算に織り込む場合の解約率見込みの合理性。<br><br>
+          【計算基礎率の留意点】<br>
+          ・解約率の設定：払込期間中と期間後の乖離。金利連動性（ディスインターミディエーション）。<br>
+          ・長期の貯蓄性商品としての予定利率の慎重な設定。
+        </div>
+        <div class="kws"><span class="kw">ディスインターミディエーション耐性</span><span class="kw">契約者理解</span><span class="kw">払済不可</span><span class="kw">予定解約率</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>⑩ 生保標準生命表2018（死亡保険用）の作成過程</h3><span class="tpl-tag">2018頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">2007との主な変更点</div>
+        <div class="tpl-block">
+          ①<span class="fill">基礎データの期間変更</span>：東日本大震災の影響を除くため2010年を除外し、2008・2009・2011年度を使用（2007は1999〜2001年度）。<br>
+          ②<span class="fill">截断年数の変更</span>：各社実績の変化を踏まえ観察年度・截断年数を見直し。<br>
+          ③ その他、高齢・若齢部分の補整接続年齢等は基礎データ変更によって自動的に変化。
+        </div>
+        <div class="tpl-note">「作成過程を変更しなくても生じる変化（最終年齢等）については言及不要」という指示が問題文にある場合が多い。</div>
+        <div class="kws"><span class="kw">東日本大震災の除外</span><span class="kw">2008・2009・2011年度</span><span class="kw">截断年数</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>⑪ ヴァリデーション（モデル・ポイント精度検証）</h3><span class="tpl-tag">H29・2022頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">600字程度の型</div>
+        <div class="tpl-block">
+          ヴァリデーションとは、<span class="fill">モデル・ポイントが保有契約群団をいかに良く代表しているかを評価する作業</span>であり、会社全体の各種統計数値とモデル・ポイントを用いた算出値の差または比を確認することをいう。<br><br>
+          <span class="fill">主な確認項目</span>：保有件数・保険金額・事業年度末保険料積立金（特に重要）・保険料等。項目が多いほど精度↑、ただし重要度に応じて選定。<br><br>
+          <span class="fill">留意点</span>：①ある一時点で良い近似でも将来の各時点で必ずしも良い近似とは限らない。②死亡・解約等をシミュレートした動態的確認が有効。
+        </div>
+        <div class="kws"><span class="kw">モデル・ポイント</span><span class="kw">統計数値の比較</span><span class="kw">保険料積立金</span><span class="kw">動態的確認</span></div>
+      </div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-head"><h3>⑫ 更新制度の保険会社・契約者のメリットと留意点</h3><span class="tpl-tag">2020頻出</span></div>
+      <div class="tpl-body">
+        <div class="tpl-sec-title">構成</div>
+        <div class="tpl-block">
+          <span class="fill">保険会社のメリット</span>：①更新時に料率改定が可能→将来の発生率上昇リスク吸収 ②責任準備金水準が低く抑えられる（短期性商品）。<br><br>
+          <span class="fill">保険契約者のメリット</span>：①保障の継続確保（健康状態に関わらず更新可能） ②更新時に保障内容の見直しが可能。<br><br>
+          <span class="fill">価格設定の留意点</span>：①将来の更新保険料水準の十分性（予定発生率の改訂の可能性）②更新後の逆選択（健康体が更新しない傾向） ③消費者の保険料上昇への理解促進。<br><br>
+          <span class="fill">更新型に適した商品</span>：医療保険・定期保険等、将来の発生率変動が大きい商品。終身保険等の長期貯蓄性商品には馴染みにくい。
+        </div>
+        <div class="kws"><span class="kw">料率改定の柔軟性</span><span class="kw">保障継続</span><span class="kw">逆選択</span><span class="kw">十分性</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+// ═══════════════════════════════════════════════════
+// QUIZ DATA  — 60問（25年分過去問から抽出）
+// ═══════════════════════════════════════════════════
+const ALL_Q = [
+// 再保険
+{cat:'再保険',q:'比例式再保険の代表的な種類として正しいものはどれか？',
+ opts:['A. 危険保険料式・共同保険式・修正共同保険式','B. カタストロフカバー・ストップロス','C. エクセスオブロス・ワーキングカバー','D. スーパーファイン・スタンダードフォーム'],ans:0,
+ expl:'比例式再保険の主な3種類は「危険保険料式・共同保険式・修正共同保険式（＋資産留保型）」。非比例式がエクセスオブロスカバー・ストップロス。',
+ tips:'<span class="tips-year">H27・H28・H29・2019・2022・2024</span>毎年のように出題される最重要分類。「比例＝危険・共同・修正共同」「非比例＝ELC・ストップロス」を完全に覚える。'},
+
+{cat:'再保険',q:'共同保険式再保険において「解約失効リスク」はどうなるか？',
+ opts:['A. 再保険会社に移転される','B. 元受会社が全て保有する','C. 折半される','D. 国が負担する'],ans:0,
+ expl:'共同保険式再保険では再保険会社が責任準備金相当の資産管理を行うため、解約失効リスクも再保険会社に移転される。「移転されない」は誤り。',
+ tips:'<span class="tips-year">2023年第1問（正誤問題）</span>「共同保険式では解約失効リスクは移転されない→誤」として出題。正しくは「移転される」。'},
+
+{cat:'再保険',q:'財務再保険（H10大蔵省告示第233号）の要件として正しいのはどれか？',
+ opts:['A. 出再保険受入手数料は現金で収受すること','B. 再保険会社は元受会社の指示でいつでも解約できる','C. リスクの一部のみを移転すること','D. 修正共同保険式のみが対象'],ans:0,
+ expl:'財務再保険の要件：①全リスクを移転 ②出再保険受入手数料は現金 ③一方的解約不可（不払いを除く）。',
+ tips:'<span class="tips-year">H25・H28・H21・2019</span>財務再保険の定義と要件は頻出。「現金」「全リスク移転」「解約不可」の3点セット。'},
+
+{cat:'再保険',q:'危険保険料式再保険の説明として最も正確なものはどれか？',
+ opts:['A. 元受契約の保険種類に関わらず再保険は自動更新1年定期保険','B. 再保険料は保険金額全体に対して計算される','C. 元受会社が任意のタイミングで出再を変更できる','D. 年金保険専用の再保険方式'],ans:0,
+ expl:'危険保険料式：元受契約の種類に関わらず再保険契約は1年定期。再保険の対象は「危険保険金額」（保険金額－責任準備金）。',
+ tips:'<span class="tips-year">H29</span>危険保険料式の特徴：1年定期・危険保険金額・自動再保険として大量契約に適している。'},
+
+{cat:'再保険',q:'修正共同保険式再保険でmod-co利率に実際の運用利回りを適用した場合、運用損益はどこに帰属するか？',
+ opts:['A. 再保険会社','B. 元受会社','C. 折半','D. 国に帰属'],ans:0,
+ expl:'mod-co利率＝実際運用利回りを適用した場合、運用に関する収益・損失は再保険会社に帰属する（2023年問題で正解として出題）。',
+ tips:'<span class="tips-year">2023年第1問③</span>「元受会社に帰属→誤」が問われた。利率を実際利回りに設定すると損益が再保険会社に移転されることを理解する。'},
+
+// 変額年金
+{cat:'変額年金',q:'変額年金の「ラチェット型」最低保証の説明として正しいのはどれか？',
+ opts:['A. 好調時に最低保証額が切り上がり、その後下がらない','B. 特別勘定残高が一定水準を超えると最低保証が消滅する','C. 毎年一定率で最低保証額が増加する','D. 元本保証のみで値上がり益は保証しない'],ans:0,
+ expl:'ラチェット型：運用実績が好調で特別勘定残高が一定水準を上回ると最低保証額が切り上がり、以後は下がらない。保険会社の負担は増加しやすい。',
+ tips:'<span class="tips-year">H27・2023</span>ノックアウト型（残高超過で保証消滅）との対比が重要。「ラチェット＝歯止め（切上がる）」「ノックアウト＝消滅（切り下がる）」。'},
+
+{cat:'変額年金',q:'変額年金最低保証のヘッジパラメータで「ボラティリティの感応度」を指すのはどれか？',
+ opts:['A. Vega（ベガ）','B. Delta（デルタ）','C. Gamma（ガンマ）','D. Rho（ロー）'],ans:0,
+ expl:'ベガ（Vega）：原資産のボラティリティに対するオプション価格の感応度。デルタ：原資産価格の感応度。ガンマ：デルタの感応度。ロー：金利の感応度。',
+ tips:'<span class="tips-year">H29・2024</span>「ボラティリティの感応度→ベガ」。2024年問題では①ベガ②ローの空欄補充として出題。Delta→先物、Gamma/Vega→オプション、Rho→金利スワップでヘッジ。'},
+
+{cat:'変額年金',q:'変額年金のポジティブ・フィードバック構造とは何か？',
+ opts:['A. 特別勘定残高が減少しITMになるほど費用収入が減り損失が拡大する構造','B. 残高増加により最低保証収入が増える好循環','C. 元受会社と再保険会社の利益が連動する構造','D. 金利上昇時に解約が増加する構造'],ans:0,
+ expl:'特別勘定残高↓→最低保証がインザマネー化↑→保険関係費用収入（残高比例）↓→損失拡大→さらに残高管理が困難になる悪循環。',
+ tips:'<span class="tips-year">2018・2022</span>「バッファーとなる内部留保で対応する従来型リスクコントロールに向かない」とテキストにある。この構造ゆえにヘッジが必要。'},
+
+{cat:'変額年金',q:'Put-Call Parityの式（ヨーロピアンオプション）として正しいのはどれか？',
+ opts:['A. C＋Ke^{−rt}＝P＋S','B. C＋S＝P＋Ke^{−rt}','C. P＋C＝S×Ke^{rt}','D. S−P＝C×Ke^{−rt}'],ans:0,
+ expl:'Put-Call Parity：C＋割引債（Ke<sup>-rt</sup>）＝P＋S。両辺は同じ満期における等価なポジション。<span data-formula="putcall"></span>',
+ tips:'<span class="tips-year">H28・2023</span>「C＋割引債＝P＋原資産」と覚える。変額年金の最低保証は「通常の投資信託（S）＋プットオプション（P）」の構成に相当。'},
+
+{cat:'変額年金',q:'変額年金の危険準備金Ⅲの上限として現在正しいのはどれか？',
+ opts:['A. 保険料積立金の6%','B. 保険料積立金の5%','C. 保険金額の3%','D. 保険料積立金の10%'],ans:0,
+ expl:'現在の危険準備金Ⅲの上限は保険料積立金（一般勘定の最低保証分＋特別勘定分）の6%。旧規定は5%だった（H29問題で「5%→誤」として出題）。',
+ tips:'<span class="tips-year">H29（誤答肢として5%が出題）</span>「5%は古い規定で現在は6%」という形で正誤問題に出ることが多い。必ず6%と覚える。'},
+
+// アセット・シェア
+{cat:'アセット・シェア',q:'アセット・シェアの選定単位として「最低限区分しなければならない」項目の正しい組合せはどれか？',
+ opts:['A. 区分経理の商品区分・保険事故の種類・契約経過年度','B. 性別・年齢・保険金額','C. 販売経路・危険選択手法・保険期間','D. 保険料払込方法・保険種類・契約年齢'],ans:0,
+ expl:'実務基準23条4項の最低区分：①区分経理の商品区分 ②保険事故の種類 ③契約経過年度。性別・年齢等はさらに細かく区分できる任意の項目。',
+ tips:'<span class="tips-year">H27・H25・2019・2020・2022・2023</span>ほぼ毎年出題の最重要暗記事項。「商品区分・保険事故・経過年度」の3点セットを完全に覚える。'},
+
+{cat:'アセット・シェア',q:'当年度末アセット・シェアの計算式で含まれないものはどれか？',
+ opts:['A. 当期の新規契約件数','B. 保険料収入','C. 資産運用収益','D. 支払配当金'],ans:0,
+ expl:'当年度末AS＝前年度末AS＋保険料＋資産運用収益±評価差額金増減額－保険金等－事業費－税金－支払配当金±調整。新規契約件数は含まれない。',
+ tips:'<span class="tips-year">H27・2021</span>当年度末ASの計算式は記述問題でも出る。「前年度末ASに加算するもの：保険料・運用収益。減算するもの：保険金・事業費・税金・配当」と整理。'},
+
+{cat:'アセット・シェア',q:'実務基準でアセット・シェアの初期値に関して正しいのはどれか？',
+ opts:['A. 負値となることも認められる','B. 必ずゼロでなければならない','C. 必ず正値でなければならない','D. 書面による承認が必要'],ans:0,
+ expl:'実務基準24条：アセット・シェアの初期値は合理的かつ適正に決定すればよく、負値となることも認められる。',
+ tips:'<span class="tips-year">2021年第1問①</span>「負値とならない→誤答」として出題。正しくは「合理的かつ適正に決定すれば負値もOK」。'},
+
+{cat:'アセット・シェア',q:'アセット・シェアを用いた料率設定の2方式として正しいのはどれか？',
+ opts:['A. イクエーション方式・アキュムレーション方式','B. プレミアム方式・リザーブ方式','C. 純粋方式・実績方式','D. デルタ方式・ガンマ方式'],ans:0,
+ expl:'アセット・シェアの料率設定への活用：①イクエーション方式（収支相等方程式の拡張）②アキュムレーション方式（実際にASの数値を算出）の2方式。',
+ tips:'<span class="tips-year">H25</span>イクエーション方式はASの項を消去するため最終的にAS値を算出しない点がアキュムレーション方式と異なる。'},
+
+// 団体保険
+{cat:'団体保険',q:'グレッグが挙げた団体生命保険の特質（5つ）に含まれないものはどれか？',
+ opts:['A. 被保険者全員の医的診査が必要','B. 保険加入目的のための団体でない','C. 団体に加入脱退がある','D. 管理が簡単（画一性）'],ans:0,
+ expl:'グレッグの5原則：①保険目的でない団体 ②加入脱退がある ③保険金額が客観的に決まる ④一定割合以上が加入 ⑤管理が簡単。「全員の医的診査」は個人保険の特質。',
+ tips:'<span class="tips-year">H27・2020</span>「団体保険は医的診査を行わない（団体選択の原理が適用）」ことがグレッグの特質の前提。医的診査が必要というのは誤り。'},
+
+{cat:'団体保険',q:'配当清算法における「プール方式」の損失限度方式の説明として正しいのはどれか？',
+ opts:['A. 発生保険金と定めた一定額の小さい方の額＋プーリング保険料が保険金費用となる','B. 全保険金額をそのまま損失として計上する','C. 大きな団体ほど優遇される固定係数方式','D. 発生保険金の一定%をプールに積み立てる方式'],ans:0,
+ expl:'損失限度方式：保険金費用＝｛発生保険金と定めた一定額の小さい方の額｝＋プーリング保険料。発生保険金が一定額を超えた部分はプール（全体）に付ける仕組み。',
+ tips:'<span class="tips-year">2021</span>信頼度方式（加重平均でプールと団体実績を混合）と損失限度方式（上限額設定）の2種がある。'},
+
+{cat:'団体保険',q:'団体信用生命保険において、被保険者が死亡した場合の相続への影響として正しいのはどれか？',
+ opts:['A. 保険金で借入金が返済されるため相続財産は増加しない','B. 保険金が相続財産に加算されるため相続税の対象になる','C. 相続財産が保険金額分増加する','D. 遺族が直接保険金を受け取る'],ans:0,
+ expl:'団体信用生命：貸し手（銀行等）が契約者・保険金受取人。被保険者死亡時は保険金で借入金が消滅するため、遺族の相続財産は増加しない（「増加する→誤」が2023年問題）。',
+ tips:'<span class="tips-year">2023年第1問（イ）</span>「被保険者の遺族にとっては相続財産が増加する→誤（正しくは増加しない）」として出題された重要な論点。'},
+
+{cat:'団体保険',q:'総合福祉団体定期保険に関する記述として正しいものはどれか？',
+ opts:['A. 契約者となる企業が負担する保険料は原則として全額損金算入できる','B. 従業員全員の加入が義務付けられている','C. 保険金受取人は企業（契約者）のみ','D. 解約返戻金はゼロに設定されている'],ans:0,
+ expl:'総合福祉団体定期保険：企業が負担する保険料は原則全額損金算入できる（福利厚生目的）。選択加入も可能で、H8年11月に発売。',
+ tips:'<span class="tips-year">H26・2023</span>税務上の優遇（全額損金算入）は試験頻出。ヒューマン・ヴァリュー特約（代替雇用費用）も一緒に覚える。'},
+
+// 医療保険・第三分野
+{cat:'医療保険',q:'第三分野標準生命表2018の基礎データとして使用されたものはどれか？',
+ opts:['A. 第21回生命表（2010年）の死亡率','B. 第19回生命表（2000年）の死亡率','C. 生保標準生命表2007（死亡保険用）','D. 業界の経験死亡率データのみ'],ans:0,
+ expl:'2018は第21回生命表（2010年）を基礎データとして使用。2007は生保標準生命表2007（死亡保険用）+業界データを使用していた点が変更点の一つ。',
+ tips:'<span class="tips-year">2019・2021頻出</span>「2007→死亡保険用+業界データ、2018→第21回生命表」の変更は最頻出。高度障害を含む(2007)→含まない(2018)も重要。'},
+
+{cat:'医療保険',q:'第三分野保険のストレステストで使用する発生率として正しいのはどれか？',
+ opts:['A. 実績の97.7%（2σ）をカバーする発生率','B. 実績の99.9%（3σ）をカバーする発生率','C. 予定発生率の1.2倍','D. 実績の99%をカバーする発生率'],ans:0,
+ expl:'第三分野保険のストレステスト：実績の保険事故発生率等に基づきテスト実施期間の発生率リスクの97.7%（2σ）をカバーする発生率で判定。99%ではない。',
+ tips:'<span class="tips-year">2022年第1問③（97.7%→正、99%→誤）</span>「97.7%＝2σ」の対応を覚える。99%＝2.326σ。テスト問題で99%を選ぶと不正解になる頻出の罠。'},
+
+{cat:'医療保険',q:'IBNR備金（既発生未報告支払備金）の対象として正しいのはどれか？',
+ opts:['A. 入院終了後も含め会社にまだ請求が届いていない案件','B. 決算期末時点でまだ入院が継続している案件','C. 解約後の未払保険金','D. 将来の死亡保険金の積立て'],ans:0,
+ expl:'IBNR備金：すでに保険事故（入院等）が発生したが会社にまだ請求が到達していない案件が対象。入院継続中は「入院責任準備金」の対象（両者は異なる）。',
+ tips:'<span class="tips-year">H25・2022</span>「IBNR＝入院継続中が対象→誤」として2022年に出題。IBNRは「Already Incurred, Not Yet Reported」＝発生済み・未報告。'},
+
+{cat:'医療保険',q:'第三分野標準生命表2018の数学的危険論による補整方法として正しいのはどれか？',
+ opts:['A. 補整前死亡率から2σを減じる（下限70%・上限85%）','B. 補整前死亡率から3σを減じる','C. 補整前死亡率の50%をそのまま採用する','D. 国民表の平均値をそのまま採用する'],ans:0,
+ expl:'数学的危険論：補整前死亡率から2σを減じる。下限は補整前死亡率の70%、上限は85%（2018で新設）。生存リスク方向への補整。想定件数：男女各100万件。',
+ tips:'<span class="tips-year">2021年第2問（1）</span>2σ水準＝約97.7%（＝2.28%で超過）。2007では上限なし（2018で85%上限を追加）。'},
+
+// 商品開発・収益検証
+{cat:'商品開発',q:'プロフィット・マージンの定義として正しいのはどれか？',
+ opts:['A. 将来の利益の現在価値÷収入保険料の現在価値','B. 純保険料÷営業保険料','C. 利差益÷総収益','D. 解約返戻金÷責任準備金'],ans:0,
+ expl:'プロフィット・マージン＝税引前利益の現在価値÷収入保険料の現在価値。保険料は年始発生として現価計算することが多い（問題の設問条件に注意）。<span data-formula="pm"></span>',
+ tips:'<span class="tips-year">H23・H28・2024</span>2024年問題ではプロフィット・マージンの数値計算（5.35%、9.74%等）が出題。定義を正確に理解した上で計算できるようにする。'},
+
+{cat:'商品開発',q:'商品毎収益検証における「確率論的手法」のデメリットとして正しいのはどれか？',
+ opts:['A. 計算負荷が大きく結果の再現が困難','B. 分布の把握ができない','C. 変額年金等のオプション性商品に不向き','D. テイルリスクが把握できない'],ans:0,
+ expl:'確率論的手法のデメリット：①計算負荷が大きい ②単純化しないと解析的に求めることが難しい ③結果の再現が困難 ④極端なシナリオの影響を把握できない場合がある。',
+ tips:'<span class="tips-year">2021年第1問（6）</span>メリットは「分布把握が容易・変額年金等に有用」。デメリットは「計算負荷・再現困難」。決定論的手法との対比で整理する。'},
+
+{cat:'商品開発',q:'負値責任準備金が発生する原因として正しいのはどれか？',
+ opts:['A. 予定発生率が年齢とともに逓減する場合','B. 保険金額が一定で予定死亡率が逓増する場合','C. 平準払の終身保険において予定利率が上昇する場合','D. 解約返戻金が責任準備金を上回る場合'],ans:0,
+ expl:'予定発生率が年齢とともに逓減すると、契約初期の危険保険料が平準払純保険料を超過する状態が生じ、貯蓄保険料がマイナスとなり責任準備金が負値になる。',
+ tips:'<span class="tips-year">H22・2022</span>他の例：①保障額逓減型（収入保障）②後払い保険料設計。負値責任準備金が生じると解約した者と継続者の公平性問題が発生する。'},
+
+{cat:'商品開発',q:'解約率のシナリオ設定が死亡率・金利と「異なる特徴」として最も正確なのはどれか？',
+ opts:['A. 契約者の一方的意思によるため事後的コントロールが困難','B. 年齢が高いほど解約率が上昇する','C. 解約率は他のシナリオと完全に独立している','D. 解約率は保険期間に依存しない'],ans:0,
+ expl:'解約は契約者の一方的通知で発生するため保険会社側の事後コントロールに限界がある。また金利等の他シナリオと連動していること（貯蓄性商品）が死亡率との違い。',
+ tips:'<span class="tips-year">H27年第2問（1）</span>解約率のシナリオ設定の3つの特徴：①事後コントロール困難 ②他シナリオ連動 ③感応度分析が特に重要。'},
+
+{cat:'商品開発',q:'高額割引制度のデメリットとして最も適切なのはどれか？',
+ opts:['A. 逆選択・モラルリスクが混入しやすい','B. 大口契約者を確保できない','C. 収益性が改善しすぎる','D. 公平性が過度に向上する'],ans:0,
+ expl:'高額割引のデメリット：保険金額が高いほど保険詐欺（モラルリスク）や逆選択（高リスク者の積極加入）が起こりやすい。H26で出題された。',
+ tips:'<span class="tips-year">H26年第2問（1）</span>高額割引のメリット（競争力・大口確保）とデメリット（逆選択・モラルリスク）のバランスを押さえる。'},
+
+// 標準生命表・基礎率
+{cat:'標準生命表',q:'生保標準生命表2007（年金開始後用）における「将来の死亡率改善率」の計算で用いた期間として正しいのはどれか？',
+ opts:['A. 1980〜2000年の死亡率推移（18年間）から年平均改善率を算出','B. 1970〜2000年の30年間','C. 1990〜2000年の10年間','D. 2000〜2010年の10年間'],ans:0,
+ expl:'年平均改善率R：R1（1995〜2000の5年間の幾何平均）とR2（1980〜1993の13年間の幾何平均）を合成した18年間の年平均改善率を死因別に算出。<span data-formula="kaizen"></span>',
+ tips:'<span class="tips-year">H29・2023</span>改善率の計算：(1-R1)^5×(1-R2)^13=(1-R)^18。死因分類に「老衰・自殺」が含まれる（2023年問題の空欄補充）。'},
+
+{cat:'標準生命表',q:'第三分野標準生命表2018で死亡率改善の反映に使用した年平均改善率（2015年以降）として正しいのはどれか？',
+ opts:['A. 男女ともに年1.0%','B. 男2.5%・女2.0%','C. 男女ともに年2.0%','D. 男3.0%・女2.5%'],ans:0,
+ expl:'2015年から標準生命表適用年（2018年）までの年平均改善率は男女ともに1.0%（国立社会保障・人口問題研究所の推計を踏まえて設定）。2015年以前は男2.5%・女2.0%。',
+ tips:'<span class="tips-year">2019年第1問（1）③</span>「1.0%」が正解。2015年以前：男2.5%・女2.0%、2015年以降：男女1.0%の2段階を区別して覚える。'},
+
+{cat:'法令・監督',q:'保険業法上、生命保険業免許の対象（第一分野）として正しいのはどれか？',
+ opts:['A. 人の生存又は死亡に関し一定額の保険金を支払う保険','B. 財産的損害を補填する保険','C. 傷害疾病に関する損害保険','D. 企業の倒産リスクをカバーする保険'],ans:0,
+ expl:'保険業法3条4項第1号：人の生存又は死亡に関し一定額の保険金を支払うことを約し保険料を収受する保険が生命保険業免許の対象（第一分野）。',
+ tips:'<span class="tips-year">H28年第1問（1）</span>保険業法第3条の条文問題は頻出。「生存又は死亡→第一分野」「疾病・傷害→第二分野・第三分野」の対応を整理する。'},
+
+{cat:'法令・監督',q:'保険料の認可に係る標準処理期間（日数）として正しいのはどれか？',
+ opts:['A. 90日','B. 45日','C. 30日','D. 60日'],ans:0,
+ expl:'保険商品の認可・届出に係る審査期間は標準処理期間として90日。商品開発の迅速化のため審査期間の短縮に努めるとされている。',
+ tips:'<span class="tips-year">2020年第1問（1）A・2023年（イ）（D）</span>「45日→誤」として2023年問題に出題。正しくは90日。'},
+
+{cat:'法令・監督',q:'基礎率変更権の行使基準に必要な要件として含まれないのはどれか？',
+ opts:['A. 変更後の保険料は業界最安値であること','B. 指標が「予定発生率に対する実績発生率の割合」または「保険料収入に対する保険金支出割合」であること','C. 指標が損益見込みに照らして適切な水準であること','D. 保険料または保険金の変更を行う手続きが明確であること'],ans:0,
+ expl:'基礎率変更権の3要件：①指標の種類 ②指標の適切な水準 ③変更手続きの明確化。「業界最安値」という要件は存在しない。',
+ tips:'<span class="tips-year">2020年第1問（6）</span>「指標の種類・水準・手続き」の3点セット。さらに「変更の意思決定を行う態勢整備」も必要。'},
+
+{cat:'法令・監督',q:'自己責任原則に基づく商品開発で検討すべき観点として含まれないのはどれか？',
+ opts:['A. 株主配当面','B. リスク面','C. 財務面','D. 募集面'],ans:0,
+ expl:'自己責任原則に基づく商品開発の検討観点：①リスク面 ②財務面 ③募集面 ④法制面の4つ。株主配当面は含まれない。',
+ tips:'<span class="tips-year">2019・2022・2023</span>「リスク・財務・募集・法制」の4観点は監督指針II-2-5-1に規定。株主・経営面は含まれないことに注意。'},
+
+// 数理・計算
+{cat:'数理',q:'VaR（バリュー・アット・リスク）の特徴として正しいのはどれか？',
+ opts:['A. 信頼区間外のリスクの規模を把握できない','B. コヒーレントリスク尺度である','C. 通時一貫性がある','D. テイルリスクを正確に把握できる'],ans:0,
+ expl:'VaRの弱点：①信頼区間外（テイル）のリスク規模を把握できない ②凸性を満たさない（分散効果に潜在的弱点）→コヒーレントリスク尺度ではない。<span data-formula="var"></span>',
+ tips:'<span class="tips-year">H25・2020</span>「VaR＝直観的・コヒーレントでない、CTE＝テイル把握可能・コヒーレント」の対比で覚える。CTEの弱点は通時一貫性がないこと。'},
+
+{cat:'数理',q:'コヒーレントリスク尺度の条件「正同次性」の正しい定義はどれか？',
+ opts:['A. ρ(λX)＝λρ(X) （任意の実数λ>0）','B. ρ(X)＝ρ(Y) （XとYの分布が等しいとき）','C. ρ(X)は常に正の値をとる','D. ρ(λX)＝ρ(X) （定数λに依存しない）'],ans:0,
+ expl:'正同次性：ρ(λX)＝λρ(X)（任意のλ>0）。「定数不変性」という用語は誤りで正しくは「正同次性」（H29年問題で「定数不変性→誤」として出題）。<span data-formula="coherent"></span>',
+ tips:'<span class="tips-year">H29年第1問②</span>「定数不変性という→×（正しくは正同次性）」として出題。コヒーレントの4条件：劣加法性・単調性・平行移動不変性・正同次性。'},
+
+{cat:'数理',q:'MVAの算式において「α（アルファ）」が表す意味として正しいのはどれか？',
+ opts:['A. 利率設定時期と解約時期のタイムラグに対応するマージン','B. 契約時の予定利率','C. 解約時の市場金利','D. 保険期間（年数）'],ans:0,
+ expl:'MVA算式の各記号：i₁＝契約時の利率、i₂＝解約時の利率、α＝タイムラグ対応マージン（運用資産の売却費用等に備えるもの）、n＝保険期間。<span data-formula="mva"></span>',
+ tips:'<span class="tips-year">H25・2019・2024</span>αは「解約に伴う運用資産の売却費用・タイムラグリスク」に備えるマージン。契約概要への記載が必要（監督指針）。'},
+
+{cat:'数理',q:'ディスインターミディエーションの説明として正しいのはどれか？',
+ opts:['A. 金利上昇時に生命保険等を大量解約し利回りの良い金融商品に乗り換える現象','B. 保険会社が再保険会社を通じてリスクを市場に転嫁すること','C. 予定利率が実際の運用利回りより高くなること','D. 選択効果により優良体が多く加入する現象'],ans:0,
+ expl:'ディスインターミディエーション：1970年代米国で発生。金利上昇時に生命保険等を解約し、利回りの良いMMF等に資金を移動する現象。MVAはこの対策として有効。',
+ tips:'<span class="tips-year">H22・2018・2019</span>「金利上昇→大量解約→流動性問題」の流れを理解する。MVAは解約時に金利変動を返戻金に反映することでディスインターミディエーションを抑制。'},
+
+{cat:'数理',q:'優良団体割引の計算において被保険者数Nが多いほどどうなるか？',
+ opts:['A. より小さな死亡率差でも割引が適用されやすくなる','B. 割引率が自動的に高くなる','C. 割引の適用要件が厳しくなる','D. 割引制度の対象外になる'],ans:0,
+ expl:'正規分布仮定でN大→標準偏差が小さくなる→信頼区間の幅が狭まる→実績死亡率が信頼区間の下側20%点を下回る可能性が高まる→割引適用されやすい。<span data-formula="discount"></span>',
+ tips:'<span class="tips-year">H27・2018・2022</span>α＝1−(γ+u(0.20)×√(γ/N))/γ̄ の形で計算。N↑→√(γ/N)↓→割引率α↑。数値計算問題としても出題される。'},
+
+{cat:'数理',q:'リスク尺度CTEの弱点として正しいのはどれか？',
+ opts:['A. 通時一貫性がないため多期間適用に問題が生じる','B. テイルのリスクを把握できない','C. コヒーレントリスク尺度ではない','D. 計算が非常に簡単すぎる'],ans:0,
+ expl:'CTEの弱点：通時一貫性（Time Consistency）がないため、多期間のリスク尺度として使用する場合に問題が生じる（例：t=0でCTE水準を満たしていても次期に破綻する可能性）。<span data-formula="cte"></span>',
+ tips:'<span class="tips-year">H25・2020</span>CTEの多期間問題は2020年で「通時一貫性の欠如」として出題。VaRは凸性なし（コヒーレントでない）、CTEは通時一貫性なし、の対比で整理。'},
+
+{cat:'商品開発',q:'無解約返戻金型商品の開発が進んだ主な背景として最も適切なのはどれか？',
+ opts:['A. 長期低金利による保険料上昇と消費者の低価格ニーズの高まり','B. 金利上昇による解約増加への対策','C. 規制強化による設計変更の義務化','D. 第三分野標準生命表の改定への対応'],ans:0,
+ expl:'無解約返戻金型の背景：低金利政策継続→予定利率引下げ→保険料上昇。景気低迷で消費者が割安な保険を求める中、実態的コスト削減なしで保険料を下げられる商品として登場。',
+ tips:'<span class="tips-year">H25・2021</span>解約返戻金をゼロにすることで保険料を下げられるが、「保険契約者の理解」と「払済保険変更不可」が重要な留意点。'},
+
+{cat:'法令・監督',q:'保険業法において生命保険会社が引き受けられる「第三分野」に含まれるものはどれか？',
+ opts:['A. 疾病・傷害に基づき一定額の保険金を支払う保険（傷害疾病定額保険）','B. 財産的損害を補填する保険','C. 純粋な死亡保険のみ','D. 年金保険のみ'],ans:0,
+ expl:'保険業法3条4項第2号：疾病・傷害等に基づく定額保険金給付保険が第三分野（生命保険と損害保険の中間領域）。生命保険会社はこれを取り扱える。',
+ tips:'<span class="tips-year">H28年第1問（1）</span>第一分野：生死に関する定額給付保険。第二分野：財産的損害の補填。第三分野：疾病・傷害等の定額給付。'},
+
+{cat:'商品開発',q:'更新型商品に「最も適している」商品の例として最も適切なのはどれか？',
+ opts:['A. 医療保険や定期保険（将来の発生率変動が大きい）','B. 平準払終身保険（長期貯蓄性が高い）','C. 一時払年金保険（利回りが重要）','D. 外貨建養老保険（為替リスクがある）'],ans:0,
+ expl:'更新型に適した商品：医療保険・定期保険等、将来の発生率変動が大きく料率改定ニーズが高い商品。終身保険等の長期貯蓄性商品は予定利率が固定されるため更新型には向かない。',
+ tips:'<span class="tips-year">2020年第2問（2）③</span>更新型のメリット：①料率改定の柔軟性（保険会社）②保障継続（契約者）。デメリット：更新時の保険料上昇・逆選択。'},
+
+// ── H12〜H20 追加問題 ──────────────────────────────
+
+{cat:'商品開発',q:'付加保険料の「費用主義」の説明として正しいのはどれか？',
+ opts:['A. 実際にかかる経費の型と大きさで賦課する考え方','B. 保険商品が提供する効用（貯蓄・保障機能）に比例して課す考え方','C. 収益目標に対して逆算して付加保険料を設定する考え方','D. 業界の平均的な事業費率を一律に適用する考え方'],ans:0,
+ expl:'費用主義：付加保険料を実際にかかる経費の型（新契約費・維持費・集金費）と大きさで賦課する考え方。効用主義は保険商品の提供する「貯蓄効用」や「保障効用」に比例した付加保険料を課す考え方。',
+ tips:'<span class="tips-year">H12・H13・H19</span>α-β-γ方式ではS比例ローディング→新契約費（費用主義）、V比例ローディング→維持費（効用主義）に対応する。'},
+
+{cat:'商品開発',q:'アセット・シェアの代表的な活用目的として含まれないものはどれか？',
+ opts:['A. 将来の解約率予測モデルの構築','B. 保険料率の計算（イクエーション・アキュムレーション方式）','C. 責任準備金の充分性確認','D. 配当率の決定・配当財源の検証'],ans:0,
+ expl:'アセット・シェアの代表的な活用目的：①保険料率の計算 ②責任準備金の充分性確認 ③配当率の決定・財源検証 ④会社組織変更時の社員持分算定。解約率予測モデルの構築は直接の活用目的ではない。',
+ tips:'<span class="tips-year">H12・H14・H17・2018</span>「4つの活用目的」として記述問題で頻出。保険料計算・責準確認・配当・組織変更の4点セット。'},
+
+{cat:'再保険',q:'サープラス方式とクォータシェア方式の比例再保険における出再額の違いとして正しいのはどれか？',
+ opts:['A. サープラス方式：通算保険金額SからRを超えた額（S-R）。クォータシェア方式：Sの一定割合αS','B. サープラス方式：Sの一定割合。クォータシェア方式：S-R','C. 両方式とも出再額はSの一定割合','D. サープラス方式：保険金額の50%固定。クォータシェア方式：任意割合'],ans:0,
+ expl:'サープラス方式：通算保険金額Sから保有額R（固定金額）を超えた超過部分（S-R）を出再。クォータシェア方式：保険金額Sの一定割合αSを出再。',
+ tips:'<span class="tips-year">H12・H16</span>サープラスは「超過額を出再（保険金額が大きい契約で多く出再）」、クォータシェアは「一律割合で出再」。H12では算式問題として出題。'},
+
+{cat:'数理',q:'投資回収年度（Break Even Year）の定義として正しいのはどれか？',
+ opts:['A. 累積利益の現在価値が初めてゼロを超える保険年度','B. 将来の利益の現在価値をゼロにする割引率','C. 利益が最大になる保険年度','D. 保険料収入が事業費を上回り始める年度'],ans:0,
+ expl:'投資回収年度（Break Even Year）：累積利益の現在価値が初めてゼロを超える保険年度。IRR（内部収益率）とは異なり、「いつ」投資が回収されるかを示す指標。',
+ tips:'<span class="tips-year">H17・H18・2018</span>プロフィット・マージン（いくら儲かるか）・IRR（利回り）・投資回収年度（いつ回収できるか）の3指標の違いを整理する。'},
+
+{cat:'法令・監督',q:'保険業法施行規則改正（2006年・平成18年）の趣旨として正しいのはどれか？',
+ opts:['A. 保険料のうち保険数理に直接よらない部分（付加保険料）を中心に商品審査を簡素化し、事後モニタリングに移行','B. 純保険料の算出方法書への記載を免除','C. 第三分野保険を事前認可から届出制に変更','D. 変額保険の特別勘定の設定要件を強化'],ans:0,
+ expl:'2006年施行規則改正：保険料のうち保険数理に直接よらない部分（付加保険料等）を中心に商品審査を簡素化し、事業費の事後モニタリングに移行。保険会社の経営努力を保険料に反映しやすくする趣旨。',
+ tips:'<span class="tips-year">H19年第2問（1）</span>「事前認可から事後モニタリングへ」の流れ。純保険料（予定死亡率等）は引き続き認可型。'},
+
+{cat:'医療保険',q:'医療保険における入院責任準備金（入院継続中部分）の対象として正しいのはどれか？',
+ opts:['A. 評価日時点でまだ入院が継続しており、将来に請求金額が確定する入院給付','B. すでに退院しているがまだ請求が到達していない案件','C. 翌年度に発生が見込まれる将来の入院','D. 解約後の未払給付金'],ans:0,
+ expl:'入院責任準備金（入院継続中部分）：評価日時点で入院中であり評価日以降に請求金額が確定する部分に対する責任準備金。一方IBNR備金は退院後も含め「まだ請求が届いていない案件」が対象。',
+ tips:'<span class="tips-year">H17・H25</span>入院継続中責任準備金：ξ（発生率）×T（平均給付日数）/365 で1日あたりの準備金を計算。IBNRとの違いを明確に区別する。'},
+
+{cat:'商品開発',q:'解約控除を行う理由として含まれないものはどれか？',
+ opts:['A. 解約することで保険料が割安になることを防ぐため','B. 契約初期に支出した新契約費の未回収分を回収するため','C. 解約する契約者と継続する契約者の公平性を保つため','D. 早期解約による収益悪化を緩和するため'],ans:0,
+ expl:'解約控除の理由：①新契約費の未回収分回収 ②継続者との公平性確保 ③早期解約による収益悪化緩和 ④解約時の資産売却コスト負担。「保険料を割安にさせないため」は解約控除の目的ではない。',
+ tips:'<span class="tips-year">H14</span>解約控除は「契約初期の事業費未回収」と「継続者との公平性」が主な理由。MVAは金利変動リスクへの対応という別の目的。'},
+
+{cat:'再保険',q:'H16年過去問：「個別危険には非比例再保険、集団危険には比例再保険が適用される」という記述は正しいか？',
+ opts:['A. 誤り（逆が正しい：個別危険に比例式、集団危険に非比例式が一般的）','B. 正しい','C. 部分的に正しい','D. 状況による'],ans:0,
+ expl:'H16年の正誤問題で×が正解。一般的に個別危険（各契約ごとのリスク）には比例式再保険（サープラス方式等）が、集団危険（契約集団全体のリスク）には非比例式再保険（ストップロス等）が適用される。設問は逆。',
+ tips:'<span class="tips-year">H16年第1問（2）①</span>「個別危険→比例式、集団危険→非比例式」が正しい対応。ストップロス再保険は集団全体の損失超過部分をカバーする非比例式の代表例。'},
+
+{cat:'数理',q:'MVA（市場価格調整）の起源として正しいのはどれか？',
+ opts:['A. 1988年にニューヨーク不没収価格法に追加された','B. 1996年に日本で最初に導入された','C. バーゼル規制の一環として導入された','D. EU・ソルベンシーIIの要求に基づく'],ans:0,
+ expl:'MVAは1988年にニューヨーク不没収価格法（Non-Forfeiture Law）に追加された。ユニバーサル保険やSPDA（一時払据置年金）等の金利感応型商品に適用され、解約に伴う金利リスクを契約者に移転する。',
+ tips:'<span class="tips-year">H12・H16・H19</span>MVAの文脈：「解約時の保険契約の簿価価格と投資対象資産の市場価格との調整」。金利上昇→市場価格下落→解約返戻金が減額される仕組み。'},
+
+{cat:'変額年金',q:'株価指数連動型年金において保険会社が一般的に行うヘッジ手法として正しいのはどれか？',
+ opts:['A. 最低保証部分は割引債、指数連動部分はコールオプションで手当て','B. 最低保証部分はプットオプション、指数連動部分は先物','C. 全額を割引債で運用','D. 指数連動部分はスワップ取引で複製'],ans:0,
+ expl:'株価指数連動型年金の一般的なヘッジ：最低保証部分→割引債（満期に元本確保）、指数連動（上昇益）部分→株価指数コールオプション（コスト内で上昇益を複製）。プットオプションは逆方向。',
+ tips:'<span class="tips-year">H13年第1問①（×の選択肢）</span>「指数連動部分にプットオプション→誤」として出題。コールオプション（上昇益）とプットオプション（下落保護）を混同しないこと。'},
+
+{cat:'商品開発',q:'カレント・アサンプション終身保険の特徴として正しいのはどれか？',
+ opts:['A. 保険料自在性・経験死亡率の反映・金利感応性を備えた商品','B. 特別勘定で運用する変額商品','C. 予定利率が固定で運用実績は一切反映されない','D. 解約返戻金がゼロに設定された商品'],ans:0,
+ expl:'カレント・アサンプション終身保険：保険料自在性（保険料を変更できる）・経験死亡率の反映・金利感応性（利率変動を反映）の3つが特徴。ユニバーサル保険の一形態。',
+ tips:'<span class="tips-year">H15・H13</span>「カレント・アサンプション＝現在の最善推定前提を使う」終身保険。保険料自在性＝ユニバーサル保険の特徴。高保険料型→再決定条項、低保険料型→払込終了条項。'},
+
+{cat:'医療保険',q:'就業不能所得補償保険に「除外期間」が設けられている理由として最も適切なのはどれか？',
+ opts:['A. 短期の就業不能は自己負担でカバーできる・保険会社の処理コストが高いため','B. 長期の就業不能のみが重要なリスクだから','C. 法律で除外期間の設定が義務付けられているから','D. 再保険会社からの要請があるから'],ans:0,
+ expl:'除外期間を設ける理由：①短期休職は貯蓄等で対応可能→消費者ニーズが少ない ②短期の少額給付多発→支払・保全コスト増 ③保険加入後に働かないインセンティブの防止（逆選択防止）。',
+ tips:'<span class="tips-year">H29・H23</span>除外期間（免責期間）の理由は「コスト・逆選択・自己責任」の3点で説明する。米国の就業不能保険と関連して出題されることが多い。'},
+
+{cat:'法令・監督',q:'付加保険料の監督体制について2006年改正後の正しい説明はどれか？',
+ opts:['A. 付加保険料は事後モニタリング型（各社判断・責任）となった','B. 付加保険料も純保険料と同じく事前認可型のまま','C. 付加保険料は監督当局が毎年設定する','D. 付加保険料の設定は禁止された'],ans:0,
+ expl:'2006年保険業法施行規則改正：付加保険料は事前認可型から各社の責任で設定する事後モニタリング型の監督体制となった。純保険料（予定死亡率等）は引き続き認可型。',
+ tips:'<span class="tips-year">2022・2023（ウ）（A）</span>「付加保険料が事後モニタリング型となった→正（2006年改正）」として出題。純保険料の認可制度は維持されている点に注意。'},
+];
+
+// ══════════════════════════════════════════════
+// ユーティリティ：Fisher-Yatesシャッフル
+// ══════════════════════════════════════════════
+function fisherYates(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// 選択肢をシャッフルし、新しい正解インデックスを返す
+function shuffleOpts(q) {
+  const correctText = q.opts[q.ans];
+  const shuffled = fisherYates(q.opts);
+  return { shuffledOpts: shuffled, newAns: shuffled.indexOf(correctText) };
+}
+
+// ══════════════════════════════════════════════
+// State
+//   curQ        : 現在表示中の問題リスト（出題順ランダム済み）
+//   idx         : curQ内の現在位置
+//   answered    : 現在の問題を回答済みか
+//   choiceData  : curQと同じ長さ。各要素 = { shuffledOpts, newAns }
+//   results     : curQと同じ長さ。各要素 = null | 'ok' | 'ng'
+//                 ← ここで二重カウントを防ぐ
+// ══════════════════════════════════════════════
+let curQ       = [];
+let idx        = 0;
+let answered   = false;
+let choiceData = [];   // 各問の選択肢シャッフル結果
+let results    = [];   // 各問の回答状態 (null|'ok'|'ng')
+
+// correct / wrong は results から毎回算出（二重カウント防止）
+function countResults() {
+  const ok = results.filter(r => r === 'ok').length;
+  const ng = results.filter(r => r === 'ng').length;
+  return { ok, ng };
+}
+
+// ══════════════════════════════════════════════
+// 初期化：問題リストをシャッフルして全stateをリセット
+// ══════════════════════════════════════════════
+function initQuiz(pool) {
+  curQ       = fisherYates(pool);
+  idx        = 0;
+  answered   = false;
+  choiceData = curQ.map(q => shuffleOpts(q));
+  results    = new Array(curQ.length).fill(null);
+}
+
+// ══════════════════════════════════════════════
+// フィルタ
+// ══════════════════════════════════════════════
+function filt(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  const pool = cat === 'all' ? ALL_Q : ALL_Q.filter(q => q.cat === cat);
+  initQuiz(pool);
+  renderQ();
+}
+
+// ══════════════════════════════════════════════
+// 描画
+// ══════════════════════════════════════════════
+function renderQ() {
+  if (!curQ.length) return;
+  const q = curQ[idx];
+  const { shuffledOpts, newAns } = choiceData[idx];
+  const prevResult = results[idx]; // 既回答かどうか
+
+  document.getElementById('qcat').textContent = q.cat;
+  document.getElementById('qnum').textContent = (idx + 1) + ' / ' + curQ.length;
+  document.getElementById('nav-cnt').textContent = (idx + 1) + ' / ' + curQ.length;
+  document.getElementById('fc-cnt-label').textContent = curQ.length + '問';
+  document.getElementById('question').textContent = q.q;
+
+  const ch = document.getElementById('choices');
+  ch.innerHTML = '';
+  const lbls = ['A', 'B', 'C', 'D'];
+
+  shuffledOpts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.innerHTML = `<span class="choice-label">${lbls[i]}</span><span>${opt.replace(/^[A-D]\. /, '')}</span>`;
+
+    // 既に回答済みの問題に戻ってきた場合は正誤表示を復元
+    if (prevResult !== null) {
+      btn.classList.add('answered');
+      if (i === newAns) btn.classList.add('correct');
+      else              btn.classList.add('neutral');
+    } else {
+      btn.onclick = () => !answered && answer(i, newAns);
+    }
+    ch.appendChild(btn);
+  });
+
+  const ex = document.getElementById('explain');
+  // 既回答なら解説を復元表示
+  if (prevResult !== null) {
+    document.getElementById('explain-ans').innerHTML = q.expl;
+    document.getElementById('tips-body').innerHTML   = q.tips;
+    ex.classList.add('show');
+    answered = true;
+    injectFormulas(document.getElementById('explain'));
+  } else {
+    document.getElementById('explain-ans').textContent = '';
+    document.getElementById('tips-body').innerHTML     = '';
+    ex.classList.remove('show');
+    answered = false;
+  }
+
+  updateScore();
+}
+
+// ══════════════════════════════════════════════
+// 回答処理
+//   二重カウント防止：results[idx] に上書きし、
+//   スコアは results 全体から再計算
+// ══════════════════════════════════════════════
+function answer(sel, newAns) {
+  answered = true;
+  const q = curQ[idx];
+  const isCorrect = (sel === newAns);
+
+  // results に記録（上書きしても recount するので問題なし）
+  results[idx] = isCorrect ? 'ok' : 'ng';
+
+  // 選択肢の色付け
+  const btns = document.querySelectorAll('.choice-btn');
+  btns.forEach((b, i) => {
+    b.classList.add('answered');
+    if (i === newAns)                       b.classList.add('correct');
+    else if (i === sel && !isCorrect)       b.classList.add('wrong');
+    else                                    b.classList.add('neutral');
+  });
+
+  // 解説表示
+  document.getElementById('explain-ans').innerHTML = q.expl;
+  document.getElementById('tips-body').innerHTML   = q.tips;
+  document.getElementById('explain').classList.add('show');
+
+  // MathJax再レンダリング
+  injectFormulas(document.getElementById('explain'));
+
+  updateScore();
+}
+
+// ══════════════════════════════════════════════
+// スコア表示（results配列から毎回再計算）
+// ══════════════════════════════════════════════
+function updateScore() {
+  const { ok, ng } = countResults();
+  const done = ok + ng;
+  const pct  = done > 0 ? Math.round(ok / done * 100) : 0;
+  const rem  = curQ.length - done;
+
+  document.getElementById('sc-ok').textContent   = '✓ 正解 ' + ok;
+  document.getElementById('sc-ng').textContent   = '✗ 不正解 ' + ng;
+  document.getElementById('sc-rem').textContent  = '残り ' + rem;
+  document.getElementById('prog-fill').style.width = (done / curQ.length * 100) + '%';
+  document.getElementById('prog-txt').textContent  = ok + ' / ' + done + ' 問 正解';
+  document.getElementById('prog-pct').textContent  = pct + '%';
+}
+
+// ══════════════════════════════════════════════
+// ナビゲーション
+// ══════════════════════════════════════════════
+function nextQ() { idx = (idx + 1) % curQ.length; renderQ(); }
+function prevQ() { idx = (idx - 1 + curQ.length) % curQ.length; renderQ(); }
+
+function sw(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') nextQ();
+  if (e.key === 'ArrowLeft')  prevQ();
+});
+
+
+
+// ══════════════════════════════════════════════
+// KaTeX: formula-store を初期レンダリング + 解説欄への挿入
+// ══════════════════════════════════════════════
+function renderKaTeX(el) {
+  if (!el || !window.renderMathInElement) return;
+  renderMathInElement(el, {
+    delimiters: [
+      {left: '\\[', right: '\\]', display: true},
+      {left: '\\(', right: '\\)', display: false}
+    ],
+    throwOnError: false
+  });
+}
+
+// data-formula スパンに数式HTMLを注入してからKaTeXレンダリング
+function injectFormulas(container) {
+  if (!container) return;
+  const map = {
+    putcall: 'fml-putcall', pm: 'fml-pm', kaizen: 'fml-kaizen',
+    var: 'fml-var', coherent: 'fml-coherent', mva: 'fml-mva',
+    discount: 'fml-discount', cte: 'fml-cte'
+  };
+  container.querySelectorAll('[data-formula]').forEach(span => {
+    const key = span.getAttribute('data-formula');
+    const src = document.getElementById(map[key]);
+    if (src) span.outerHTML = src.innerHTML;
+  });
+  renderKaTeX(container);
+}
+
+// formula-store 自体も初期レンダリング（非表示でも可）
+window.addEventListener('load', () => {
+  renderKaTeX(document.getElementById('formula-store'));
+});
+
+// ══════════════════════════════════════════════
+// KP (重要ポイント) reveal 機能
+// ══════════════════════════════════════════════
+function initKPReveal() {
+  document.querySelectorAll('.kp-ul li').forEach(li => {
+    const raw = li.innerHTML.replace(/<br>/gi, ' ').replace(/<[^>]+>/g, '').trim();
+    // hintは最初の句点か読点かコロンまで、なければ最初の20文字
+    let hint = raw;
+    const sep = raw.search(/[：:。、・]/);
+    if (sep > 0 && sep < 30) {
+      hint = raw.substring(0, sep + 1);
+    } else {
+      hint = raw.substring(0, 22) + (raw.length > 22 ? '…' : '');
+    }
+    const full = li.innerHTML;
+    li.innerHTML = `<span class="kp-hint">${hint}</span><span class="kp-full">${full}</span>`;
+    li.addEventListener('click', () => li.classList.toggle('open'));
+  });
+
+  // カード単位でまとめて開閉するボタンを挿入
+  document.querySelectorAll('.kp-card').forEach(card => {
+    const btn = document.createElement('div');
+    btn.className = 'kp-reveal-all';
+    btn.innerHTML = '<button class="btn-reveal" onclick="toggleCard(this,true)">▶ すべて展開</button><button class="btn-reveal" onclick="toggleCard(this,false)">▲ すべて折りたたむ</button>';
+    card.insertBefore(btn, card.querySelector('.kp-ul'));
+  });
+}
+
+function toggleCard(btn, open) {
+  const card = btn.closest('.kp-card');
+  card.querySelectorAll('.kp-ul li').forEach(li => {
+    if (open) li.classList.add('open');
+    else li.classList.remove('open');
+  });
+}
+
+// ══════════════════════════════════════════════
+// Template reveal 機能
+// ══════════════════════════════════════════════
+function initTplReveal() {
+  // 実際の構造: tpl-body > tpl-sec-title + tpl-block(s) が交互に並んでいる
+  // tpl-sec-title ごとに「その直後に続くtpl-block群」をグループ化してwrapする
+  document.querySelectorAll('.tpl-body').forEach(body => {
+    // 子要素を一度配列に取り出す
+    const children = Array.from(body.children);
+    if (!children.some(c => c.classList.contains('tpl-sec-title'))) return;
+
+    // グループ化: tpl-sec-title が出るたびに新しいグループを開始
+    const groups = [];
+    let current = null;
+    children.forEach(child => {
+      if (child.classList.contains('tpl-sec-title')) {
+        current = { title: child, blocks: [] };
+        groups.push(current);
+      } else if (current) {
+        current.blocks.push(child);
+      }
+    });
+
+    // body を一旦空にする
+    body.innerHTML = '';
+
+    groups.forEach(({ title, blocks }) => {
+      // hintテキスト: 最初のblockの冒頭18文字
+      let hintText = '';
+      if (blocks.length > 0) {
+        const t = blocks[0].textContent.replace(/\s+/g, ' ').trim();
+        hintText = t.substring(0, 20) + (t.length > 20 ? '…' : '');
+      }
+
+      // ラッパー
+      const wrap = document.createElement('div');
+      wrap.className = 'tpl-sec-wrap';
+
+      // トグルボタン（タイトル行）
+      const toggle = document.createElement('div');
+      toggle.className = 'tpl-sec-toggle';
+      toggle.innerHTML = `
+        <span class="tgl-icon">▶</span>
+        <span class="tgl-title">${title.textContent}</span>
+        <span class="tgl-hint">${hintText}</span>`;
+
+      // コンテンツエリア（最初は非表示）
+      const content = document.createElement('div');
+      content.className = 'tpl-sec-body';
+      blocks.forEach(b => content.appendChild(b));
+
+      // クリックで開閉
+      toggle.addEventListener('click', () => {
+        const isOpen = toggle.classList.toggle('open');
+        content.classList.toggle('open', isOpen);
+      });
+
+      wrap.appendChild(toggle);
+      wrap.appendChild(content);
+      body.appendChild(wrap);
+    });
+  });
+}
+
+// ══════════════════════════════════════════════
+// 初期化
+// ══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  initQuiz(ALL_Q);
+  renderQ();
+  initKPReveal();
+  initTplReveal();
+});
+
+</script>
+
+<script>
+// Service Worker 登録 (PWA・オフライン対応)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .catch(err => console.warn('SW:', err));
+  });
+}
+</script>
+</body>
+</html>
